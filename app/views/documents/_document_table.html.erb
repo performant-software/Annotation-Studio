@@ -33,15 +33,15 @@
           <% end %></td>
         <td class="button-column">
           <% if can? :update, document %>
-          <%= link_to 'Edit', edit_document_path(document.title), :class =>
+          <%= link_to 'Edit', edit_document_path(document), :class =>
           'btn btn-default btn-sm' %>
           <% end %>
           <% if can? :publish, document %>
-          <%= link_to 'Publish', document_publish_path(document.title), method: :post, :class =>
+          <%= link_to 'Publish', document_publish_path(document), method: :post, :class =>
           'btn btn-default btn-sm' %>
           <% end %>
           <% if can? :archive, document %>
-          <%= link_to 'Archive', document_archive_path(document.title), method: :post, :class => 
+          <%= link_to 'Archive', document_archive_path(document), method: :post, :class => 
           'btn btn-default btn-sm' %>
           <% end %></td>
       </tr>
