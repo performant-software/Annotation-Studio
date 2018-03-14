@@ -155,6 +155,15 @@
 }
 
 #textcontent div.were-wolf, #textcontent div.codex {
+  h2 {
+    font-family: "Georgia", "Times", serif;
+    font-size: 20px;
+  }
+
+  h1 {
+    font-family: "Georgia", "Times", serif;
+    color: #B83114;
+  }
   div, div.codex_line {
     font-family: "Georgia", "Times", serif;
     font-size: 15px;
@@ -163,16 +172,6 @@
 
     small {
       font-size: smaller;
-    }
-
-    h2 {
-      font-family: "Georgia", "Times", serif;
-      font-size: 20px;
-    }
-
-    h1 {
-      font-family: "Georgia", "Times", serif;
-      color: #B83114;
     }
 
     p.smaller {
