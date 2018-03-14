@@ -8,8 +8,8 @@
     .castList {text-align:center;}
     .stage {text-align:center; line-height:initial;}
     .sp {text-align:center; line-height:initial;}
-    p { 
-        text-align:center; 
+    p {
+        text-align:center;
         line-height:initial;
     }
     a[name].note {
@@ -28,12 +28,12 @@
             left: 20px;
             padding-left: 3em;
 
-            /*  
-              Handling for prose and paragraph indentation. 
-              If class "indentps" is present all paragraphs (except first) will be indented. 
+            /*
+              Handling for prose and paragraph indentation.
+              If class "indentps" is present all paragraphs (except first) will be indented.
               If not present, larger vertical margins will offset paragraphs
             */
-            
+
             .indentps p:first-child {
                 text-indent: 0;
                 margin: 0.25em 0;
@@ -152,4 +152,40 @@
             width: 6ex;
         }
     }
+}
+
+#textcontent div.were-wolf, #textcontent div.codex {
+  div, div.codex_line {
+    font-family: "Georgia", "Times", serif;
+    font-size: 15px;
+    line-height: 140%;
+    margin: 10px;
+
+    small {
+      font-size: smaller;
+    }
+
+    h2 {
+      font-family: "Georgia", "Times", serif;
+      font-size: 20px;
+    }
+
+    h1 {
+      font-family: "Georgia", "Times", serif;
+      color: #B83114;
+    }
+
+    p.smaller {
+      font-size: 12px;
+      line-height: 180%;
+      margin-left: 20px;
+    }
+
+    p {
+      font-family: "Georgia", "Times", serif;
+      font-size: 15px;
+      line-height: 140%;
+      margin: 10px;
+    }
+  }
 }
