@@ -19,7 +19,7 @@ class DocumentsController < ApplicationController
     end    
     
     @tab_state = { document_set => 'active' }
-    @assigned_documents_count = Document.active.tagged_with(current_user.rep_group_list, :any =>true).count
+    @assigned_documents_count = Document.active.tagged_with(current_user.rep_group_list, :any =>true).count(:all)
     @created_documents_count = current_user.documents.count
     @all_documents_count = Document.all.count
     per_page = 20
