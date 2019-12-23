@@ -41,6 +41,11 @@
         <span class="panel-title">
           <%= link_to "Documents", documents_path %></span>
         <ul class="nav nav-tabs nav-tabs-xs pull-right" id="document-tabs" role="tablist">
+          <li class="<%= @tab_state['search_results'] %>">
+            <%= link_to documents_path( docs: 'search_results', title: params[:title],author: params[:author], edition: params[:edition] ), params do %>
+              <span class='badge'><%= @search_documents_count %></span> Search Results
+            <% end %>
+          </li>
           <li class="<%= @tab_state['assigned'] %>">
             <%= link_to documents_path( docs: 'assigned', title: params[:title],author: params[:author], edition: params[:edition] ), params do %>
               <span class='badge'><%= @assigned_documents_count %></span> Shared

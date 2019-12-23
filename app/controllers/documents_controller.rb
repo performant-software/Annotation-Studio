@@ -11,45 +11,34 @@ class DocumentsController < ApplicationController
   # GET /documents
   # GET /documents.json
   def index
-    Rails.logger.info("The params are #{params.inspect}")
     if params[:docs] != 'assigned' && params[:docs] != 'created' && params[:docs] != 'all'
       document_set = 'assigned'
     else
       document_set = params[:docs]
     end
 
-    [:title, :author, :edition].each do |query|
-      if params.has_key?(query) && params[query].present?
-        if query == :edition
-          @documents = Document.tagged_with(params[query])
-        elsif params.has_key?(query) && params[query].present?
-          @documents = @documents.where("#{query} LIKE ?", "%#{params[query]}%")
-        end
-      end
-    end
     @tab_state = { document_set => 'active' }
-    @assigned_documents_count = @documents.active.tagged_with(current_user.rep_group_list, :any =>true).count
-    @all_documents_count = @documents.all.count
-    @created_documents = current_user.documents
+    @assigned_documents_count = Document.active.tagged_with(current_user.rep_group_list, :any =>true).count
+    @all_documents_count = Document.all.count
+    @created_documents_count = current_user.documents.count
+    @search_documents_count = 0
     [:title, :author, :edition].each do |query|
       if params.has_key?(query) && params[query].present?
         if query == :edition
-          @created_documents = @created_documents.tagged_with(params[query])
+          @search_documents_count = Document.tagged_with(params[query]).count
         elsif params.has_key?(query) && params[query].present?
-          @created_documents.where("#{query} LIKE ?", "%#{params[query]}%")
+          @search_documents_count = Document.where("#{query} LIKE ?", "%#{params[query]}%").count
         end
       end
     end
-    @created_documents_count = @created_documents.count
-
     per_page = 20
 
     if document_set == 'assigned'
-      @documents = @documents.active.tagged_with(current_user.rep_group_list, :any =>true)
+      @documents = Document.active.tagged_with(current_user.rep_group_list, :any =>true).paginate(:page => params[:page], :per_page => per_page).order('created_at DESC')
     elsif document_set == 'created'
-      @documents = @created_documents
+      @documents = current_user.documents.paginate(:page => params[:page], :per_page => per_page).order('created_at DESC')
     elsif can? :manage, Document && document_set == 'all'
-      @documents = @documents
+      @documents = Document.paginate(:page => params[:page], :per_page => per_page ).order("created_at DESC")
     end
     # add search parameters if they are there
 
@@ -57,8 +46,16 @@ class DocumentsController < ApplicationController
       @documents = @documents.tagged_with(params[:group])
     end
 
-    # paginate the documents after the search parameters are applied
-    @documents = @documents.paginate(:page => params[:page], :per_page => per_page).order('created_at DESC')
+    [:title, :author, :edition].each do |query|
+      if params.has_key?(query) && params[query].present?
+        if query == :edition
+          @documents = Document.tagged_with(params[query]).paginate(:page => params[:page], :per_page => per_page).order('created_at DESC')
+        elsif params.has_key?(query) && params[query].present?
+          @documents = Document.where("#{query} LIKE ?", "%#{params[query]}%").paginate(:page => params[:page], :per_page => per_page).order('created_at DESC')
+        end
+      end
+    end
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @documents }
