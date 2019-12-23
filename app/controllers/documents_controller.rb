@@ -13,14 +13,13 @@ class DocumentsController < ApplicationController
   def index
     per_page = 20
     @search_documents_count = 0
-    if ( params.has_key?(:author) || params.has_key?(:edition) || params.has_key?(:title) ) && !params.has_key?(:docs)
+    if ( params.has_key?(:author) || params.has_key?(:edition) || params.has_key?(:title) ) && !(params.has_key?(:docs))
       document_set = 'search_results'
     elsif params[:docs] != 'assigned' && params[:docs] != 'created' && params[:docs] != 'all' && params[:docs] != 'search_results'
       document_set = 'assigned'
     else
       document_set = params[:docs]
     end
-
     [:title, :author, :edition].each do |query|
       if params.has_key?(query) && params[query].present?
         if query == :edition
@@ -33,12 +32,12 @@ class DocumentsController < ApplicationController
     @tab_state = { document_set => 'active' }
     @assigned_documents_count = Document.active.tagged_with(current_user.rep_group_list, :any =>true).count
     @all_documents_count = Document.all.count
-
+    @created_documents_count = current_user.documents.count
     if document_set == 'assigned'
       @documents = Document.active.tagged_with(current_user.rep_group_list, :any =>true).paginate(:page => params[:page], :per_page => per_page).order('created_at DESC')
     elsif document_set == 'created'
       @documents = current_user.documents.paginate(:page => params[:page], :per_page => per_page).order('created_at DESC')
-    elsif can? :manage, Document && document_set == 'all'
+    elsif (can? :manage, Document) && document_set == 'all'
       @documents = Document.paginate(:page => params[:page], :per_page => per_page ).order("created_at DESC")
     elsif document_set == 'search_results'
       [:title, :author, :edition].each do |query|
@@ -57,7 +56,6 @@ class DocumentsController < ApplicationController
     if params[:group]
       @documents = @documents.tagged_with(params[:group])
     end
-    Rails.logger.info("********** 
 
 
     respond_to do |format|
