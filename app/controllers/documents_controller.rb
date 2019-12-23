@@ -15,16 +15,6 @@ class DocumentsController < ApplicationController
     @search_documents_count = 0
     if ( params.has_key?(:author) || params.has_key?(:edition) || params.has_key?(:title) ) && !params.has_key?(:docs)
       document_set = 'search_results'
-      [:title, :author, :edition].each do |query|
-        if params.has_key?(query) && params[query].present?
-          if query == :edition
-            @documents = Document.tagged_with(params[query])
-          elsif params.has_key?(query) && params[query].present?
-            @documents = Document.where("#{query} LIKE ?", "%#{params[query]}%")
-          end
-        end
-      end
-      @documents = @documents.paginate(:page => params[:page], :per_page => per_page).order('created_at DESC')
     elsif params[:docs] != 'assigned' && params[:docs] != 'created' && params[:docs] != 'all' && params[:docs] != 'search_results'
       document_set = 'assigned'
     else
@@ -50,6 +40,17 @@ class DocumentsController < ApplicationController
       @documents = current_user.documents.paginate(:page => params[:page], :per_page => per_page).order('created_at DESC')
     elsif can? :manage, Document && document_set == 'all'
       @documents = Document.paginate(:page => params[:page], :per_page => per_page ).order("created_at DESC")
+    elsif document_set == 'search_results'
+      [:title, :author, :edition].each do |query|
+        if params.has_key?(query) && params[query].present?
+          if query == :edition
+            @documents = Document.tagged_with(params[query])
+          elsif params.has_key?(query) && params[query].present?
+            @documents = Document.where("#{query} LIKE ?", "%#{params[query]}%")
+          end
+        end
+      end
+      @documents = @documents.paginate(:page => params[:page], :per_page => per_page).order('created_at DESC')
     end
     # add search parameters if they are there
 
