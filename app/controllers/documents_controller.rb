@@ -11,7 +11,7 @@ class DocumentsController < ApplicationController
   # GET /documents
   # GET /documents.json
   def index
-    if params[:docs] != 'assigned' && params[:docs] != 'created' && params[:docs] != 'all'
+    if params[:docs] != 'assigned' && params[:docs] != 'created' && params[:docs] != 'all' && params[:docs] != 'search_results'
       document_set = 'assigned'
     else
       document_set = params[:docs]
