@@ -5,7 +5,7 @@ ruby '2.2.4'
 gem 'rails', '4.2.1'
 gem 'puma'
 
-gem 'pg'
+gem 'pg', '~> 0.18'
 gem "newrelic_rpm"#, "~> 3.5.7.59"
 
 gem 'devise', '~> 3.2'
@@ -36,7 +36,7 @@ group :development do
 end
 
 group :assets do
-  gem "therubyracer"
+  gem "therubyracer", require: false
   gem 'coffee-rails' #, '~> 3.2.1'
   gem 'uglifier' #, '>= 1.0.3'
   gem 'underscore-rails'
@@ -48,7 +48,7 @@ group :test, :development do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'pry-rails'
-  gem 'spring'
+  # gem 'spring'
   gem 'simplecov'
   gem 'rails_best_practices'
   gem 'launchy'
@@ -88,3 +88,4 @@ gem "rest-client"
 
 gem "doorkeeper"
 gem "octokit", "~> 4.0"
+gem 'foreman'
