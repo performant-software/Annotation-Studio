@@ -57,6 +57,7 @@ class DocumentsController < ApplicationController
     if params[:group]
       @documents = @documents.tagged_with(params[:group])
     end
+    Rails.logger.info("********** 
 
 
     respond_to do |format|
