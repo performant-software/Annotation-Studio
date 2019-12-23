@@ -24,7 +24,6 @@ class DocumentsController < ApplicationController
           end
         end
       end
-      @search_documents_count = @documents.count
       @documents = @documents.paginate(:page => params[:page], :per_page => per_page).order('created_at DESC')
     elsif params[:docs] != 'assigned' && params[:docs] != 'created' && params[:docs] != 'all' && params[:docs] != 'search_results'
       document_set = 'assigned'
@@ -32,6 +31,15 @@ class DocumentsController < ApplicationController
       document_set = params[:docs]
     end
 
+    [:title, :author, :edition].each do |query|
+      if params.has_key?(query) && params[query].present?
+        if query == :edition
+          @search_documents_count = Document.tagged_with(params[query]).count
+        elsif params.has_key?(query) && params[query].present?
+          @search_documents_count = Document.where("#{query} LIKE ?", "%#{params[query]}%").count
+        end
+      end
+    end
     @tab_state = { document_set => 'active' }
     @assigned_documents_count = Document.active.tagged_with(current_user.rep_group_list, :any =>true).count
     @all_documents_count = Document.all.count
