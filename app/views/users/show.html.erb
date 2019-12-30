@@ -151,6 +151,15 @@
     <!--  <%#= link_to "Go to annotation list", annotations_path %></li>-->
       <!--</ul>-->
     </div>
+    <div class="panel panel-default" id="dashboard-annotations_path">
+      <div class="panel-heading">
+        <span class="panel-title"><%= link_to "Anthologies", "/anthologies" %></span>
+      </div><!-- / .panel-heading -->
+      <ul class="nav nav-pills">
+        <!--<li><%#= link_to "Go to document list", documents_path %></li>-->
+        <li><%= link_to raw("<span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span> Create new anthology"), anthology_path('new') %></li>
+      </ul>
+    </div><!--/ panel -->
     <!--/ panel --> </div>
   <!--/col-md-3 -->
 </div>

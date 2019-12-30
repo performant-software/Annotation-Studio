@@ -1,5 +1,8 @@
 AnnotationStudio::Application.routes.draw do
 
+  resources :anthologies do
+    resources :documents
+  end
   get "api/me"
 
   use_doorkeeper

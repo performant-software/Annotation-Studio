@@ -6,6 +6,19 @@
     <li><%= link_to("Dashboard", "/dashboard", :id => "dashboard-link") %></li>
   <% end %>
 
+  <% if current_page?(anthologies_path) %>
+    <li class="active">Anthologies</li>
+  <% elsif params[:controller] == 'anthologies' %>
+    <li><%= link_to("Anthologies", "/anthologies", :id => "documents-link") %></li>
+    <% if params[:action] == 'show' %>
+      <li class="active"><%= @anthology.name %></li>
+    <% elsif params[:action] == 'new' %>
+      <li class="active">New Anthology</li>
+    <% elsif params[:action] == 'edit' %>
+      <li class="active">Editing: <%= @anthology.name %></li>
+    <% end %>
+  <% end %>
+
   <% if current_page?(documents_path) %>
     <li class="active">Documents</li>
   <% elsif params[:controller] == 'documents' %>
