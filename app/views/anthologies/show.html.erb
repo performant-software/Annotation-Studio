@@ -1,0 +1,18 @@
+<%= content_for :body_id, 'documents' %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default" id="document-form">
+      <div class="panel-heading">
+        <span class="panel-title"><%= @anthology.name %></span>
+      </div>
+      <% unless @anthology.description.blank? %>
+        <h3>Description</h3>
+        <div class="container" >
+          <%= @anthology.description %>
+        </div>
+      <% else %>
+        <div class="container" > There is no description for this anthology. </div>
+      <% end %>
+    </div>
+  </div><!--/panel-body -->
+</div><!--/panel -->
