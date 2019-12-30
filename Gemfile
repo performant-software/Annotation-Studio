@@ -5,9 +5,10 @@ ruby '2.2.4'
 gem 'rails', '4.2.1'
 gem 'puma'
 
-gem 'pg'
+gem 'pg', '~> 0.18'
 gem "newrelic_rpm"#, "~> 3.5.7.59"
 
+gem 'aws-sdk-s3'
 gem 'devise', '~> 3.2'
 gem "switch_user"
 gem 'cancancan', '~> 1.10'
@@ -17,7 +18,7 @@ gem "friendly_id"
 gem "babosa"
 gem 'high_voltage', '~> 2.1.0'
 gem "aws-sdk", '< 2.0'
-gem "paperclip"
+gem "paperclip", '6.0.0'
 gem "delayed_job_active_record"
 gem 'pdf-reader'
 gem 'pdf-reader-html'
@@ -36,7 +37,7 @@ group :development do
 end
 
 group :assets do
-  gem "therubyracer"
+  gem "therubyracer", require: false
   gem 'coffee-rails' #, '~> 3.2.1'
   gem 'uglifier' #, '>= 1.0.3'
   gem 'underscore-rails'
@@ -48,7 +49,7 @@ group :test, :development do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'pry-rails'
-  gem 'spring'
+  # gem 'spring'
   gem 'simplecov'
   gem 'rails_best_practices'
   gem 'launchy'
@@ -88,3 +89,4 @@ gem "rest-client"
 
 gem "doorkeeper"
 gem "octokit", "~> 4.0"
+gem 'foreman'

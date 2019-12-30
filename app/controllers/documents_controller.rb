@@ -10,7 +10,38 @@ class DocumentsController < ApplicationController
 
   # GET /documents
   # GET /documents.json
+  def anthology_add
+    # puts params.inspect
+    successful = true
+    documents = []
+    begin
+      params[:document_ids].each do |doc_id|
+        doc = Document.find(doc_id)
+        doc.anthology_id =  params[:anthology]
+        doc.save
+        documents << doc.title
+      end
+    rescue
+      successful = false
+    end
+    respond_to do |format|
+      if successful
+        if documents.count == 1
+          docs_string = " #{documents.first}"
+        elsif documents.count == 2
+          docs_string = "s #{documents.first} and #{documents.last}"
+        elsif documents.count > 2
+          docs_string = "s #{documents[ 0..-2 ].join(", ")} and #{documents.last}"
+        end
+        format.html { redirect_to anthology_path(Anthology.find(params[:anthology])), notice: "You added the document#{docs_string} to this anthology" }
+      else
+        format.html { redirect_to documents_path, alert: "There was a problem adding documents to the anthology selected"}
+      end
+    end
+    # redirect_to anthology_path(Anthology.first)
+  end
   def index
+    @anthologies = Anthology.all
     per_page = 20
     @search_documents_count = 0
     if ( params.has_key?(:author) || params.has_key?(:edition) || params.has_key?(:title) ) && !(params.has_key?(:docs))
