@@ -80,9 +80,11 @@
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create New Document
           <% end %>
         <% end %>
+        <% if @documents.present? && @documents.count > 0 %>
         <div class='pagination-controls'>
           <%= will_paginate @documents, renderer: BootstrapPagination::Rails %>
         </div>
+      <% end %>
       </div>
     </div><!--/panel -->
   </div><!--/col-md-12 -->

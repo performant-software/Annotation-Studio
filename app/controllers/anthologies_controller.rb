@@ -2,7 +2,7 @@ class AnthologiesController < ApplicationController
   before_filter :find_anthology, :only => [:show, :edit]
 
   def show
-
+    @anthologies = Anthology.all
   end
 
   def create

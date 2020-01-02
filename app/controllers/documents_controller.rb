@@ -42,6 +42,7 @@ class DocumentsController < ApplicationController
   end
   def index
     @anthologies = Anthology.all
+    @documents = []
     per_page = 20
     @search_documents_count = 0
     if ( params.has_key?(:author) || params.has_key?(:edition) || params.has_key?(:title) ) && !(params.has_key?(:docs))
@@ -80,7 +81,9 @@ class DocumentsController < ApplicationController
           end
         end
       end
+    if @documents.present?
       @documents = @documents.paginate(:page => params[:page], :per_page => per_page).order('created_at DESC')
+    end
     end
     # add search parameters if they are there
 
@@ -98,9 +101,9 @@ class DocumentsController < ApplicationController
   # GET /documents/1
   # GET /documents/1.json
   def show
-    if request.path != document_path(@document)
-      redirect_to @document, status: :moved_permanently
-    end
+    # if request.path != document_path(@document)
+    #   redirect_to @document, status: :moved_permanently
+    # end
 
     # configuration for annotator [note that public schema won't have mel_catalog enabled]
     @mel_catalog_enabled =  Tenant.mel_catalog_enabled
