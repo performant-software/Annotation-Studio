@@ -23,9 +23,13 @@
           <% end %>
         <% end %>
         <td>
-          <%= link_to document.title, anthology_document_path(document.anthology.friendly_id, document.friendly_id) %></td>
-        <td>
-          <%= document.author %></td>
+          <% if controller_name == 'anthologies' %>
+            <%= link_to document.title, anthology_document_path(document.anthology.friendly_id, document.friendly_id) %></td>
+      <% else %>
+        <%= link_to document.title, document_path(document.friendly_id) %></td>
+    <% end %>
+    <td>
+      <%= document.author %></td>
         <td>
           <%= document.created_at.strftime("%m/%d/%Y") %></td>
         <td>
