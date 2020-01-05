@@ -30,65 +30,73 @@
     <% end %>
     <td>
       <%= document.author %></td>
-        <td>
-          <%= document.created_at.strftime("%m/%d/%Y") %></td>
-        <td>
-          <% document.rep_group_list.each do |group| %>
-            <span class="label label-info">
-              <%= group %></span>
-          <% end %></td>
-        <td>
-          <% if can? :update, document %>
-            <div class="btn-group" role="group" aria-label="document states">
+    <td>
+      <%= document.created_at.strftime("%m/%d/%Y") %></td>
+    <td>
+      <% document.rep_group_list.each do |group| %>
+        <span class="label label-info">
+          <%= group %></span>
+      <% end %></td>
+    <td>
+      <% if can? :update, document %>
+        <div class="btn-group" role="group" aria-label="document states">
 
-              <% if document.draft? %>
-                <%= link_to 'Editable', "#", :class => 'btn btn-default btn-sm active' %>
-              <% else %>
-                <%= link_to 'Editable', "#", :class => 'btn btn-default btn-sm disabled' %>
-              <% end %>
-
-
-              <% if document.annotatable? %>
-                <%= link_to 'Annotatable', document_annotatable_path(document), method: :post, :class => 'btn btn-default btn-sm active' %>
-              <% else %>
-                <%= link_to 'Annotatable', document_annotatable_path(document), method: :post, :class => 'btn btn-default btn-sm' %>
-              <% end %>
-
-
-              <% if document.review? %>
-                <%= link_to 'Reviewable', document_review_path(document), method: :post, :class => 'btn btn-default btn-sm active' %>
-              <% else %>
-                <%= link_to 'Reviewable', document_review_path(document), method: :post, :class => 'btn btn-default btn-sm' %>
-              <% end %>
-
-
-              <% if document.published? %>
-                <%= link_to 'Publishable', document_publish_path(document), method: :post, :class => 'btn btn-default btn-sm active' %>
-              <% else %>
-                <%= link_to 'Publishable', document_publish_path(document), method: :post, :class => 'btn btn-default btn-sm' %>
-              <% end %>
-
-
-              <% if document.archived? %>
-                <%= link_to 'Hidden', document_archive_path(document), method: :post, :class => 'btn btn-default btn-sm active' %>
-              <% else %>
-                <%= link_to 'Hidden', document_archive_path(document), method: :post, :class => 'btn btn-default btn-sm' %>
-              <% end %>
-            </div>
+          <% if document.draft? %>
+            <%= link_to 'Editable', "#", :class => 'btn btn-default btn-sm active' %>
           <% else %>
-            <%= document.state %>
+            <%= link_to 'Editable', "#", :class => 'btn btn-default btn-sm disabled' %>
           <% end %>
-        </td>
-        <td class="button-column">
-          <% if can? :update, document %>
-            <% if document.draft? %>
-              <%= link_to 'Edit', edit_document_path(document), :class => 'btn btn-default btn-sm', data: { toggle: 'tooltip', placement: 'top', original_title: 'Text and Metadata are editable' } %>
-            <% else %>
-              <%= link_to 'Edit', edit_document_path(document), :class => 'btn btn-default btn-sm', data: { toggle: 'tooltip', placement: 'top', original_title: 'Only metadata are editable' } %>
-            <% end %>
-            <%= link_to 'Delete', document_path(document), method: :delete, data: {confirm: "Are you sure?"}, :class => 'btn btn-danger btn-sm' %>
+
+
+          <% if document.annotatable? %>
+            <%= link_to 'Annotatable', document_annotatable_path(document), method: :post, :class => 'btn btn-default btn-sm active' %>
+          <% else %>
+            <%= link_to 'Annotatable', document_annotatable_path(document), method: :post, :class => 'btn btn-default btn-sm' %>
           <% end %>
-        </td>
+
+
+          <% if document.review? %>
+            <%= link_to 'Reviewable', document_review_path(document), method: :post, :class => 'btn btn-default btn-sm active' %>
+          <% else %>
+            <%= link_to 'Reviewable', document_review_path(document), method: :post, :class => 'btn btn-default btn-sm' %>
+          <% end %>
+
+
+          <% if document.published? %>
+            <%= link_to 'Publishable', document_publish_path(document), method: :post, :class => 'btn btn-default btn-sm active' %>
+          <% else %>
+            <%= link_to 'Publishable', document_publish_path(document), method: :post, :class => 'btn btn-default btn-sm' %>
+          <% end %>
+
+
+          <% if document.archived? %>
+            <%= link_to 'Hidden', document_archive_path(document), method: :post, :class => 'btn btn-default btn-sm active' %>
+          <% else %>
+            <%= link_to 'Hidden', document_archive_path(document), method: :post, :class => 'btn btn-default btn-sm' %>
+          <% end %>
+        </div>
+      <% else %>
+        <%= document.state %>
+      <% end %>
+    </td>
+    <td class="button-column">
+      <% if can? :update, document %>
+        <% if document.draft? %>
+          <% if controller_name == 'anthologies' %>
+            <%= link_to 'Edit', edit_anthology_document_path(document.anthology.friendly_id,document.friendly_id), :class => 'btn btn-default btn-sm', data: { toggle: 'tooltip', placement: 'top', original_title: 'Text and Metadata are editable' } %>
+          <% else %>
+            <%= link_to 'Edit', edit_document_path(document), :class => 'btn btn-default btn-sm', data: { toggle: 'tooltip', placement: 'top', original_title: 'Text and Metadata are editable' } %>
+          <% end %>
+        <% else %>
+          <% if controller_name == 'anthologies' %>
+            <%= link_to 'Edit', edit_anthology_document_path(document.anthology.friendly_id,document.friendly_id), :class => 'btn btn-default btn-sm', data: { toggle: 'tooltip', placement: 'top', original_title: 'Only metadata are editable' } %>
+          <% else %>
+            <%= link_to 'Edit', edit_document_path(document), :class => 'btn btn-default btn-sm', data: { toggle: 'tooltip', placement: 'top', original_title: 'Only metadata are editable' } %>
+          <% end %>
+        <% end %>
+        <%= link_to 'Delete', document_path(document), method: :delete, data: {confirm: "Are you sure?"}, :class => 'btn btn-danger btn-sm' %>
+      <% end %>
+    </td>
       </tr>
     <% end %>
   <% else %>

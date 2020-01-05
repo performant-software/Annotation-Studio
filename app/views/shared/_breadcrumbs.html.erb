@@ -22,6 +22,10 @@
   <% if current_page?(documents_path) %>
     <li class="active">Documents</li>
   <% elsif params[:controller] == 'documents' %>
+    <% if params[:anthology_id].present? %>
+    <li><%= link_to("Anthologies", "/anthologies", :id => "documents-link") %></li>
+    <li><%= link_to(params[:anthology_id],anthology_path(params[:anthology_id])) %></li>
+    <% end %>
     <li><%= link_to("Documents", "/documents", :id => "documents-link") %></li>
     <% if params[:action] == 'show' %>
       <li class="active"><%= @document.title %></li>
