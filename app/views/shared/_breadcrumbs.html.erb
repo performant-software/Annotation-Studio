@@ -26,7 +26,9 @@
     <li><%= link_to("Anthologies", "/anthologies", :id => "documents-link") %></li>
     <li><%= link_to(params[:anthology_id],anthology_path(params[:anthology_id])) %></li>
     <% end %>
+    <% unless params[:anthology_id].present? %>
     <li><%= link_to("Documents", "/documents", :id => "documents-link") %></li>
+  <% end %>
     <% if params[:action] == 'show' %>
       <li class="active"><%= @document.title %></li>
     <% elsif params[:action] == 'preview' %>

@@ -94,7 +94,9 @@
             <%= link_to 'Edit', edit_document_path(document), :class => 'btn btn-default btn-sm', data: { toggle: 'tooltip', placement: 'top', original_title: 'Only metadata are editable' } %>
           <% end %>
         <% end %>
-        <%= link_to 'Delete', document_path(document), method: :delete, data: {confirm: "Are you sure?"}, :class => 'btn btn-danger btn-sm' %>
+        <% if document.anthology.present? %>
+          <%= link_to 'Remove from anthology', { action: :remove_doc, controller: 'anthologies', anthology_id: document.anthology_id, document_id: document.id }, method: :post, :class => 'btn btn-danger btn-sm' %>
+      <% end %>
       <% end %>
     </td>
       </tr>

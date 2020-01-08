@@ -3,7 +3,7 @@
   <div class="col-md-12">
     <div class="panel panel-default" id="document-form">
       <div class="panel-heading">
-        <span class="panel-title"><%= @anthology.name %></span>
+        <span class="panel-title">Anthology: <%= @anthology.name %></span>
       </div>
       <% unless @anthology.description.blank? %>
         <div class="container" >
@@ -21,7 +21,7 @@
           <%= render partial: 'documents/document_table', locals: { documents: @anthology.documents, anthologies: "no" } %>
         </div>
       <% else %>
-        <div class="container" > There is no documents for this anthology. </div>
+        <div class="container" > There are no documents for this anthology. </div>
       <% end %>
     </div>
   </div><!--/panel-body -->

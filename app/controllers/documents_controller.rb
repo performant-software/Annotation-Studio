@@ -11,7 +11,6 @@ class DocumentsController < ApplicationController
   # GET /documents
   # GET /documents.json
   def anthology_add
-    # puts params.inspect
     successful = true
     documents = []
     begin

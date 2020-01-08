@@ -20,6 +20,7 @@ AnnotationStudio::Application.routes.draw do
   get 'documents/catalog/image/:eid', to: 'catalog#image'
   get 'documents/catalog/reference/:eid', to: 'catalog#reference'
   post 'anthology_add', to: 'documents#anthology_add'
+  post 'remove_doc', to: 'anthologies#remove_doc'
 
   resources :documents do
     resources :annotations

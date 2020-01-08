@@ -7,6 +7,7 @@ class AnthologiesController < ApplicationController
 
   def create
     @anthology = Anthology.new(anthology_params)
+    @anthology.user = current_user
     respond_to do |format|
       if @anthology.save
         format.html { redirect_to anthologies_url, notice: 'Anthology was successfully created.', anchor: 'created'}
@@ -17,6 +18,22 @@ class AnthologiesController < ApplicationController
       end
     end
 
+  end
+
+  def remove_doc
+    respond_to do |format|
+      @anthology = Anthology.find(params[:anthology_id])
+      Rails.logger.info "**** entering remove doc"
+      @document = Document.find(params[:document_id])
+      Rails.logger.info "The doc is #{@document.inspect}"
+
+      if @anthology.present? && @document.present? && @document.update_attributes(anthology_id: nil)
+
+        format.html {redirect_to @anthology, notice: "The document #{@document.title} was successfully removed from this anthology"}
+      else
+        format.html { redirect_to anthologies_path, error: "There was a problem removing the document from this anthology" }
+      end
+    end
   end
 
   def index
