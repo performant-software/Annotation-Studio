@@ -31,7 +31,7 @@
     </table>
     <div class="panel-footer doc-set-footer">
       <% if can? :create, Anthology %>
-        <%= link_to anthology_path('new'), class: 'btn btn-primary create-new-button' do %>
+        <%= link_to anthology_path('new') do %>
           <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create New Anthology
         <% end %>
       <% end %>
