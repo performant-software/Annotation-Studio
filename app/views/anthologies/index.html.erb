@@ -16,11 +16,11 @@
         <% @anthologies.each do |anthology| %>
           <tr>
             <td>
-              <%= link_to anthology.name, anthology_path(anthology.friendly_id) %></td>
+              <%= link_to anthology.name, anthology_path(id:anthology.friendly_id) %></td>
             <td>
               <%= anthology.description %></td>
             <td class="button-column">
-              <%= link_to 'Edit', edit_anthology_path(anthology.friendly_id), :class => 'btn btn-default btn-sm' %></td>
+              <%= link_to 'Edit', edit_anthology_path(id: anthology.friendly_id), :class => 'btn btn-default btn-sm' %></td>
           </tr>
         <% end %>
       <% else %>
