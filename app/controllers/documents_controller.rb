@@ -57,7 +57,7 @@ class DocumentsController < ApplicationController
     @search_documents_count = 0
     if ( params.has_key?(:author) || params.has_key?(:edition) || params.has_key?(:title) ) && !(params.has_key?(:docs))
       document_set = 'search_results'
-    elsif params[:docs] != 'assigned' && params[:docs] != 'created' && params[:docs] != 'all' && params[:docs] != 'search_results'
+    elsif params[:docs] != 'assigned' && params[:docs] != 'created' && params[:docs] != 'all' && params[:docs] != 'search_results' && params[:docs] != 'vetted'
       document_set = 'assigned'
     else
       document_set = params[:docs]
@@ -71,6 +71,7 @@ class DocumentsController < ApplicationController
         end
       end
     end
+    @vetted_documents_count = Document.where(vetted: true).count
     @tab_state = { document_set => 'active' }
     @assigned_documents_count = Document.active.tagged_with(current_user.rep_group_list, :any =>true).count
     @all_documents_count = Document.all.count
@@ -79,6 +80,8 @@ class DocumentsController < ApplicationController
       @documents = Document.active.tagged_with(current_user.rep_group_list, :any =>true).paginate(:page => params[:page], :per_page => per_page).order('created_at DESC')
     elsif document_set == 'created'
       @documents = current_user.documents.paginate(:page => params[:page], :per_page => per_page).order('created_at DESC')
+    elsif document_set == 'vetted'
+      @documents = Document.where(vetted: true).paginate(:page => params[:page], :per_page => per_page).order('created_at DESC')
     elsif (can? :manage, Document) && document_set == 'all'
       @documents = Document.paginate(:page => params[:page], :per_page => per_page ).order("created_at DESC")
     elsif document_set == 'search_results'
@@ -384,6 +387,6 @@ class DocumentsController < ApplicationController
   def documents_params
     params.require(:document).permit(:title, :state, :chapters, :text, :snapshot, :user_id, :rep_privacy_list,
                                      :rep_group_list, :new_group, :author, :edition, :publisher,
-                                     :publication_date, :source, :rights_status, :upload, :survey_link)
+                                     :publication_date, :source, :rights_status, :upload, :survey_link, :vetted)
   end
 end

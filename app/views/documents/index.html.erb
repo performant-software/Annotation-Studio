@@ -50,6 +50,11 @@
               <span class='badge'><%= @created_documents_count %></span> Mine
             <% end %>
           </li>
+          <li class="<%= @tab_state['vetted'] %>">
+            <%= link_to documents_path( docs: 'vetted', title: params[:title],author: params[:author], edition: params[:edition], anthology_id: params[:anthology_id] ),params do %>
+              <span class='badge'><%= @vetted_documents_count %></span> Vetted
+            <% end %>
+          </li>
           <% if can? :manage, Document %>
             <li class="<%= @tab_state['all'] %>">
               <%= link_to documents_path( docs: 'all', title: params[:title],author: params[:author], edition: params[:edition], anthology_id: params[:anthology_id] ), params do %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200119164914) do
+ActiveRecord::Schema.define(version: 20200120102333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(version: 20200119164914) do
     t.text     "snapshot"
     t.string   "cove_uri"
     t.string   "origin"
+    t.boolean  "vetted"
   end
 
   add_index "documents", ["slug"], name: "index_documents_on_slug", unique: true, using: :btree
