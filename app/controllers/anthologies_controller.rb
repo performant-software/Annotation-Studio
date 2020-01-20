@@ -2,6 +2,8 @@ class AnthologiesController < ApplicationController
   before_filter :find_anthology, :only => [:show, :edit]
 
   def show
+    Rails.logger.info Anthology.all.inspect
+    Rails.logger.info @anthology.inspect
     @anthologies = Anthology.all
   end
 
@@ -27,7 +29,7 @@ class AnthologiesController < ApplicationController
       @document = Document.find(params[:document_id])
       Rails.logger.info "The doc is #{@document.inspect}"
 
-      if @anthology.present? && @document.present? && @document.update_attributes(anthology_id: nil)
+      if @anthology.present? && @document.present? && @anthology.documents.delete(@document)
 
         format.html {redirect_to @anthology, notice: "The document #{@document.title} was successfully removed from this anthology"}
       else

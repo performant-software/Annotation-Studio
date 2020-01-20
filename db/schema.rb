@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191228224559) do
+ActiveRecord::Schema.define(version: 20200119164914) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,7 +63,20 @@ ActiveRecord::Schema.define(version: 20191228224559) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "user_id"
+    t.string   "slug"
   end
+
+  add_index "anthologies", ["slug"], name: "index_anthologies_on_slug", unique: true, using: :btree
+  add_index "anthologies", ["user_id"], name: "index_anthologies_on_user_id", using: :btree
+
+  create_table "anthologies_documents", force: :cascade do |t|
+    t.integer "anthology_id"
+    t.integer "document_id"
+  end
+
+  add_index "anthologies_documents", ["anthology_id"], name: "index_anthologies_documents_on_anthology_id", using: :btree
+  add_index "anthologies_documents", ["document_id"], name: "index_anthologies_documents_on_document_id", using: :btree
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "user_id"
@@ -114,10 +127,8 @@ ActiveRecord::Schema.define(version: 20191228224559) do
     t.text     "snapshot"
     t.string   "cove_uri"
     t.string   "origin"
-    t.integer  "anthology_id"
   end
 
-  add_index "documents", ["anthology_id"], name: "index_documents_on_anthology_id", using: :btree
   add_index "documents", ["slug"], name: "index_documents_on_slug", unique: true, using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|

@@ -14,12 +14,18 @@ class DocumentsController < ApplicationController
     successful = true
     documents = []
     begin
+      anthology = Anthology.find(params[:anthology])
+      Rails.logger.info "****"
+      Rails.logger.info "anthology is #{anthology.inspect}"
       params[:document_ids].each do |doc_id|
         doc = Document.find(doc_id)
-        doc.anthology_id =  params[:anthology]
-        doc.save
-        documents << doc.title
+        unless anthology.documents.include?(doc)
+          anthology.documents << doc
+          documents << doc.title
+        end
       end
+      anthology.save
+      Rails.logger.info "*** past save"
     rescue
       successful = false
     end
@@ -41,6 +47,11 @@ class DocumentsController < ApplicationController
   end
   def index
     @anthologies = Anthology.all
+    if params[:anthology_id].present?
+      @anthology = Anthology.find(params[:anthology_id])
+    else
+      @anthology = Anthology.first
+    end
     @documents = []
     per_page = 20
     @search_documents_count = 0
