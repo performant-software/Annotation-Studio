@@ -50,6 +50,7 @@ class DocumentsController < ApplicationController
     @anthologies = [@anthologies, Anthology.where(user_id: current_user.id).pluck(:id) ]
     @anthologies = @anthologies.flatten.uniq
     @anthologies = Anthology.all.map {|ant| ant if @anthologies.include?(ant.id)}
+    @anthologies = @anthologies.compact
     if params[:anthology_id].present?
       @anthology = Anthology.find(params[:anthology_id])
     else
