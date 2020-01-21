@@ -166,7 +166,7 @@
             <% current_user.anthologies.order("created_at DESC").limit(10).each do |anthology| %>
             <li class="list-group-item">
               <%= link_to anthology.name, anthology_path(anthology.friendly_id) %>
-              <span class="pull-right"><%= document.created_at.strftime("%m/%d/%Y") %></span>
+              <span class="pull-right"><%= anthology.created_at.strftime("%m/%d/%Y") %></span>
               <div class="clearfix"></div>
             </li>
             <% end %>
