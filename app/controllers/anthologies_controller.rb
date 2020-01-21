@@ -81,6 +81,6 @@ class AnthologiesController < ApplicationController
   end
 
   def anthology_params
-    params.require(:anthology).permit(:name, :description)
+    params.require(:anthology).permit(:name, :description, :banner)
   end
 end

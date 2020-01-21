@@ -15,6 +15,11 @@
       <% else %>
         <div class="container" ><i> There is no description for this anthology.</i></div>
       <% end %>
+      <div class="media-left">
+        <% unless @anthology.banner.blank? %>
+          <%= link_to image_tag(@anthology.banner.url(:medium), class: 'media-object'), @anthology.banner.url(:medium), target: '_blank' %>
+        <% end %>
+      </div>
       <% unless @anthology.documents.count == 0 %>
         <div class="container" >
           <h3>Documents</h3>
