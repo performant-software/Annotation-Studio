@@ -46,7 +46,7 @@ class DocumentsController < ApplicationController
     # redirect_to anthology_path(Anthology.first)
   end
   def index
-    @anthologies = Anthology.all
+    @anthologies = current_user.anthologies
     if params[:anthology_id].present?
       @anthology = Anthology.find(params[:anthology_id])
     else

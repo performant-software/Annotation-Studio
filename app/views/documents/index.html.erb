@@ -70,6 +70,7 @@
           <% unless @documents.blank? %>
             <%= form_tag(anthology_add_path, :method => "post") do %>
               <%= render partial: 'document_table', locals: { documents: @documents } %>
+              <% unless @anthologies.blank? %>
               <%= button_tag "Add selected to anthology:", :class => 'btn btn-primary create-new-button',:name => nil%>
               <select name="anthology" id="anthology">
                 <% @anthologies.each do |anthology| %>
@@ -80,6 +81,7 @@
                   <% end %>
                 <% end %>
               </select>
+            <% end %>
             <% end %>
           <% else %>
             <div class="container">
