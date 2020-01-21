@@ -6,6 +6,10 @@
     <li><%= link_to("Dashboard", "/dashboard", :id => "dashboard-link") %></li>
   <% end %>
 
+  <% if current_page?(users_path) %>
+    <li class="active">Users</li>
+  <% end %>
+
   <% if current_page?(anthologies_path) %>
     <li class="active">Anthologies</li>
   <% elsif params[:controller] == 'anthologies' %>
