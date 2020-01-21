@@ -91,7 +91,7 @@
           <%= link_to 'Edit', edit_document_path(document), :class => 'btn btn-default btn-sm', data: { toggle: 'tooltip', placement: 'top', original_title: 'Only metadata are editable' } %>
         <% end %>
       <% end %>
-      <% if document.anthologies.include?(@anthology) && current_user.anthologies.include?(@anthology) %>
+      <% if document.anthologies.include?(@anthology) && current_user.anthologies.include?(@anthology) || @anthology.user == current_user %>
         <%= link_to 'Remove from anthology', { action: :remove_doc, controller: 'anthologies', anthology_id: @anthology.id, document_id: document.id }, method: :post, :class => 'btn btn-danger btn-sm' %>
       <% end %>
     <% end %>
