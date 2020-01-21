@@ -155,7 +155,7 @@
       <div class="panel-heading">
         <span class="panel-title"><%= link_to "Anthologies", "/anthologies" %></span>
         <ul class="nav nav-tabs nav-tabs-xs pull-right" id="anthologies-tabs" role="tablist">
-          <li><a href="#ant-assigned" data-toggle="tab"><span class="badge"><%= current_user.anthologies.size %></span> Assigned</a></li>
+          <li><a href="#ant-assigned" data-toggle="tab"><span class="badge"><%= current_user.anthology_ids.uniq.size %></span> Assigned</a></li>
           <li><a href="#ant-created" data-toggle="tab"><span class="badge"><%= Anthology.where(user_id: current_user.id).size %></span> Mine</a></li>
         </ul>
       </div><!-- / .panel-heading -->
@@ -163,10 +163,10 @@
         <div class="tab-pane no-padding fade in" id="ant-assigned">
           <ul id="anthologies-assigned" class="list-group">
             <% unless current_user.anthologies.empty? || current_user.anthologies.nil? %>
-            <% current_user.anthologies.order("created_at DESC").limit(10).each do |anthology| %>
+            <% current_user.anthology_ids.uniq.first(10).each do |anthology| %>
             <li class="list-group-item">
-              <%= link_to anthology.name, anthology_path(anthology.friendly_id) %>
-              <span class="pull-right"><%= anthology.created_at.strftime("%m/%d/%Y") %></span>
+              <%= link_to Anthology.find(anthology).name, anthology_path(Anthology.find(anthology).friendly_id) %>
+              <span class="pull-right"><%= Anthology.find(anthology).created_at.strftime("%m/%d/%Y") %></span>
               <div class="clearfix"></div>
             </li>
             <% end %>

@@ -46,10 +46,10 @@ class DocumentsController < ApplicationController
     # redirect_to anthology_path(Anthology.first)
   end
   def index
-    @anthologies = current_user.anthologies.map {|ant| ant.id}
-    @anthologies << Anthology.where(user_id: current_user.id).pluck(:id)
-    @anthologies.flatten
-    @anthologies = Anthology.all.select {|ant| @anthologies.include?(ant.id)}
+    @anthologies = current_user.anthologies.map {|ant| ant.id}.uniq
+    @anthologies = [@anthologies, Anthology.where(user_id: current_user.id).pluck(:id) ]
+    @anthologies = @anthologies.flatten.uniq
+    @anthologies = Anthology.all.map {|ant| ant if @anthologies.include?(ant.id)}
     if params[:anthology_id].present?
       @anthology = Anthology.find(params[:anthology_id])
     else
