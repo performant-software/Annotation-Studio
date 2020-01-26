@@ -54,7 +54,7 @@
       <div class="tab-content">
         <div class="tab-pane no-padding active" id="all">
           <% unless @users.blank? %>
-            <%= form_tag(anthology_add_path, :method => "post") do %>
+            <%= form_tag(user_anthology_add_path, :method => "post") do %>
               <%= render partial: 'user_table', locals: { users: @users } %>
               <% unless @anthologies.blank? %>
                 <%= button_tag "Add selected to anthology:", :class => 'btn btn-primary create-new-button',:name => nil%>

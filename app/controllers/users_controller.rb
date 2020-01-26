@@ -25,7 +25,7 @@ class UsersController < ApplicationController
 
       if @anthology.present? && @user.present? && @user.anthologies.delete(@anthology)
 
-        format.html {redirect_to @anthology, notice: "The user #{@user.fullname} was successfully removed from this anthology"}
+        format.html {redirect_to users_path, notice: "The user #{@user.fullname} was successfully removed from this anthology"}
       else
         format.html { redirect_to users_path, error: "There was a problem removing the user from this anthology" }
       end
@@ -57,7 +57,7 @@ class UsersController < ApplicationController
         elsif users.count > 2
           users_string = "s #{users[ 0..-2 ].join(", ")} and #{users.last}"
         end
-        format.html { redirect_to anthology_path(Anthology.find(params[:anthology])), notice: "You added the user#{users_string} to this anthology" }
+        format.html { redirect_to users_path, notice: "You added the user#{users_string} to this anthology" }
       else
         format.html { redirect_to users_path, alert: "There was a problem adding users to the anthology selected"}
       end

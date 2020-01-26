@@ -13,4 +13,4 @@ catalog.css tiny_mce_popup.js groups.css annotations.css)
 
 Rails.application.config.assets.enabled = true
 Rails.application.config.assets.digest = true
-Rails.application.config.assets.initialize_on_precompile = true
+Rails.application.config.assets.initialize_on_precompile = false
