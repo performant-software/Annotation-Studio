@@ -1,0 +1,32 @@
+<table class="table table-striped table-bordered">
+  <tr>
+    <th></th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Email</th>
+    <th>Actions</th>
+  </tr>
+  <% users.each do |user| %>
+    <tr>
+      <% if user.anthologies.include?(@anthology) %>
+        <td><div class="<%= "user_of_#{user.id}" %>" ><%= check_box_tag 'user_ids[]', user.id,  :checked => "checked" %></div></td>
+      <% else %>
+        <td><div class="<%= "user_of_#{user.id}"%>" ><%= check_box_tag 'user_ids[]',  user.id %></div></td>
+      <% end %>
+      <td>
+        <%= link_to user.firstname, user_path(user.id) %></td>
+      <td>
+        <%= user.lastname %></td>
+      <td>
+        <%= user.email %></td>
+      <td class="button-column">
+        <% if @anthology.present? &&  user.anthologies.include?(@anthology) && @anthologies.include?(@anthology) %>
+          <%= link_to 'Remove from anthology', { action: :remove_user, controller: 'users', anthology_id: @anthology.id}, method: :post, :class => 'btn btn-danger btn-sm' %>
+        <% end %>
+      <% end %>
+</table>
+<script type="text/javascript">
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+</script>

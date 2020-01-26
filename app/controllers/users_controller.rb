@@ -65,14 +65,65 @@ class UsersController < ApplicationController
     # redirect_to anthology_path(Anthology.first)
   end
   def index
-    @anthologies = Anthology.all
+    @anthologies = current_user.anthologies.map {|ant| ant.id}.uniq
+    @anthologies = [@anthologies, Anthology.where(user_id: current_user.id).pluck(:id) ]
+    @anthologies = @anthologies.flatten.uniq
+    @anthologies = Anthology.all.map {|ant| ant if @anthologies.include?(ant.id)}
+    @anthologies = @anthologies.compact
     if params[:anthology_id].present?
       @anthology = Anthology.find(params[:anthology_id])
     else
-      @anthology = Anthology.first
+      @anthology = Anthology.where(user_id: current_user.id).first
     end
-    @users = User.all
+    @users = []
+    per_page = 20
+    @search_users_count = 0
+    if ( params.has_key?(:lastname) || params.has_key?(:email) || params.has_key?(:first_name) ) && ( !(params.has_key?(:users)) || params[:users] == 'search_results' )
+      user_set = 'search_results'
+    elsif params[:users].present?
+      user_set = params[:users]
+    else
+      user_set = 'all'
+    end
+    [:firstname, :lastname, :email].each do |query|
+      if params.has_key?(query) && params[query].present?
+        @search_users_count = User.where("#{query} LIKE ?", "%#{params[query]}%").count
+      end
+    end
+    @tab_state = { user_set => 'active' }
+    @all_users_count = User.all.count
+    if user_set == 'all'
+      @users = User.paginate(:page => params[:page], :per_page => per_page ).order("created_at DESC")
+    elsif user_set == 'search_results'
+      Rails.logger.info "***"
+      Rails.logger.info "entering search results"
+      [:firstname, :lastname, :email].each do |query|
+        if params.has_key?(query) && params[query].present?
+            @users = User.where("#{query} LIKE ?", "%#{params[query]}%")
+          end
+        end
+      if @users.present?
+        @users = @users.paginate(:page => params[:page], :per_page => per_page).order('created_at DESC')
+      end
+    end
+  # add search parameters if they are there
+
+
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @documents }
+    end
   end
+  # def index
+  #   @anthologies = Anthology.all
+  #   if params[:anthology_id].present?
+  #     @anthology = Anthology.find(params[:anthology_id])
+  #   else
+  #     @anthology = Anthology.first
+  #   end
+  #   @users = User.all
+  # end
 
   def edit
     @user = User.where(:id => params[:id])

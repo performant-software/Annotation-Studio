@@ -1,51 +1,110 @@
 <%= content_for :body_id, 'users' %>
 <%= content_for :body_class, 'index' %>
 <%= content_for :page_title, 'Users' %>
-<% if current_user.admin? %>
-  <div class="row">
-    <%= form_tag(user_anthology_add_path, :method => "post") do %>
-      <div class="panel panel-default" id="dashboard-documents">
-        <div class="panel-heading">
-          <span class="panel-title">Users</span>
-        </div>
-        <table class="table table-striped table-bordered">
-          <tr>
-            <th></th>
-            <th>Full Name</th>
-            <th>Email</th>
-            <th>Actions</th>
-          </tr>
-          <% @users.each do |user| %>
-            <tr>
-              <% if user.anthologies.include?(@anthology) %>
-                <td><div class="<%= "user_of_#{user.id}" %>" ><%= check_box_tag 'user_ids[]', user.id,  :checked => "checked" %></div></td>
-              <% else %>
-                <td><div class="<%= "user_of_#{user.id}"%>" ><%= check_box_tag 'user_ids[]',  user.id %></div></td>
-              <% end %>
-              <td> <%= user.fullname %></td>
-              <td> <%= user.email %></td>
-              <td class="button-column">
-                <% if user.anthologies.include?(@anthology) %>
-                  <%= link_to 'Remove from anthology', { action: :remove_user, controller: 'users', anthology_id: @anthology.id, user_id: user.id }, method: :post, :class => 'btn btn-danger btn-sm' %>
-                <% end %>
-              </td>
-            <% end %></tr>
-        </table>
-        <div class="panel-footer doc-set-footer">
-          <%= button_tag "Add selected to anthology:", :class => 'btn btn-primary create-new-button',:name => nil%>
-          <select name="anthology" id="anthology">
-            <% @anthologies.each do |anthology| %>
-              <% if anthology.id == @anthology.id %>
-                <option selected="selected" value=<%= anthology.id %>><%= link_to anthology.name, documents_path(title: params[:title],author: params[:author], edition: params[:edition], anthology_id: anthology.id) %> </option>
-              <% else %>
-                <option value=<%= anthology.id %>><%= link_to anthology.name, documents_path(title: params[:title],author: params[:author], edition: params[:edition], anthology_id: anthology.id) %> </option>
+<%= stylesheet_link_tag "users" %>
+<div class="row">
+  <%= form_tag(users_path, :method => "get", class: 'navbar-form navbar-left') do %>
+    <div class="input-group form-group">
+      <%= search_field_tag :firstname, params[:firstname], placeholder: "First Name", class: "form-control" %>
+      <%= hidden_field_tag :users, params[:users], value: 'search_results' %>
+      <div class="input-group-btn">
+        <%= button_tag "Search", :class => 'btn btn-info',:name => nil%>
+      </div>
+    </div>
+  <% end %>
+  <%= form_tag(users_path, :method => "get", class: 'navbar-form navbar-left') do %>
+    <div class="input-group">
+      <%= search_field_tag :lastname, params[:lastname], placeholder: "Last Name", class: "form-control" %>
+      <%= hidden_field_tag :users, params[:users], value: 'search_results' %>
+      <div class="input-group-btn">
+        <%= button_tag "Search", :class => 'btn btn-info',:name => nil%>
+      </div>
+    </div>
+  <% end %>
+  <%= form_tag(users_path, :method => "get", class: 'navbar-form navbar-left') do %>
+    <div class="input-group">
+      <%= search_field_tag :email, params[:email], placeholder: "Email", class: "form-control" %>
+      <%= hidden_field_tag :users, params[:users], value: 'search_results' %>
+      <div class="input-group-btn">
+        <%= button_tag "Search", :class => 'btn btn-info',:name => nil%>
+      </div>
+    </div>
+  <% end %>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default" id="dashboard-users">
+      <div class="panel-heading">
+        <span class="panel-title">
+          <%= link_to "Users", users_path %></span>
+        <ul class="nav nav-tabs nav-tabs-xs pull-right active" id="user-tabs" role="tablist">
+          <li class="<%= @tab_state['search_results'] %>">
+            <%= link_to users_path( users: 'search_results', firstname: params[:firstname],lastname: params[:lastname], email: params[:email], anthology_id: params[:anthology_id] ), params do %>
+              <span class='badge'><%= @search_users_count %></span> Search Results
+            <% end %>
+          </li>
+          <li class="<%= @tab_state['all'] %>">
+            <%= link_to users_path( users: 'all', firstname: params[:firstname],lastname: params[:lastname], email: params[:email], anthology_id: params[:anthology_id] ), params do %>
+              <span class='badge'><%= @all_users_count %></span> All
+            <% end %>
+          </li>
+        </ul>
+      </div>
+      <!-- / .panel-heading -->
+      <div class="tab-content">
+        <div class="tab-pane no-padding active" id="all">
+          <% unless @users.blank? %>
+            <%= form_tag(anthology_add_path, :method => "post") do %>
+              <%= render partial: 'user_table', locals: { users: @users } %>
+              <% unless @anthologies.blank? %>
+                <%= button_tag "Add selected to anthology:", :class => 'btn btn-primary create-new-button',:name => nil%>
+                <select name="anthology" id="anthology">
+                  <% @anthologies.each do |anthology| %>
+                    <% if anthology.id == @anthology.id %>
+                      <option selected="selected" value=<%= anthology.id %>><%= link_to anthology.name, users_path(firstname: params[:firstname],lastname: params[:lastname], email: params[:email], anthology_id: anthology.id) %> </option>
+                    <% else %>
+                      <option value=<%= anthology.id %>><%= link_to anthology.name, users_path(firstname: params[:firstname],lastname: params[:lastname], email: params[:email], anthology_id: anthology.id) %> </option>
+                    <% end %>
+                  <% end %>
+                </select>
               <% end %>
             <% end %>
-          </select>
+          <% else %>
+            <div class="container">
+              <tr>
+                <td colspan="6">No users to view.</td>
+              </tr>
+            </div>
+          <% end %>
         </div>
       </div>
-  </div>
-<% end %>
-<% else %>
-  <h3>You should be an admin to view this page</h3>
-<% end %>
+      <div class="panel-footer user-set-footer">
+        <% if can? :create, User %>
+          <%= link_to user_path('new'), class: 'btn btn-primary create-new-button' do %>
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create New User
+          <% end %>
+        <% end %>
+        <% if @users.present? && @users.count > 0 %>
+          <div class='pagination-controls'>
+            <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
+          </div>
+        <% end %>
+      </div>
+    </div><!--/panel -->
+  </div><!--/col-md-12 -->
+</div><!--/row -->
+
+
+<script type="text/javascript">
+  $(document).ready(
+    function(){
+      var hash = window.location.hash
+      if (hash.length > 0){
+        setTimeout(function(){
+          console.log(hash);
+          $(hash + "-tab").tab('show');
+        },10);
+      }
+    }
+  );
+</script>
