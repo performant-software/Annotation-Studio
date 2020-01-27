@@ -27,6 +27,7 @@ require "babosa" # allows cyrillic, other characters in titles (transliterates t
 
 class Document < ActiveRecord::Base
   belongs_to :user, :autosave => true
+  has_and_belongs_to_many :anthologies
   before_validation :add_title, on: :create, unless: :title?
   before_create :add_processed_at, unless: :uploaded?
   ALLOWED_CONTENT_TYPES = %w|application/msword

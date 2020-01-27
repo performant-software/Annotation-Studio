@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161028195936) do
+ActiveRecord::Schema.define(version: 20200121143333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,30 @@ ActiveRecord::Schema.define(version: 20161028195936) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "anthologies", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "user_id"
+    t.string   "slug"
+    t.string   "banner_file_name"
+    t.string   "banner_content_type"
+    t.integer  "banner_file_size"
+    t.datetime "banner_updated_at"
+  end
+
+  add_index "anthologies", ["slug"], name: "index_anthologies_on_slug", unique: true, using: :btree
+  add_index "anthologies", ["user_id"], name: "index_anthologies_on_user_id", using: :btree
+
+  create_table "anthologies_documents", force: :cascade do |t|
+    t.integer "anthology_id"
+    t.integer "document_id"
+  end
+
+  add_index "anthologies_documents", ["anthology_id"], name: "index_anthologies_documents_on_anthology_id", using: :btree
+  add_index "anthologies_documents", ["document_id"], name: "index_anthologies_documents_on_document_id", using: :btree
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "user_id"
@@ -107,6 +131,7 @@ ActiveRecord::Schema.define(version: 20161028195936) do
     t.text     "snapshot"
     t.string   "cove_uri"
     t.string   "origin"
+    t.boolean  "vetted"
   end
 
   add_index "documents", ["slug"], name: "index_documents_on_slug", unique: true, using: :btree
@@ -249,5 +274,13 @@ ActiveRecord::Schema.define(version: 20161028195936) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["slug"], name: "index_users_on_slug", using: :btree
+
+  create_table "users_anthologies", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "anthology_id"
+  end
+
+  add_index "users_anthologies", ["anthology_id"], name: "index_users_anthologies_on_anthology_id", using: :btree
+  add_index "users_anthologies", ["user_id"], name: "index_users_anthologies_on_user_id", using: :btree
 
 end

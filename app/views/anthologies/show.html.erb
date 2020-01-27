@@ -1,0 +1,33 @@
+<%= content_for :body_id, 'documents' %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default" id="document-form">
+      <div class="panel-heading">
+        <span class="panel-title">Anthology: <%= @anthology.name %></span>
+      </div>
+      <% unless @anthology.description.blank? %>
+        <div class="container" >
+        <h3>Description</h3>
+        <div class="container" >
+          <%= @anthology.description %>
+        </div>
+        </div>
+      <% else %>
+        <div class="container" ><i> There is no description for this anthology.</i></div>
+      <% end %>
+      <div class="media-left">
+        <% unless @anthology.banner.blank? %>
+          <%= link_to image_tag(@anthology.banner.url(:medium), class: 'media-object'), @anthology.banner.url(:medium), target: '_blank' %>
+        <% end %>
+      </div>
+      <% unless @anthology.documents.count == 0 %>
+        <div class="container" >
+          <h3>Documents</h3>
+          <%= render partial: 'documents/document_table', locals: { documents: @anthology.documents } %>
+        </div>
+      <% else %>
+        <div class="container" > There are no documents for this anthology. </div>
+      <% end %>
+    </div>
+  </div><!--/panel-body -->
+</div><!--/panel -->

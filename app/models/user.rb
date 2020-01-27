@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   acts_as_taggable_on :rep_group, :rep_privacy, :rep_subgroup
 
   has_many :documents
+  has_and_belongs_to_many :anthologies, join_table: 'users_anthologies'
 
   # Doesn't handle missing values.
   def fullname

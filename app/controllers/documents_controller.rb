@@ -10,12 +10,58 @@ class DocumentsController < ApplicationController
 
   # GET /documents
   # GET /documents.json
+  def anthology_add
+    successful = true
+    documents = []
+    begin
+      anthology = Anthology.find(params[:anthology])
+      Rails.logger.info "****"
+      Rails.logger.info "anthology is #{anthology.inspect}"
+      params[:document_ids].each do |doc_id|
+        doc = Document.find(doc_id)
+        unless anthology.documents.include?(doc)
+          anthology.documents << doc
+          documents << doc.title
+        end
+      end
+      anthology.save
+      Rails.logger.info "*** past save"
+    rescue
+      successful = false
+    end
+    respond_to do |format|
+      if successful
+        if documents.count == 1
+          docs_string = " #{documents.first}"
+        elsif documents.count == 2
+          docs_string = "s #{documents.first} and #{documents.last}"
+        elsif documents.count > 2
+          docs_string = "s #{documents[ 0..-2 ].join(", ")} and #{documents.last}"
+        end
+        format.html { redirect_to anthology_path(Anthology.find(params[:anthology])), notice: "You added the document#{docs_string} to this anthology" }
+      else
+        format.html { redirect_to documents_path, alert: "There was a problem adding documents to the anthology selected"}
+      end
+    end
+    # redirect_to anthology_path(Anthology.first)
+  end
   def index
+    @anthologies = current_user.anthologies.map {|ant| ant.id}.uniq
+    @anthologies = [@anthologies, Anthology.where(user_id: current_user.id).pluck(:id) ]
+    @anthologies = @anthologies.flatten.uniq
+    @anthologies = Anthology.all.map {|ant| ant if @anthologies.include?(ant.id)}
+    @anthologies = @anthologies.compact
+    if params[:anthology_id].present?
+      @anthology = Anthology.find(params[:anthology_id])
+    else
+      @anthology = Anthology.first
+    end
+    @documents = []
     per_page = 20
     @search_documents_count = 0
     if ( params.has_key?(:author) || params.has_key?(:edition) || params.has_key?(:title) ) && !(params.has_key?(:docs))
       document_set = 'search_results'
-    elsif params[:docs] != 'assigned' && params[:docs] != 'created' && params[:docs] != 'all' && params[:docs] != 'search_results'
+    elsif params[:docs] != 'assigned' && params[:docs] != 'created' && params[:docs] != 'all' && params[:docs] != 'search_results' && params[:docs] != 'vetted'
       document_set = 'assigned'
     else
       document_set = params[:docs]
@@ -29,6 +75,7 @@ class DocumentsController < ApplicationController
         end
       end
     end
+    @vetted_documents_count = Document.where(vetted: true).count
     @tab_state = { document_set => 'active' }
     @assigned_documents_count = Document.active.tagged_with(current_user.rep_group_list, :any =>true).count
     @all_documents_count = Document.all.count
@@ -37,6 +84,8 @@ class DocumentsController < ApplicationController
       @documents = Document.active.tagged_with(current_user.rep_group_list, :any =>true).paginate(:page => params[:page], :per_page => per_page).order('created_at DESC')
     elsif document_set == 'created'
       @documents = current_user.documents.paginate(:page => params[:page], :per_page => per_page).order('created_at DESC')
+    elsif document_set == 'vetted'
+      @documents = Document.where(vetted: true).paginate(:page => params[:page], :per_page => per_page).order('created_at DESC')
     elsif (can? :manage, Document) && document_set == 'all'
       @documents = Document.paginate(:page => params[:page], :per_page => per_page ).order("created_at DESC")
     elsif document_set == 'search_results'
@@ -49,7 +98,9 @@ class DocumentsController < ApplicationController
           end
         end
       end
+    if @documents.present?
       @documents = @documents.paginate(:page => params[:page], :per_page => per_page).order('created_at DESC')
+    end
     end
     # add search parameters if they are there
 
@@ -67,9 +118,9 @@ class DocumentsController < ApplicationController
   # GET /documents/1
   # GET /documents/1.json
   def show
-    if request.path != document_path(@document)
-      redirect_to @document, status: :moved_permanently
-    end
+    # if request.path != document_path(@document)
+    #   redirect_to @document, status: :moved_permanently
+    # end
 
     # configuration for annotator [note that public schema won't have mel_catalog enabled]
     @mel_catalog_enabled =  Tenant.mel_catalog_enabled
@@ -340,6 +391,6 @@ class DocumentsController < ApplicationController
   def documents_params
     params.require(:document).permit(:title, :state, :chapters, :text, :snapshot, :user_id, :rep_privacy_list,
                                      :rep_group_list, :new_group, :author, :edition, :publisher,
-                                     :publication_date, :source, :rights_status, :upload, :survey_link)
+                                     :publication_date, :source, :rights_status, :upload, :survey_link, :vetted)
   end
 end

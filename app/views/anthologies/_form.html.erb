@@ -1,0 +1,23 @@
+<%= form_for (@anthology), :html => { :role => 'form', class: "confirm-changes" } do |f| %>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :name %>
+          <%= f.text_field :name, :class => 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :description %>
+          <%= f.text_area :description, :class => 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :banner %>
+          <%= f.file_field :banner, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.submit nil, :class => 'btn btn-default btn btn-default-primary btn-primary' %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
