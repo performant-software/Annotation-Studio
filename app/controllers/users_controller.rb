@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     if params[:id].nil? # if there is no user id in params, show current one
       @user = current_user
     else
-      @user = User.where(:id => params[:id])
+      @user = User.find(params[:id])
     end
     @document_list = Document.all # for getting document name in annotations table.
     respond_to do |format|
