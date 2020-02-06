@@ -98,9 +98,12 @@ class DocumentsController < ApplicationController
           end
         end
       end
-    if @documents.present?
-      @documents = @documents.paginate(:page => params[:page], :per_page => per_page).order('created_at DESC')
+      if @documents.present?
+        @documents = @documents.paginate(:page => params[:page], :per_page => per_page).order('created_at DESC')
+      end
     end
+    if @documents.present? && params[:order].present? && Document.column_names.include?(params[:order])
+      @documents = @documents.order(params[:order])
     end
     # add search parameters if they are there
 
