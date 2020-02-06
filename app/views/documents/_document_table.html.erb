@@ -2,10 +2,14 @@
   <tr>
     <% unless controller_name == "anthologies" %>
       <th></th>
+    <th><%= link_to "Title", documents_path(order: "title") %></th>
+    <th><%= link_to "Author", documents_path(order: "author") %></th>
+    <th><%= link_to "Created", documents_path(order: "created_at") %></th>
+  <% else %>
+    <th><%= link_to "Title", anthology_path(friendly_id: @anthology.friendly_id, order: "title") %></th>
+    <th><%= link_to "Author", anthology_path(friendly_id: @anthology.friendly_id, order: "author") %></th>
+    <th><%= link_to "Created", anthology_path(friendly_id: @anthology.friendly_id, order: "created_at") %></th>
     <% end %>
-    <th>Title</th>
-    <th>Author</th>
-    <th>Created</th>
     <th><%= ENV["CLASS_TERM_PLURAL"] %></th>
     <th>Status</th>
     <th>Actions</th>

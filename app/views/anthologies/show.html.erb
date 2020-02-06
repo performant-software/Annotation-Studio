@@ -23,7 +23,11 @@
       <% unless @anthology.documents.count == 0 %>
         <div class="container" >
           <h3>Documents</h3>
-          <%= render partial: 'documents/document_table', locals: { documents: @anthology.documents } %>
+          <% if params[:order].present? %>
+          <%= render partial: 'documents/document_table', locals: { documents: @anthology.documents.order(params[:order]) } %>
+        <% else %>
+          <%= render partial: 'documents/document_table', locals: { documents: @anthology.documents.order(:title) } %>
+        <% end %>
         </div>
       <% else %>
         <div class="container" > There are no documents for this anthology. </div>
