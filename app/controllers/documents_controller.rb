@@ -81,13 +81,13 @@ class DocumentsController < ApplicationController
     @all_documents_count = Document.all.count
     @created_documents_count = current_user.documents.count
     if document_set == 'assigned'
-      @documents = Document.active.tagged_with(current_user.rep_group_list, :any =>true).paginate(:page => params[:page], :per_page => per_page).order('created_at DESC')
+      @documents = Document.active.tagged_with(current_user.rep_group_list, :any =>true).paginate(:page => params[:page], :per_page => per_page)
     elsif document_set == 'created'
-      @documents = current_user.documents.paginate(:page => params[:page], :per_page => per_page).order('created_at DESC')
+      @documents = current_user.documents.paginate(:page => params[:page], :per_page => per_page)
     elsif document_set == 'vetted'
-      @documents = Document.where(vetted: true).paginate(:page => params[:page], :per_page => per_page).order('created_at DESC')
+      @documents = Document.where(vetted: true).paginate(:page => params[:page], :per_page => per_page)
     elsif (can? :manage, Document) && document_set == 'all'
-      @documents = Document.paginate(:page => params[:page], :per_page => per_page ).order("created_at DESC")
+      @documents = Document.paginate(:page => params[:page], :per_page => per_page )
     elsif document_set == 'search_results'
       [:title, :author, :edition].each do |query|
         if params.has_key?(query) && params[query].present?
@@ -99,11 +99,15 @@ class DocumentsController < ApplicationController
         end
       end
       if @documents.present?
-        @documents = @documents.paginate(:page => params[:page], :per_page => per_page).order('created_at DESC')
+        @documents = @documents.paginate(:page => params[:page], :per_page => per_page)
       end
     end
-    if @documents.present? && params[:order].present? && Document.column_names.include?(params[:order])
-      @documents = @documents.order(params[:order])
+    if @documents.present?
+      if params[:order].present? && Document.column_names.include?(params[:order])
+        @documents = @documents.order(params[:order])
+      else
+        @documents = @documents.order('created_at DESC')
+      end
     end
     # add search parameters if they are there
 
