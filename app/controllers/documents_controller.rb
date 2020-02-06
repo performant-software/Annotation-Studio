@@ -104,7 +104,11 @@ class DocumentsController < ApplicationController
     end
     if @documents.present?
       if params[:order].present? && Document.column_names.include?(params[:order])
-        @documents = @documents.order(params[:order])
+        if params[:order] == 'created_at'
+          @documents = @documents.order('created_at DESC')
+        else
+          @documents = @documents.order(params[:order])
+        end
       else
         @documents = @documents.order('created_at DESC')
       end
