@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     if params[:id].nil? # if there is no user id in params, show current one
       @user = current_user
     else
-      @user = User.where(:id => params[:id])
+      @user = User.find(params[:id])
     end
     @document_list = Document.all # for getting document name in annotations table.
     respond_to do |format|
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
       @user = User.find(params[:user_id])
       Rails.logger.info "The user is #{@user.inspect}"
 
-      if @anthology.present? && @user.present? && @user.anthologies.delete(@anthology)
+      if @anthology.present? && @user.present? && @user.anthologies.delete(@anthology) && @user.anthology_group_list.remove(@anthology.name)
 
         format.html {redirect_to users_path(anthology_id: @anthology.id), notice: "The user #{@user.fullname} was successfully removed from this anthology"}
       else
@@ -40,6 +40,7 @@ class UsersController < ApplicationController
       params[:user_ids].each do |user_id|
         user = User.find(user_id)
         unless user.anthologies.include?(@anthology)
+          user.anthology_group_list.add(@anthology.name)
           user.anthologies << @anthology
           users << user.fullname
         end
