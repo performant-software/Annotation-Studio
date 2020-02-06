@@ -8,6 +8,7 @@ gem 'puma'
 gem 'pg', '~> 0.18'
 gem "newrelic_rpm"#, "~> 3.5.7.59"
 
+gem 'scout_apm'
 gem 'aws-sdk-s3'
 gem 'devise', '~> 3.2'
 gem "switch_user"
