@@ -2,9 +2,11 @@
   <tr>
     <% unless controller_name == "anthologies" %>
       <th></th>
-    <th><%= link_to "Title", documents_path(order: "title") %></th>
-    <th><%= link_to "Author", documents_path(order: "author") %></th>
-    <th><%= link_to "Created", documents_path(order: "created_at") %></th>
+      <th><%= link_to "Title", documents_path( order: "title", docs: params[:docs], title: params[:title],author: params[:author], edition: params[:edition], anthology_id: params[:anthology_id] ) %>
+      </th>
+      <th><%= link_to "Author", documents_path( order: "author", docs: params[:docs], title: params[:title],author: params[:author], edition: params[:edition], anthology_id: params[:anthology_id] ) %>
+      </th>
+      <th><%= link_to "Created", documents_path( order: "created_at", docs: params[:docs], title: params[:title],author: params[:author], edition: params[:edition], anthology_id: params[:anthology_id] ) %>    </th>
   <% else %>
     <th><%= link_to "Title", anthology_path(friendly_id: @anthology.friendly_id, order: "title") %></th>
     <th><%= link_to "Author", anthology_path(friendly_id: @anthology.friendly_id, order: "author") %></th>
