@@ -37,7 +37,6 @@ module AnnotationStudio
     # config.active_record.whitelist_attributes = true
 
     config.assets.precompile += %w(active_admin.css active_admin.js)
-    config.assets.precompile += %w(javascripts/*.js stylesheets/*.css)
     config.assets.js_compressor = :uglifier
 
     # Enable the asset pipeline
