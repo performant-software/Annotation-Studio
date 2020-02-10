@@ -327,9 +327,9 @@ GEM
       activerecord (>= 4.0.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    gon (6.3.2)
-      actionpack (>= 3.0.20)
-      i18n (>= 0.7)
+    gon (6.0.1)
+      actionpack (>= 3.0)
+      json
       multi_json
       request_store (>= 1.0)
     has_scope (0.7.2)
@@ -487,7 +487,7 @@ GEM
       nokogiri (~> 1.5)
       optimist (~> 3.0)
     ref (2.0.0)
-    request_store (1.4.1)
+    request_store (1.5.0)
       rack (>= 1.4)
     require_all (2.0.0)
     responders (2.4.1)
@@ -600,7 +600,7 @@ DEPENDENCIES
   figaro
   fog
   friendly_id
-  gon
+  gon (= 6.0.1)
   high_voltage (~> 2.1.0)
   highline
   jbuilder
