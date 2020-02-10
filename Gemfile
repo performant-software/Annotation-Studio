@@ -23,7 +23,7 @@ gem "delayed_job_active_record"
 gem 'pdf-reader'
 gem 'pdf-reader-html'
 gem 'yomu'
-gem 'apartment', '1.1.0'
+gem 'apartment', '1.0.1'
 gem 'net-ssh'
 gem 'select2-rails', '< 4.0'
 gem 'omniauth-oauth2', '1.3.1'
