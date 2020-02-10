@@ -5,7 +5,7 @@ ruby '2.2.4'
 gem 'rails', '4.2.1'
 gem 'puma'
 
-gem 'pg', '~> 0.18'
+gem 'pg', '0.18.4'
 gem "newrelic_rpm"#, "~> 3.5.7.59"
 
 gem 'aws-sdk-s3'
