@@ -9,7 +9,7 @@ gem 'pg', '0.18.4'
 gem "newrelic_rpm"#, "~> 3.5.7.59"
 
 gem 'aws-sdk-s3'
-gem 'devise', '~> 3.2'
+gem 'devise', '3.5.2'
 gem "switch_user"
 gem 'cancancan', '~> 1.10'
 gem 'repertoire-groups', '0.0.1', :path => 'vendor/repertoire-groups-0.0.1' #, :require => 'repertoire-groups'
