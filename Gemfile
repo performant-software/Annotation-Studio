@@ -18,7 +18,7 @@ gem "friendly_id"
 gem "babosa"
 gem 'high_voltage', '~> 2.1.0'
 gem "aws-sdk", '< 2.0'
-gem "paperclip", '6.0.0'
+gem "paperclip", '4.3.2'
 gem "delayed_job_active_record"
 gem 'pdf-reader'
 gem 'pdf-reader-html'
