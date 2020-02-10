@@ -317,7 +317,6 @@ GEM
     fog-xml (0.1.3)
       fog-core
       nokogiri (>= 1.5.11, < 2.0.0)
-    foreman (0.86.0)
     formatador (0.2.5)
     formtastic (3.1.5)
       actionpack (>= 3.2.13)
@@ -600,7 +599,6 @@ DEPENDENCIES
   factory_girl_rails
   figaro
   fog
-  foreman
   friendly_id
   gon
   high_voltage (~> 2.1.0)

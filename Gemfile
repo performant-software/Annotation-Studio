@@ -89,4 +89,3 @@ gem "rest-client"
 
 gem "doorkeeper"
 gem "octokit", "~> 4.0"
-gem 'foreman'
