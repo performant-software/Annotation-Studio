@@ -13,7 +13,7 @@ gem 'devise', '3.5.2'
 gem "switch_user"
 gem 'cancancan', '~> 1.10'
 gem 'repertoire-groups', '0.0.1', :path => 'vendor/repertoire-groups-0.0.1' #, :require => 'repertoire-groups'
-gem 'acts-as-taggable-on'
+gem 'acts-as-taggable-on', '3.5.0'
 gem "friendly_id"
 gem "babosa"
 gem 'high_voltage', '~> 2.1.0'

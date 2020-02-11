@@ -68,8 +68,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    acts-as-taggable-on (4.0.0)
-      activerecord (>= 4.0)
+    acts-as-taggable-on (3.5.0)
+      activerecord (>= 3.2, < 5)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
     apartment (1.0.1)
@@ -582,7 +582,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin (= 1.0.0.pre1)
-  acts-as-taggable-on
+  acts-as-taggable-on (= 3.5.0)
   apartment (= 1.0.1)
   aws-sdk (< 2.0)
   aws-sdk-s3
