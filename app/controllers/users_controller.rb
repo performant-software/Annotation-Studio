@@ -88,7 +88,7 @@ class UsersController < ApplicationController
     end
     [:firstname, :lastname, :email].each do |query|
       if params.has_key?(query) && params[query].present?
-        @search_users_count = User.where("#{query} LIKE ?", "%#{params[query]}%").count
+        @search_users_count = User.where("lower(#{query}) LIKE ?", "%#{params[query]}%").count
       end
     end
     @tab_state = { user_set => 'active' }
@@ -100,7 +100,7 @@ class UsersController < ApplicationController
       Rails.logger.info "entering search results"
       [:firstname, :lastname, :email].each do |query|
         if params.has_key?(query) && params[query].present?
-            @users = User.where("#{query} LIKE ?", "%#{params[query]}%")
+            @users = User.where("lower(#{query}) LIKE ?", "%#{params[query]}%")
           end
         end
       if @users.present?
