@@ -100,6 +100,9 @@ class DocumentsController < ApplicationController
       end
       if @documents.present?
         @documents = @documents.paginate(:page => params[:page], :per_page => per_page)
+      else
+        @documents = Document.paginate(:page => params[:page], :per_page => per_page ) 
+        @search_documents_count = Document.count
       end
     end
     if @documents.present?
