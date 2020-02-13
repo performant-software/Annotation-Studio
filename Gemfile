@@ -4,6 +4,7 @@ ruby '2.2.4'
 
 gem 'rails', '4.2.1'
 gem 'puma'
+gem "puma_worker_killer"
 
 gem 'pg', '0.18.4'
 gem "newrelic_rpm"#, "~> 3.5.7.59"
