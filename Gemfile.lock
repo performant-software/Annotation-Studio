@@ -364,7 +364,6 @@ GEM
       activesupport (>= 3.0.0)
     launchy (2.4.3)
       addressable (~> 2.3)
-    libv8 (3.16.14.19)
     loofah (2.4.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -485,7 +484,6 @@ GEM
       json (>= 1.8)
       nokogiri (~> 1.5)
       optimist (~> 3.0)
-    ref (2.0.0)
     request_store (1.4.1)
       rack (>= 1.4)
     require_all (2.0.0)
@@ -552,9 +550,6 @@ GEM
     switch_user (1.5.2)
     terrapin (0.6.0)
       climate_control (>= 0.0.3, < 1.0)
-    therubyracer (0.12.3)
-      libv8 (~> 3.16.14.15)
-      ref
     thor (0.20.3)
     thread_safe (0.3.6)
     tilt (1.1)
@@ -639,7 +634,6 @@ DEPENDENCIES
   shoulda-matchers
   simplecov
   switch_user
-  therubyracer
   tilt (= 1.1)
   tinymce-rails
   uglifier

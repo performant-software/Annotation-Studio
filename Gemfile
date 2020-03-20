@@ -37,7 +37,6 @@ group :development do
 end
 
 group :assets do
-  gem "therubyracer", require: false
   gem 'coffee-rails' #, '~> 3.2.1'
   gem 'uglifier' #, '>= 1.0.3'
   gem 'underscore-rails'
