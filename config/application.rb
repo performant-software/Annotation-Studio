@@ -38,6 +38,8 @@ module AnnotationStudio
 
     config.assets.precompile += %w(active_admin.css active_admin.js)
 
+    config.serve_static_assets = true
+
     # Enable the asset pipeline
     config.assets.enabled = true
 
