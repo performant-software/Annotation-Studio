@@ -2,14 +2,47 @@ class AnthologiesController < ApplicationController
   before_filter :find_anthology, :only => [:show, :edit]
 
   def show
-    Rails.logger.info Anthology.all.inspect
-    Rails.logger.info @anthology.inspect
+    @page = 1
+    if params[:page].present?
+      @page = params[:page]
+    end
     @anthologies = Anthology.all
-    @search_documents_count = @anthology.documents.count
+    @search_documents_count = 0
+    @all_documents_count = @anthology.documents.count
     document_set = 'all'
     total_pages = 1
     @tab_state = { document_set => 'active' }
-    @documents = @anthology.documents.paginate(:page => 1, :per_page =>1 )
+    if !params[:docs].present? && !params[:author] && !params[:edition] && !params[:title]  || params[:docs] == "all"
+    @tab_state = { 'all' => 'active' }
+      if params[:order].present? && ["title", "author", "created_at"].include?(params[:order])
+        if params[:order] == "created_at"
+          @documents = @anthology.documents.order(created_at: :desc).paginate(:page => @page, :per_page =>10 )
+        else
+          @documents = @anthology.documents.order(params[:order].to_sym).paginate(:page => @page, :per_page =>10 )
+        end
+      else
+        @documents = @anthology.documents.paginate(:page => @page, :per_page =>10 )
+      end
+    else
+
+    @tab_state = { 'search_results' => 'active' }
+      if params[:author].present? || params[:edition].present? || params[:title].present?
+        [:title, :author, :edition].each do |query|
+          if params.has_key?(query) && params[query].present?
+            if query == :edition
+              @search_documents_count = Document.tagged_with(params[query]).count
+              @documents = Document.tagged_with(params[query])
+            elsif params.has_key?(query) && params[query].present?
+              @search_documents_count = Document.where("#{query} LIKE ?", "%#{params[query]}%").count
+              @documents = Document.where("#{query} LIKE ?", "%#{params[query]}%")
+            end
+          end
+        end
+        @documents = @documents.paginate(:page => @page, :per_page =>10 )
+      else
+        @documents = []
+      end
+    end
   end
 
   def create
