@@ -1,5 +1,6 @@
 class AnthologiesController < ApplicationController
   before_filter :find_anthology, :only => [:show, :edit]
+  before_filter :authenticate_user!
 
   def show
     @page = 1
