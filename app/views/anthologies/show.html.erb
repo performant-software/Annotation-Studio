@@ -15,10 +15,10 @@
       <% else %>
         <div class="container" ><i> There is no description for this anthology.</i></div>
       <% end %>
-      <div class="media-left">
+      <div class="media-left" >
         <% unless @anthology.banner.blank? %>
 <div class="container" >
-          <%= link_to image_tag(@anthology.banner.url(:medium), class: 'media-object'), @anthology.banner.url(:medium), target: '_blank' %>
+          <%= link_to image_tag(@anthology.banner.url(:medium), class: 'media-object', style: "padding-top:15px;"), @anthology.banner.url(:medium), target: '_blank'  %>
 </div>
         <% end %>
       </div>

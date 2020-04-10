@@ -5,6 +5,11 @@ class AnthologiesController < ApplicationController
     Rails.logger.info Anthology.all.inspect
     Rails.logger.info @anthology.inspect
     @anthologies = Anthology.all
+    @search_documents_count = @anthology.documents.count
+    document_set = 'all'
+    total_pages = 1
+    @tab_state = { document_set => 'active' }
+    @documents = @anthology.documents.paginate(:page => 1, :per_page =>1 )
   end
 
   def create
@@ -63,7 +68,7 @@ class AnthologiesController < ApplicationController
         format.html { redirect_to anthologies_url, notice: 'Anthology was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { redirect_to edit_anthology_url(id: @anthology.friendly_id), alert: @anthology.error_messages}
         format.json { render json: @anthology.errors, status: :unprocessable_entity }
       end
     end
