@@ -68,5 +68,5 @@
   <h4>Switch User</h4>
   
   
-  <p><strong>Remember me?</strong><%= select_tag 'user_id', options_for_select(@relevant_users.collect{ |u| [u.name, u.id] }), class: 'form-control' %></p>
+  <p><strong>Remember me?</strong><%= select_tag 'user_id', options_for_select(@relevant_users.collect{ |u| [u.fullname, u.id] }), class: 'form-control' %></p>
 <% end %>
