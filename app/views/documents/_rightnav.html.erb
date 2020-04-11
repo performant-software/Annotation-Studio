@@ -66,5 +66,7 @@
     <%= link_to "Download CSV", "/documents/#{@document.slug}/annotations.csv", class: "btn btn-default btn-sm", role: "button" %>
   <% end -%>
   <h4>Switch User</h4>
-  <p><strong>Remember me?</strong><%= switch_user_select class: 'form-control' %></p>
+  
+  
+  <p><strong>Remember me?</strong><%= select_tag 'user_id', options_for_select(@relevant_users.collect{ |u| [u.name, u.id] }), class: 'form-control' %></p>
 <% end %>
