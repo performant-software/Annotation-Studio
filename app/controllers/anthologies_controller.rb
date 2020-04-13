@@ -1,5 +1,5 @@
 class AnthologiesController < ApplicationController
-  before_filter :find_anthology, :only => [:show, :edit]
+  before_filter :find_anthology, :only => [:show, :edit, :destroy]
   before_filter :authenticate_user!
 
   def show
@@ -86,10 +86,13 @@ class AnthologiesController < ApplicationController
   end
 
   def destroy
-    @anthology.destroy
 
     respond_to do |format|
-      format.html { redirect_to anthologies_url }
+    if @anthology.destroy
+      format.html { redirect_to anthologies_url, notice: "You successfully deleted the anthology" }
+    else
+      format.html { redirect_to anthologies_url, alert: "There was a problem deleting the anthology" }
+    end
       format.json { head :no_content }
     end
   end
