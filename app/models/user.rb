@@ -48,6 +48,10 @@ class User < ActiveRecord::Base
     roles.pluck(:name).include? 'admin'
   end
 
+  def teacher?
+    roles.pluck(:name).include? 'teacher'
+  end
+
   def self.find_for_wordpress_oauth2(auth, current)
     Rails.logger.info "*****"
     Rails.logger.info "the auth under the find is #{auth}"

@@ -75,7 +75,10 @@
                 <% unless @documents.blank? %>
                   <%= form_tag(anthology_add_path(anthology: @anthology.id), :method => "post") do %>
                     <%= render partial: 'documents/document_table', locals: { documents: @documents } %>
-                  <%= button_tag "Add selected to anthology", :class => 'btn btn-primary create-new-button',:name => nil%>
+
+                    <% if current_user.admin? || current_user.teacher? %>
+                      <%= button_tag "Add selected to anthology", :class => 'btn btn-primary create-new-button',:name => nil%>
+                    <% end %>
               <% end %>
                 <% else %>
                   <div class="container">

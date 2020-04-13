@@ -33,7 +33,7 @@
       <% end %>
     </table>
     <div class="panel-footer doc-set-footer">
-      <% if can? :create, Anthology %>
+      <% if current_user.admin? || current_user.teacher? %>
         <%= link_to anthology_path('new') do %>
           <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create New Anthology
         <% end %>
