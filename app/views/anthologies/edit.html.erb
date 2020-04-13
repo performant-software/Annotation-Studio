@@ -5,7 +5,13 @@
       <div class="panel-heading">
         <span class="panel-title">Edit Anthology</span>
       </div>
+      <% if @anthology.user == current_user %>
       <%= render partial: 'form' %>
+    <% else %>
+      <div class="container">
+        You have to be the owner of this anthology in order to edit it
+      </div>
+    <% end %>
     </div>
   </div><!--/panel-body -->
 </div><!--/panel -->
