@@ -68,5 +68,14 @@
   <h4>Switch User</h4>
   
   
-  <p><strong>Remember me?</strong><%= select_tag 'user_id', options_for_select(@relevant_users.collect{ |u| [u.fullname, u.id] }), class: 'form-control' %></p>
+  <p><strong>Remember me?</strong>  <input type="checkbox" name="remember_user" id="remember_user" value="remember_user" onchange="location.href = '/switch_user/remember_user?remember=' + encodeURIComponent(this.checked)">
+  <select name="switch_user_identifier" id="switch_user_identifier" onchange="location.href = '/switch_user?scope_identifier=' + encodeURIComponent(this.options[this.selectedIndex].value)" class="form-control"><optgroup label="User">
+      <% @relevant_users.each do |user| %>
+        <% if user == @relevant_users.first %>
+          <option value=<%= "user_#{user.id}"%> selected="selected"><%= user.fullname %></option>
+        <% else %>
+          <option value=<%= "user_#{user.id}"%>><%= user.fullname %></option>
+        <% end %>
+      <% end %>
+  </p>
 <% end %>
