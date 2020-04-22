@@ -404,7 +404,8 @@ class DocumentsController < ApplicationController
 
   def set_relevant_users
     if @document.present?
-      @relevant_users = User.tagged_with(@document.rep_group_list, :any => true).order(:firstname)
+      SwitchUser.setup {|config| config.available_users = {user: -> {User.tagged_with(@document.rep_group_list, :any => true).order(:firstname)}} }
+      # @relevant_users = User.tagged_with(@document.rep_group_list, :any => true).order(:firstname)
     end
   end
   def documents_params
