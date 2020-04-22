@@ -12,9 +12,9 @@
       <input type="radio" value="class"><%= ENV["CLASS_TERM_PLURAL"] %></input>
     </label>
     <% if current_user.has_role?(:admin) %>
-    <label class="btn btn-default btn-sm viewchoice" id="admin">
-      <input type="radio" value="admin">All</input>
-    </label>
+      <label class="btn btn-default btn-sm viewchoice" id="admin">
+        <input type="radio" value="admin">All</input>
+      </label>
     <% end %>
   </div>
   <p><strong>Where</strong> they occur:</p>
@@ -31,24 +31,24 @@
     <input type="text" id="tagsearchbox" placeholder="Enter tag(s) to filter on">
   </div><!-- /input-group -->
   <% if Tenant.annotation_categories_enabled -%>
-  <p><strong>How</strong> they are categorized:</p>
-  <div class="btn-toolbar" id="category-chooser">
-    <% AnnotationCategory.find_each do |annotation_category| -%>
-    <button id="annotation_category_<%= annotation_category.id %>" type="button" class="btn btn-default btn-sm" data-annotation_category_id="<%= annotation_category.id %>" data-hex="<%= annotation_category.hex %>"><%= annotation_category.name %></button>
-    <% end -%>
-  </div><!-- /input-group -->
+    <p><strong>How</strong> they are categorized:</p>
+    <div class="btn-toolbar" id="category-chooser">
+      <% AnnotationCategory.find_each do |annotation_category| -%>
+        <button id="annotation_category_<%= annotation_category.id %>" type="button" class="btn btn-default btn-sm" data-annotation_category_id="<%= annotation_category.id %>" data-hex="<%= annotation_category.hex %>"><%= annotation_category.name %></button>
+      <% end -%>
+    </div><!-- /input-group -->
   <% end -%>
   <% if ENV["ANNOTATOR_CUSTOM_SORT"] == 'true' -%>
-  <h4>Sort annotations by:</h4>
-  <p><strong>How</strong> they are sorted:</p>
-  <div class="btn-group btn-group-sm" data-toggle="buttons" id="sort-chooser">
-    <label class="btn btn-default btn-sm viewchoice active" id="textpositionsort">
-      <input type="radio" checked value="textpositionsort">Text Position</input>
-    </label>
-    <label class="btn btn-default btn-sm viewchoice" id="customsort">
-      <input type="radio" checked value="customsort">Custom</input>
-    </label>
-  </div><!-- /input-group -->
+    <h4>Sort annotations by:</h4>
+    <p><strong>How</strong> they are sorted:</p>
+    <div class="btn-group btn-group-sm" data-toggle="buttons" id="sort-chooser">
+      <label class="btn btn-default btn-sm viewchoice active" id="textpositionsort">
+        <input type="radio" checked value="textpositionsort">Text Position</input>
+      </label>
+      <label class="btn btn-default btn-sm viewchoice" id="customsort">
+        <input type="radio" checked value="customsort">Custom</input>
+      </label>
+    </div><!-- /input-group -->
   <% end %>
   <% if @document.present? && current_user.has_document_permissions?(@document) %>
     <h4>Save</h4>
@@ -66,8 +66,5 @@
     <%= link_to "Download CSV", "/documents/#{@document.slug}/annotations.csv", class: "btn btn-default btn-sm", role: "button" %>
   <% end -%>
   <h4>Switch User</h4>
-  
-
-    <p><strong>Remember me?</strong><%= switch_user_select class: 'form-control' %></p>
-  
+  <p><strong>Remember me?</strong><%= switch_user_select class: 'form-control' %></p>
 <% end %>
