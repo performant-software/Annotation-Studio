@@ -7,31 +7,98 @@
       </div>
       <% unless @anthology.description.blank? %>
         <div class="container" >
-        <h3>Description</h3>
-        <div class="container" >
-          <%= @anthology.description %>
-        </div>
+          <h3>Description</h3>
+          <div class="container" >
+            <%= @anthology.description %>
+          </div>
         </div>
       <% else %>
         <div class="container" ><i> There is no description for this anthology.</i></div>
       <% end %>
-      <div class="media-left">
+      <div class="media-left" >
         <% unless @anthology.banner.blank? %>
-          <%= link_to image_tag(@anthology.banner.url(:medium), class: 'media-object'), @anthology.banner.url(:medium), target: '_blank' %>
+          <div class="container" >
+            <%= link_to image_tag(@anthology.banner.url(:medium), class: 'media-object', style: "padding-top:15px;"), @anthology.banner.url(:medium), target: '_blank'  %>
+          </div>
         <% end %>
       </div>
-      <% unless @anthology.documents.count == 0 %>
-        <div class="container" >
-          <h3>Documents</h3>
-          <% if params[:order].present? %>
-          <%= render partial: 'documents/document_table', locals: { documents: @anthology.documents.order(params[:order]) } %>
-        <% else %>
-          <%= render partial: 'documents/document_table', locals: { documents: @anthology.documents.order(:title) } %>
-        <% end %>
+      <div class="container">
+        <div class="row">
+          <%= form_tag(anthology_path(id: @anthology.friendly_id, docs: "search_results"), :method => "get", class: 'navbar-form navbar-left') do %>
+            <div class="input-group form-group">
+              <%= search_field_tag :title, params[:title], placeholder: "Title", class: "form-control" %>
+              <div class="input-group-btn">
+                <%= button_tag "Search", :class => 'btn btn-info',:name => nil%>
+              </div>
+            </div>
+          <% end %>
+          <%= form_tag(anthology_path(id: @anthology.friendly_id, docs: "search_results"), :method => "get", class: 'navbar-form navbar-left') do %>
+            <div class="input-group">
+              <%= search_field_tag :author, params[:author], placeholder: "Author", class: "form-control" %>
+              <div class="input-group-btn">
+                <%= button_tag "Search", :class => 'btn btn-info',:name => nil%>
+              </div>
+            </div>
+          <% end %>
+          <%= form_tag(anthology_path(id: @anthology.friendly_id, docs: "search_results"), :method => "get", class: 'navbar-form navbar-left') do %>
+            <div class="input-group">
+              <%= search_field_tag :edition, params[:edition], placeholder: "Edition", class: "form-control" %>
+              <div class="input-group-btn">
+                <%= button_tag "Search", :class => 'btn btn-info',:name => nil%>
+              </div>
+            </div>
+          <% end %>
         </div>
-      <% else %>
-        <div class="container" > There are no documents for this anthology. </div>
-      <% end %>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default" id="dashboard-documents">
+            <div class="panel-heading">
+              <span class="panel-title">Documents</span>
+              <ul class="nav nav-tabs nav-tabs-xs pull-right" id="document-tabs" role="tablist">
+                <li class="<%= @tab_state['search_results'] %>">
+                  <%= link_to anthology_path( docs: 'search_results', title: params[:title],author: params[:author], edition: params[:edition], id: @anthology.friendly_id ), params do %>
+                    <span class='badge'><%= @search_documents_count %></span> Search Results
+                  <% end %>
+                </li>
+                <% if can? :manage, Document %>
+                  <li class="<%= @tab_state['all'] %>">
+                    <%= link_to anthology_path( docs: 'all', title: params[:title],author: params[:author], edition: params[:edition], id: @anthology.friendly_id ), params do %>
+                      <span class='badge'><%= @all_documents_count %></span> All
+                    <% end %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+            <div class="tab-content">
+              <div class="tab-pane no-padding active" id="all">
+                <% unless @documents.blank? %>
+                  <%= form_tag(anthology_add_path(anthology: @anthology.id), :method => "post") do %>
+                    <%= render partial: 'documents/document_table', locals: { documents: @documents } %>
+
+                    <% if current_user.admin? || current_user.teacher? %>
+                      <%= button_tag "Add selected to anthology", :class => 'btn btn-primary create-new-button',:name => nil%>
+                    <% end %>
+              <% end %>
+                <% else %>
+                  <div class="container">
+                    <tr>
+                      <td colspan="6">No documents to view.</td>
+                    </tr>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+            <div class="panel-footer doc-set-footer">
+              <% if @documents.present? && @documents.count > 0 %>
+                <div class='pagination-controls'>
+                  <%= will_paginate @documents, renderer: BootstrapPagination::Rails %>
+                </div>
+              <% end %>
+            </div>
+          </div><!--/panel -->
+        </div><!--/col-md-12 -->
+      </div>
     </div>
   </div><!--/panel-body -->
 </div><!--/panel -->

@@ -5,6 +5,7 @@ require 'json'
 class DocumentsController < ApplicationController
   before_filter :find_document, :only => [:show, :set_default_state, :preview, :post_to_cove, :annotatable, :review, :publish, :export, :archive, :snapshot, :destroy, :edit, :update]
   before_filter :authenticate_user!
+  before_filter :set_relevant_users
 
   load_and_authorize_resource :except => :create
 
@@ -142,7 +143,6 @@ class DocumentsController < ApplicationController
     @enable_rich_text_editor = ENV["ANNOTATOR_RICHTEXT"]
     @tiny_mce_toolbar = @mel_catalog_enabled ? ENV["ANNOTATOR_RICHTEXT_WITH_CATALOG"] : ENV["ANNOTATOR_RICHTEXT_CONFIG"]
     @api_url = ENV["API_URL"]
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @document }
@@ -402,6 +402,12 @@ class DocumentsController < ApplicationController
     @document = Document.friendly.find(params.has_key?(:document_id) ? params[:document_id] : params[:id])
   end
 
+  def set_relevant_users
+    if @document.present?
+      SwitchUser.setup {|config| config.available_users = {user: -> {User.tagged_with(@document.rep_group_list, :any => true).order(:firstname)}} }
+      # @relevant_users = User.tagged_with(@document.rep_group_list, :any => true).order(:firstname)
+    end
+  end
   def documents_params
     params.require(:document).permit(:title, :state, :chapters, :text, :snapshot, :user_id, :rep_privacy_list,
                                      :rep_group_list, :new_group, :author, :edition, :publisher,

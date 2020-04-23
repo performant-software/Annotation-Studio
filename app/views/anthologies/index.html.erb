@@ -20,7 +20,10 @@
             <td>
               <%= anthology.description %></td>
             <td class="button-column">
-              <%= link_to 'Edit', edit_anthology_path(id: anthology.friendly_id), :class => 'btn btn-default btn-sm' %></td>
+              <% if anthology.user == current_user %>
+              <%= link_to 'Edit', edit_anthology_path(id: anthology.friendly_id), :class => 'btn btn-default btn-sm' %>
+            <%= link_to 'Delete', anthology_path(anthology), method: :delete, data: {confirm: "Are you sure?"}, :class => 'btn btn-danger btn-sm' %>
+          <% end %></td>
           </tr>
         <% end %>
       <% else %>
@@ -30,7 +33,7 @@
       <% end %>
     </table>
     <div class="panel-footer doc-set-footer">
-      <% if can? :create, Anthology %>
+      <% if current_user.admin? || current_user.teacher? %>
         <%= link_to anthology_path('new') do %>
           <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create New Anthology
         <% end %>
