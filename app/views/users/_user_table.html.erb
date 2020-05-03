@@ -21,7 +21,8 @@
         <%= user.email %></td>
       <td class="button-column">
         <% if @anthology.present? &&  user.anthologies.include?(@anthology) && @anthologies.include?(@anthology) %>
-          <%= link_to 'Remove from anthology', { action: :remove_user, controller: 'users', anthology_id: @anthology.id, user_id: user.id}, method: :post, :class => 'btn btn-danger btn-sm' %>
+          <%= link_to 'Remove from anthology',
+            { action: :remove_user, controller: 'users', anthology_id: @anthology.id, user_id: user.id}, method: :post, :class => 'btn btn-danger btn-sm' %>
         <% end %>
       <% end %>
 </table>

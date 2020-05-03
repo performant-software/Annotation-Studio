@@ -33,12 +33,12 @@ class AnthologiesController < ApplicationController
           [:email, :name].each do |query|
             if params.has_key?(query) && params[query].present?
               if query == :email
-                @search_users_count = User.where("users.email like ?", "%#{params[query]}%").count
-                @users = User.where("users.email like ?", "%#{params[query]}%")
+                @search_users_count = User.where("users.email ILIKE ?", "%#{params[query]}%").count
+                @users = User.where("users.email ILIKE ?", "%#{params[query]}%")
               elsif query == :name
-                @search_users_count = User.where("users.firstname like ? OR users.lastname like ? OR users.full_name like ?",
+                @search_users_count = User.where("users.firstname ILIKE ? OR users.lastname ILIKE ? OR users.full_name ILIKE ?",
                   "%#{params[query]}%", "%#{params[query]}%", "%#{params[query]}%").count
-                @users = User.where("users.firstname like ? OR users.lastname like ? OR users.full_name like ?",
+                @users = User.where("users.firstname ILIKE ? OR users.lastname ILIKE ? OR users.full_name ILIKE ?",
                   "%#{params[query]}%", "%#{params[query]}%", "%#{params[query]}%")
               end
             end
@@ -66,11 +66,12 @@ class AnthologiesController < ApplicationController
           [:title, :author, :edition].each do |query|
             if params.has_key?(query) && params[query].present?
               if query == :edition
-                @search_documents_count = Document.tagged_with(params[query]).count
-                @documents = Document.tagged_with(params[query])
+                tags = Tag.where('name ILIKE ?', "%#{params[query]}%").pluck(:name)
+                @search_documents_count = Document.tagged_with(tags, any: true).count
+                @documents = Document.tagged_with(tags, any: true)
               elsif params.has_key?(query) && params[query].present?
-                @search_documents_count = Document.where("#{query} LIKE ?", "%#{params[query]}%").count
-                @documents = Document.where("#{query} LIKE ?", "%#{params[query]}%")
+                @search_documents_count = Document.where("#{query} ILIKE ?", "%#{params[query]}%").count
+                @documents = Document.where("#{query} ILIKE ?", "%#{params[query]}%")
               end
             end
           end

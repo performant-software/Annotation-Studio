@@ -1,23 +1,23 @@
 <div class="container tab-pane" id="users-001">
-        <div class="row">
-          <%= form_tag(anthology_path(id: anthology.friendly_id, docs: "search_results"), :method => "get", class: 'navbar-form navbar-left') do %>
-            <div class="input-group form-group">
-              <%= search_field_tag :email, params[:email], placeholder: "Email", class: "form-control" %>
-              <%= hidden_field_tag :tab , "users" %>
-              <div class="input-group-btn">
-                <%= button_tag "Search", :class => 'btn btn-info',:name => nil %>
-              </div>
-            </div>
-          <% end %>
-
-          <%= form_tag(anthology_path(id: anthology.friendly_id, docs: "search_results"), :method => "get", class: 'navbar-form navbar-left') do %>
-            <div class="input-group">
-              <%= search_field_tag :name, params[:name], placeholder: "Full Name", class: "form-control" %>
-              <%= hidden_field_tag :tab , "users" %>
-              <div class="input-group-btn">
-                <%= button_tag "Search", :class => 'btn btn-info',:name => nil %>
-              </div>
-            </div>
-          <% end %>
+  <div class="row">
+    <%= form_tag(anthology_path(id: anthology.friendly_id, docs: "search_results"), :method => "get", class: 'navbar-form navbar-left') do %>
+    <div class="input-group form-group">
+        <%= search_field_tag :email, params[:email], placeholder: "Email", class: "form-control" %>
+        <%= hidden_field_tag :tab , "users" %>
+        <div class="input-group-btn">
+        <%= button_tag "Search", :class => 'btn btn-info',:name => nil %>
         </div>
-      </div>
+    </div>
+    <% end %>
+
+    <%= form_tag(anthology_path(id: anthology.friendly_id, docs: "search_results"), :method => "get", class: 'navbar-form navbar-left') do %>
+    <div class="input-group">
+        <%= search_field_tag :name, params[:name], placeholder: "Full Name", class: "form-control" %>
+        <%= hidden_field_tag :tab , "users" %>
+        <div class="input-group-btn">
+        <%= button_tag "Search", :class => 'btn btn-info',:name => nil %>
+        </div>
+    </div>
+    <% end %>
+  </div>
+</div>
