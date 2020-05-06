@@ -23,5 +23,5 @@ navsaconference:
   welcome_message: 'Welcome to Conference COVE Studio'
   welcome_blurb: 'COVE Studio is a web application that supports close reading and collaborative interpretation of online documents.'
   site_color: '#279eb2'
-  home_banner: 'navsa_home_banner.png'
+  home_banner: 'navsa_2020.png'
   brand: 'shared/navsa_conference_brand'
