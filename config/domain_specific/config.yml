@@ -4,11 +4,13 @@ default:
   welcome_blurb: "Annotation Studio is a web application that supports close reading and collaborative interpretation of online documents. For more information on the project click the About link at the top. If you don’t have an account yet, click Register at the top of this page otherwise just log in."
   site_color: '#CCC'
   brand: 'shared/default_brand'
+  home_banner: 'cove_home_banner.jpeg'
 public:
   site_name: Public
   welcome_message: "Welcome to Annotation Studio"
   welcome_blurb: "Annotation Studio is a web application that supports close reading and collaborative interpretation of online documents. For more information on the project click the About link at the top. If you don’t have an account yet, click Register at the top of this page otherwise just log in."
   site_color: '#CCC'
+  home_banner: 'cove_home_banner.jpeg'
 cove-studio:
   site_name: COVE
   welcome_message: 'Sign in above, or via <a href="http://navsa.org">NAVSA</a>'
