@@ -1,104 +1,69 @@
 <%= content_for :body_id, 'documents' %>
 <div class="row">
-  <div class="col-md-12">
-    <div class="panel panel-default" id="document-form">
-      <div class="panel-heading">
-        <span class="panel-title">Anthology: <%= @anthology.name %></span>
-      </div>
-      <% unless @anthology.description.blank? %>
-        <div class="container" >
-          <h3>Description</h3>
-          <div class="container" >
-            <%= @anthology.description %>
-          </div>
-        </div>
-      <% else %>
-        <div class="container" ><i> There is no description for this anthology.</i></div>
-      <% end %>
-      <div class="media-left" >
-        <% unless @anthology.banner.blank? %>
-          <div class="container" >
-            <%= link_to image_tag(@anthology.banner.url(:medium), class: 'media-object', style: "padding-top:15px;"), @anthology.banner.url(:medium), target: '_blank'  %>
-          </div>
-        <% end %>
-      </div>
-      <div class="container">
-        <div class="row">
-          <%= form_tag(anthology_path(id: @anthology.friendly_id, docs: "search_results"), :method => "get", class: 'navbar-form navbar-left') do %>
-            <div class="input-group form-group">
-              <%= search_field_tag :title, params[:title], placeholder: "Title", class: "form-control" %>
-              <div class="input-group-btn">
-                <%= button_tag "Search", :class => 'btn btn-info',:name => nil%>
-              </div>
-            </div>
-          <% end %>
-          <%= form_tag(anthology_path(id: @anthology.friendly_id, docs: "search_results"), :method => "get", class: 'navbar-form navbar-left') do %>
-            <div class="input-group">
-              <%= search_field_tag :author, params[:author], placeholder: "Author", class: "form-control" %>
-              <div class="input-group-btn">
-                <%= button_tag "Search", :class => 'btn btn-info',:name => nil%>
-              </div>
-            </div>
-          <% end %>
-          <%= form_tag(anthology_path(id: @anthology.friendly_id, docs: "search_results"), :method => "get", class: 'navbar-form navbar-left') do %>
-            <div class="input-group">
-              <%= search_field_tag :edition, params[:edition], placeholder: "Edition", class: "form-control" %>
-              <div class="input-group-btn">
-                <%= button_tag "Search", :class => 'btn btn-info',:name => nil%>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="panel panel-default" id="dashboard-documents">
+    <div class="col-md-12">
+        <div class="panel panel-default" id="document-form">
             <div class="panel-heading">
-              <span class="panel-title">Documents</span>
-              <ul class="nav nav-tabs nav-tabs-xs pull-right" id="document-tabs" role="tablist">
-                <li class="<%= @tab_state['search_results'] %>">
-                  <%= link_to anthology_path( docs: 'search_results', title: params[:title],author: params[:author], edition: params[:edition], id: @anthology.friendly_id ), params do %>
-                    <span class='badge'><%= @search_documents_count %></span> Search Results
-                  <% end %>
-                </li>
-                <% if can? :manage, Document %>
-                  <li class="<%= @tab_state['all'] %>">
-                    <%= link_to anthology_path( docs: 'all', title: params[:title],author: params[:author], edition: params[:edition], id: @anthology.friendly_id ), params do %>
-                      <span class='badge'><%= @all_documents_count %></span> All
-                    <% end %>
-                  </li>
-                <% end %>
-              </ul>
+                <span class="panel-title">Anthology: <%= @anthology.name %></span>
             </div>
-            <div class="tab-content">
-              <div class="tab-pane no-padding active" id="all">
-                <% unless @documents.blank? %>
-                  <%= form_tag(anthology_add_path(anthology: @anthology.id), :method => "post") do %>
-                    <%= render partial: 'documents/document_table', locals: { documents: @documents } %>
-
-                    <% if current_user.admin? || current_user.teacher? %>
-                      <%= button_tag "Add selected to anthology", :class => 'btn btn-primary create-new-button',:name => nil%>
-                    <% end %>
-              <% end %>
-                <% else %>
-                  <div class="container">
-                    <tr>
-                      <td colspan="6">No documents to view.</td>
-                    </tr>
-                  </div>
-                <% end %>
-              </div>
-            </div>
-            <div class="panel-footer doc-set-footer">
-              <% if @documents.present? && @documents.count > 0 %>
-                <div class='pagination-controls'>
-                  <%= will_paginate @documents, renderer: BootstrapPagination::Rails %>
+            <% unless @anthology.description.blank? %>
+                <div class="container anthology-description">
+                    <h3>Description</h3>
+                    <div class="container">
+                        <%= @anthology.description %>
+                    </div>
                 </div>
-              <% end %>
+            <% else %>
+                <div class="container" ><i> There is no description for this anthology.</i></div>
+            <% end %>
+            <div class="media-left" >
+                <% unless @anthology.banner.blank? %>
+                    <div class="container" >
+                        <%= link_to image_tag(@anthology.banner.url(:medium), class: 'media-object', style: "padding-top:15px;"), @anthology.banner.url(:medium), target: '_blank'  %>
+                    </div>
+                <% end %>
             </div>
-          </div><!--/panel -->
-        </div><!--/col-md-12 -->
-      </div>
-    </div>
-  </div><!--/panel-body -->
+            <% if can? :manage, User %>
+              <div class="container">
+                <div class="media-left">
+                  <ul class="nav nav-tabs">
+                    <li role="presentation" class=<%= (params[:tab] == "documents" || params[:tab].nil?) ? 'active' : '' %>>
+                      <a href="?tab=documents">Documents</a>
+                    </li>
+                    <li role="presentation" class=<%= params[:tab] == "users" ? 'active' : '' %> >
+                      <a href="?tab=users">Users</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <% if params[:tab] == "users" %>
+                <%= render 'users_tab', anthology: @anthology %>
+                <%= render 'searched_users', users: @users, anthology: @anthology, tab_state: @tab_state, search_users_count: @search_users_count, all_users_count: @all_users_count %>
+              <% else %>
+                <%= render 'documents_tab', anthology: @anthology %>
+                <%= render 'searched_documents', 
+                    search_documents_count: @search_documents_count, 
+                    tab_state: @tab_state,
+                    all_documents_count: @all_documents_count, 
+                    documents: @documents,
+                    anthology: @anthology 
+                  %>
+              <% end %>
+            <% else %> 
+              <%= render 'documents_tab', anthology: @anthology %>
+              <%= render 'searched_documents', 
+                search_documents_count: @search_documents_count, 
+                tab_state: @tab_state,
+                all_documents_count: @all_documents_count, 
+                documents: @documents,
+                anthology: @anthology 
+              %>
+            <% end %>
+
+            
+
+            
+
+            
+        </div>
+    </div><!--/panel-body -->
 </div><!--/panel -->

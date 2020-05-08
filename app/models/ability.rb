@@ -32,7 +32,7 @@ class Ability
       can :read, Document do |tors|
         !(user.rep_group_list & tors.rep_group_list).empty?
       end
-
+      cannot :manage, User
     else
       cannot :manage, :all
       can :read, Document, { :public? => true }
