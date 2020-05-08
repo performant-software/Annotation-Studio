@@ -32,15 +32,16 @@
                                 <td> <%= user.email %> </td>
                                 <td>
                                     <% if anthology.users.include?(user) %>
-                                        <%= link_to 'Remove From Anthology', { action: :remove_user, controller: 'anthologies', anthology_id: anthology.id, user_id: user.id}, method: :post , :class => 'btn btn-danger btn-md' %>
+                                        <%= link_to 'Remove From Anthology', { action: :remove_user, controller: 'anthologies', anthology_id: anthology.id, user_id: user.id, name: @searched_name, email: @searched_email}, method: :post , :class => 'btn btn-danger btn-md' %>
                                     <% else  %>
-                                        <%= link_to 'Assign To Anthology', { action: :add_user, controller: 'anthologies', anthology_id: anthology.id, user_id: user.id}, method: :post, :class => 'btn btn-primary btn-md' %>
+                                        <%= link_to 'Assign To Anthology', { action: :add_user, controller: 'anthologies', anthology_id: anthology.id, user_id: user.id, name: @searched_name, email: @searched_email}, method: :post, :class => 'btn btn-primary btn-md' %>
                                     <% end %>
                                 </td>
                             </tr>
                         <% end %>
                     </tbody>
                 </table>
+            <%= will_paginate  @users, renderer: BootstrapPagination::Rails %>
             <% end %>
         </div>
     </div>

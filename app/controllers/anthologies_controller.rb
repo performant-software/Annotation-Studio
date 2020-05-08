@@ -33,13 +33,12 @@ class AnthologiesController < ApplicationController
           [:email, :name].each do |query|
             if params.has_key?(query) && params[query].present?
               if query == :email
-                @search_users_count = User.where("users.email ILIKE ?", "%#{params[query]}%").count
                 @users = User.where("users.email ILIKE ?", "%#{params[query]}%")
+                @search_users_count = @users.count
               elsif query == :name
-                @search_users_count = User.where("users.firstname ILIKE ? OR users.lastname ILIKE ? OR users.full_name ILIKE ?",
-                  "%#{params[query]}%", "%#{params[query]}%", "%#{params[query]}%").count
                 @users = User.where("users.firstname ILIKE ? OR users.lastname ILIKE ? OR users.full_name ILIKE ?",
                   "%#{params[query]}%", "%#{params[query]}%", "%#{params[query]}%")
+                @search_users_count = @users.count
               end
             end
           end
@@ -81,6 +80,8 @@ class AnthologiesController < ApplicationController
         end
       end
     end
+    @searched_name = (params[:name] || [])
+    @searched_email = (params[:email] || [])
   end
 
   def create
@@ -101,12 +102,11 @@ class AnthologiesController < ApplicationController
   def remove_doc
     respond_to do |format|
       @anthology = Anthology.find(params[:anthology_id])
-      Rails.logger.info "**** entering remove doc"
       @document = Document.find(params[:document_id])
-      Rails.logger.info "The doc is #{@document.inspect}"
 
       if @anthology.present? && @document.present? && @anthology.documents.delete(@document)
-
+        @document.rep_group_list.remove(@anthology.slug)
+        @document.save
         format.html {redirect_to @anthology, notice: "The document #{@document.title} was successfully removed from this anthology"}
       else
         format.html { redirect_to anthologies_path, error: "There was a problem removing the document from this anthology" }
@@ -117,14 +117,16 @@ class AnthologiesController < ApplicationController
   def remove_user
     respond_to do |format|
       @anthology = Anthology.find(params[:anthology_id])
-      Rails.logger.info "**** removing user"
       @user = User.find(params[:user_id])
-      Rails.logger.info "The user is #{@user.inspect}"
+      @searched_name = (params[:name] || [])
+      @searched_email = (params[:email] || [])
 
       if @anthology.present? && @user.present? && @anthology.users.delete(@user)
-        format.html {redirect_to anthology_path(@anthology, tab: "users"), tab: 'users', notice: "The user #{@user.full_name} was successfully removed from this anthology"}
+        @user.rep_group_list.remove(@anthology.slug)
+        @user.save
+        format.html {redirect_to anthology_path(@anthology, tab: "users", name: @searched_name, email: @searched_email), tab: 'users', notice: "The user #{@user.fullname} was successfully removed from this anthology"}
       else
-        format.html { redirect_to anthologies_path, error: "There was a problem removing the user from this anthology" }
+        format.html { redirect_to anthologies_path(@anthology, tab: "users", name: @searched_name, email: @searched_email), error: "There was a problem removing the user from this anthology" }
       end
     end
   end
@@ -132,15 +134,17 @@ class AnthologiesController < ApplicationController
   def add_user
     respond_to do |format|
       @anthology = Anthology.find(params[:anthology_id])
-      Rails.logger.info "**** adding user"
       @user = User.find(params[:user_id])
-      Rails.logger.info "The user is #{@user.inspect}"
-      
+      @searched_name = (params[:name] || [])
+      @searched_email = (params[:email] || [])
+
       if @anthology.present? && @user.present?
         @anthology.users << @user
-        format.html {redirect_to anthology_path(@anthology, tab: "users"), notice: "The user #{@user.email} was successfully added to this anthology"}
+        @user.rep_group_list.add(@anthology.slug)
+        @user.save
+        format.html {redirect_to anthology_path(@anthology, tab: "users", name: @searched_name, email: @searched_email), notice: "The user #{@user.fullname} was successfully added to this anthology"}
       else
-        format.html { redirect_to anthologies_path, error: "There was a problem adding the user to this anthology" }
+        format.html { redirect_to anthologies_path(@anthology, tab: "users", name: @searched_name, email: @searched_email), error: "There was a problem adding the user to this anthology" }
       end
     end
   end
@@ -187,7 +191,7 @@ class AnthologiesController < ApplicationController
   private
 
   def find_anthology
-    @anthology = Anthology.friendly.find(params.has_key?(:anthology_id) ? params[:anthology_id] : params[:id])
+    @anthology = Anthology.includes(:users, :documents).friendly.find(params.has_key?(:anthology_id) ? params[:anthology_id] : params[:id])
   end
 
   def anthology_params

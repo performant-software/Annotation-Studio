@@ -20,6 +20,8 @@ class DocumentsController < ApplicationController
       Rails.logger.info "anthology is #{anthology.inspect}"
       params[:document_ids].each do |doc_id|
         doc = Document.find(doc_id)
+        doc.rep_group_list.add(anthology.slug)
+        doc.save
         unless anthology.documents.include?(doc)
           anthology.documents << doc
           documents << doc.title
