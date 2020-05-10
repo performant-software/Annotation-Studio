@@ -17,6 +17,8 @@
       </label>
     <% end %>
   </div>
+  <p>By User</p>
+  <%= select_tag "users", options_from_collection_for_select(User.tagged_with(@document.rep_group_list, :any => true).order(:firstname), "email", "fullname"), class: 'form-control' %>
   <p><strong>Where</strong> they occur:</p>
   <div class="btn-group btn-group-sm" data-toggle="buttons" id="filter-chooser">
     <label class="btn btn-default btn-sm active" id="visibleannotations">

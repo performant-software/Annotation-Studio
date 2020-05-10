@@ -56,12 +56,23 @@ var annotation_studio = {
     sidebar.subscriber = subscriber;
   },
 	selectedTags: [],
-  loadOptions: function(overrides) {
+  loadOptions: function(overrides, user_select) {
     var annotation_categories = [];
     $.each($('#category-chooser button.active'), function(i, j) {
       annotation_categories.push($(j).data('annotation_category_id'));
     });
-
+    if(user_select){
+    var settings = {
+      'limit': 1000,
+      "groups": groups,
+      "subgroups": subgroups,
+      'user': user_select,
+      'mode': 'user',
+      'context': search_context,
+      'uri': [location.protocol, '//', location.host, location.pathname].join(''),
+      'annotation_categories': annotation_categories
+    };
+    }else {
     var settings = {
       'limit': 1000,
       "groups": groups,
@@ -72,6 +83,7 @@ var annotation_studio = {
       'uri': [location.protocol, '//', location.host, location.pathname].join(''),
       'annotation_categories': annotation_categories
     };
+    }
 
     if($('#tagsearchbox').length && $('#tagsearchbox').val() != '') {
       settings.tags = $('#tagsearchbox').val();
@@ -87,17 +99,31 @@ var annotation_studio = {
     subscriber.loadAnnotations(subscriber.plugins.Store.annotations);
     $('#spinnermodal').modal('hide');
   },
-  filterAnnotations: function(overrides) {
-    var options = annotation_studio.loadOptions(overrides);
+  filterAnnotations: function(overrides, user_select) {
+    console.log("*** the user select is");
+    console.log(user_select);
+    var options = annotation_studio.loadOptions(overrides, user_select);
     var reload_data = annotation_studio.reloadAnnotations(options);
     var cleanup_document = annotation_studio.cleanupDocument();
     $.when(reload_data).then(cleanup_document).done(annotation_studio.refreshAnnotations(), annotation_studio.loadSidebar());
   },
   modeFilter: function(event) {
+    console.log('*** went into mode filter');
     var overrides = {
       mode: event.target.id
     };
     annotation_studio.filterAnnotations(overrides);
+  },
+  userFilter: function(event) {
+    console.log('*** went into user filter');
+    var overrides = { };
+    console.log("*** event is");
+    console.log(event)
+    console.log("*** target is");
+    console.log(event.target)
+    console.log("*** value is");
+    console.log(event.target.value)
+    annotation_studio.filterAnnotations(overrides, event.target.value);
   },
   tagFilter: function(event) {
     $('*[data-role="remove"]').hide();
@@ -278,6 +304,7 @@ jQuery(function($) {
   });
 
   $('.viewchoice').on('click', annotation_studio.modeFilter);
+  $('#users').on('change', annotation_studio.userFilter);
 
 	var tagsElement = $("#annotation-tag-list");
 	$("body").on('click', '#annotation-tag-list input', annotation_studio.tagFilterCheck);
