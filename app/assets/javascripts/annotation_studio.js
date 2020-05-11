@@ -97,7 +97,7 @@ var annotation_studio = {
   },
   refreshAnnotations: function() {
     subscriber.loadAnnotations(subscriber.plugins.Store.annotations);
-    $('#spinnermodal').modal('hide');
+    $('#spinnermodal').modal('show');
   },
   filterAnnotations: function(overrides, user_select) {
     console.log("*** the user select is");
@@ -153,6 +153,9 @@ var annotation_studio = {
   },
   stopSpinner: function() {
     $('#spinnermodal').modal('hide');
+  },
+  startSpinner: function() {
+    $('#spinnermodal').modal('show');
   },
   // Update the sidebar with local annotation data
   loadSidebar: function(annotation) {
@@ -281,7 +284,7 @@ jQuery(function($) {
   if(!($('body').attr('id') == 'documents' && $('body').attr('class') == 'show')) {
     return;
   }
-
+  annotation_studio.startSpinner();
   annotation_studio.initialize_default_state_behavior();
   annotation_studio.initialize_annotator();
 
