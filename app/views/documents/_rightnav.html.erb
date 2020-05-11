@@ -17,8 +17,10 @@
       </label>
     <% end %>
   </div>
+  <% if User.tagged_with(@document.rep_group_list, :any => true).count != 0 %>
   <p>By User</p>
   <%= select_tag "users", options_from_collection_for_select(User.tagged_with(@document.rep_group_list, :any => true).order(:firstname), "email", "fullname"), class: 'form-control' %>
+<% end %>
   <p><strong>Where</strong> they occur:</p>
   <div class="btn-group btn-group-sm" data-toggle="buttons" id="filter-chooser">
     <label class="btn btn-default btn-sm active" id="visibleannotations">
@@ -67,6 +69,8 @@
     <p><strong>Download CSV</strong> of the document snapshot</p>
     <%= link_to "Download CSV", "/documents/#{@document.slug}/annotations.csv", class: "btn btn-default btn-sm", role: "button" %>
   <% end -%>
+  <% if User.tagged_with(@document.rep_group_list, :any => true).count != 0 %>
   <h4>Switch User</h4>
   <p><strong>Remember me?</strong><%= switch_user_select class: 'form-control' %></p>
+  <% end -%>
 <% end %>
