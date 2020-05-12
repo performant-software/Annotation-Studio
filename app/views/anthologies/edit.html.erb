@@ -1,9 +1,10 @@
 <%= content_for :body_id, 'documents' %>
+<%= content_for :page_title, @anthology.name %>
 <div class="row">
   <div class="col-md-12">
     <div class="panel panel-default" id="document-form">
       <div class="panel-heading">
-        <span class="panel-title">Edit Anthology</span>
+        <span class="panel-title">Edit Anthology(<%= @anthology.name %>)</span>
       </div>
       <% if @anthology.user == current_user %>
       <%= render partial: 'form' %>

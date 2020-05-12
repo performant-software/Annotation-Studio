@@ -26,6 +26,7 @@
  *= require "catalog"
  *= require "ekko-lightbox.min"
  *= require "navbar-overrides.css"
+ *= require "anthologies"
  */
 
 html {
@@ -170,14 +171,4 @@ img#neh-logo {
     margin-top: 12px;
     color: #fff;
   }
-}
-
-.anthology-description { 
-  margin-bottom: 15px;
-}
-
-.an-searched-users-table-header { 
-  margin-bottom: 20px;
-  font-size: 16px;
-  color: inherit;
 }

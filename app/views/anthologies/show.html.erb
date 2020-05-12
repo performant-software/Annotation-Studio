@@ -1,69 +1,74 @@
+<%= content_for :page_title, @anthology.name %>
 <%= content_for :body_id, 'documents' %>
 <div class="row">
-    <div class="col-md-12">
-        <div class="panel panel-default" id="document-form">
-            <div class="panel-heading">
-                <span class="panel-title">Anthology: <%= @anthology.name %></span>
-            </div>
-            <% unless @anthology.description.blank? %>
-                <div class="container anthology-description">
-                    <h3>Description</h3>
-                    <div class="container">
-                        <%= @anthology.description %>
-                    </div>
-                </div>
-            <% else %>
-                <div class="container" ><i> There is no description for this anthology.</i></div>
-            <% end %>
-            <div class="media-left" >
-                <% unless @anthology.banner.blank? %>
-                    <div class="container" >
-                        <%= link_to image_tag(@anthology.banner.url(:medium), class: 'media-object', style: "padding-top:15px;"), @anthology.banner.url(:medium), target: '_blank'  %>
-                    </div>
-                <% end %>
-            </div>
-            <% if can? :manage, User %>
-              <div class="container">
-                <div class="media-left">
-                  <ul class="nav nav-tabs">
-                    <li role="presentation" class=<%= (params[:tab] == "documents" || params[:tab].nil?) ? 'active' : '' %>>
-                      <a href="?tab=documents">Documents</a>
-                    </li>
-                    <li role="presentation" class=<%= params[:tab] == "users" ? 'active' : '' %> >
-                      <a href="?tab=users">Users</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <% if params[:tab] == "users" %>
-                <%= render 'users_tab', anthology: @anthology %>
-                <%= render 'searched_users', users: @users, anthology: @anthology, tab_state: @tab_state, search_users_count: @search_users_count, all_users_count: @all_users_count %>
-              <% else %>
-                <%= render 'documents_tab', anthology: @anthology %>
-                <%= render 'searched_documents', 
-                    search_documents_count: @search_documents_count, 
-                    tab_state: @tab_state,
-                    all_documents_count: @all_documents_count, 
-                    documents: @documents,
-                    anthology: @anthology 
-                  %>
-              <% end %>
-            <% else %> 
-              <%= render 'documents_tab', anthology: @anthology %>
-              <%= render 'searched_documents', 
-                search_documents_count: @search_documents_count, 
-                tab_state: @tab_state,
-                all_documents_count: @all_documents_count, 
-                documents: @documents,
-                anthology: @anthology 
-              %>
-            <% end %>
-
-            
-
-            
-
-            
+  <div class="col-md-12">
+    <div class="panel panel-default" id="document-form">
+      <div class="panel-heading">
+        <span class="panel-title">Anthology: <%= @anthology.name %></span>
+      </div>
+      <% unless @anthology.description.blank? %>
+        <div class="container anthology-description">
+          <h3>Description</h3>
+          <div class="container">
+            <%= @anthology.description %>
+          </div>
         </div>
-    </div><!--/panel-body -->
+      <% else %>
+        <div class="container" ><i> There is no description for this anthology.</i></div>
+      <% end %>
+      <div class="media-left" >
+        <% unless @anthology.banner.blank? %>
+          <div class="container" >
+            <%= link_to image_tag(@anthology.banner.url(:medium), class: 'media-object', style: "padding-top:15px;"), @anthology.banner.url(:medium), target: '_blank'  %>
+          </div>
+        <% end %>
+      </div>
+      <div class="search-tabs-wrapper">
+        <% if can? :manage, User %>
+          <div class="container">
+            <div class="media-left">
+              <ul class="nav nav-tabs">
+                <li role="presentation" class=<%= (params[:tab] == "documents" || params[:tab].nil?) ? 'active' : '' %>>
+                  <a href="?tab=documents">Documents</a>
+                </li>
+                <li role="presentation" class=<%= params[:tab] == "users" ? 'active' : '' %> >
+                  <a href="?tab=users">Users</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <% if params[:tab] == "users" %>
+
+            <%= render 'users_tab', anthology: @anthology %>
+            <%= render 'searched_users', users: @users, anthology: @anthology, tab_state: @tab_state, search_users_count: @search_users_count, all_users_count: @all_users_count %>
+
+          <% else %>
+            <%= render 'documents_tab', anthology: @anthology %>
+            <%= render 'searched_documents',
+                       search_documents_count: @search_documents_count,
+                       tab_state: @tab_state,
+                       all_documents_count: @all_documents_count,
+                       documents: @documents,
+                       anthology: @anthology
+            %>
+          <% end %>
+        <% else %>
+          <%= render 'documents_tab', anthology: @anthology %>
+          <%= render 'searched_documents',
+                     search_documents_count: @search_documents_count,
+                     tab_state: @tab_state,
+                     all_documents_count: @all_documents_count,
+                     documents: @documents,
+                     anthology: @anthology
+          %>
+        <% end %>
+      </div>
+
+
+
+
+
+
+    </div>
+  </div><!--/panel-body -->
 </div><!--/panel -->
