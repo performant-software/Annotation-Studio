@@ -11,6 +11,11 @@
           <%= f.text_area :description, :class => 'form-control' %>
         </div>
         <div class="form-group">
+          <% unless @anthology.banner.blank? %>
+            <div class="container" >
+              <%= link_to image_tag(@anthology.banner.url(:medium), class: 'media-object', style: "padding-top:15px;"), @anthology.banner.url(:medium), target: '_blank'  %>
+            </div>
+          <% end %>
           <%= f.label :banner %>
           <%= f.file_field :banner, class: 'form-control' %>
         <i>The banner should be a png, jpg, or jpeg and should be less than 1 MB and at least 1100 # 250 pixels</i>
