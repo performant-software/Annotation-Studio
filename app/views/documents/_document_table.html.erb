@@ -9,8 +9,11 @@
     <th>
       <%= link_to "Created", documents_path( order: "created_at", docs: params[:docs], title: params[:title],author: params[:author], edition: params[:edition], anthology_id: params[:anthology_id] ) %>
     </th>
-<!--    <th><%#= ENV["CLASS_TERM_PLURAL"] %></th>-->
-    <% if current_user.admin? %>
+    <% if %w[anthologies].include?(controller_name) %>
+      <th>Vetted</th>
+    <% end %>
+    <% if %w[anthologies].exclude?(controller_name) %>
+      <th><%= ENV["CLASS_TERM_PLURAL"] %></th>
       <th>Status</th>
     <% end %>
     <th>Actions</th>
@@ -28,55 +31,60 @@
         <%= document.author %></td>
       <td>
         <%= document.created_at.strftime("%m/%d/%Y") %></td>
-<!--      <td>-->
-        <%# document.rep_group_list.each do |group| %>
-<!--          <span class="label label-info">-->
-<!--            <%#= group %></span>-->
-<!--        <%# end %></td>-->
-    <% if current_user.admin? %>
-      <td>
-        <% if can? :update, document %>
-          <div class="btn-group" role="group" aria-label="document states">
+      <% if %w[anthologies].include?(controller_name) %>
+        <td>
+          <%= document.vetted.present?.to_s.capitalize %>
+        </td>
+      <% end %>
+      <% if %w[anthologies].exclude?(controller_name) %>
+        <td>
+          <% document.rep_group_list.each do |group| %>
+        <span class="label label-info">
+          <%= group %></span>
+          <% end %></td>
+        <td>
+          <% if can? :update, document %>
+            <div class="btn-group" role="group" aria-label="document states">
 
-            <% if document.draft? %>
-              <%= link_to 'Editable', "#", :class => 'btn btn-default btn-sm active' %>
-            <% else %>
-              <%= link_to 'Editable', "#", :class => 'btn btn-default btn-sm disabled' %>
-            <% end %>
-
-
-            <% if document.annotatable? %>
-              <%= link_to 'Annotatable', document_annotatable_path(document), method: :post, :class => 'btn btn-default btn-sm active' %>
-            <% else %>
-              <%= link_to 'Annotatable', document_annotatable_path(document), method: :post, :class => 'btn btn-default btn-sm' %>
-            <% end %>
+              <% if document.draft? %>
+                <%= link_to 'Editable', "#", :class => 'btn btn-default btn-sm active' %>
+              <% else %>
+                <%= link_to 'Editable', "#", :class => 'btn btn-default btn-sm disabled' %>
+              <% end %>
 
 
-            <% if document.review? %>
-              <%= link_to 'Reviewable', document_review_path(document), method: :post, :class => 'btn btn-default btn-sm active' %>
-            <% else %>
-              <%= link_to 'Reviewable', document_review_path(document), method: :post, :class => 'btn btn-default btn-sm' %>
-            <% end %>
+              <% if document.annotatable? %>
+                <%= link_to 'Annotatable', document_annotatable_path(document), method: :post, :class => 'btn btn-default btn-sm active' %>
+              <% else %>
+                <%= link_to 'Annotatable', document_annotatable_path(document), method: :post, :class => 'btn btn-default btn-sm' %>
+              <% end %>
 
 
-            <% if document.published? %>
-              <%= link_to 'Publishable', document_publish_path(document), method: :post, :class => 'btn btn-default btn-sm active' %>
-            <% else %>
-              <%= link_to 'Publishable', document_publish_path(document), method: :post, :class => 'btn btn-default btn-sm' %>
-            <% end %>
+              <% if document.review? %>
+                <%= link_to 'Reviewable', document_review_path(document), method: :post, :class => 'btn btn-default btn-sm active' %>
+              <% else %>
+                <%= link_to 'Reviewable', document_review_path(document), method: :post, :class => 'btn btn-default btn-sm' %>
+              <% end %>
 
 
-            <% if document.archived? %>
-              <%= link_to 'Hidden', document_archive_path(document), method: :post, :class => 'btn btn-default btn-sm active' %>
-            <% else %>
-              <%= link_to 'Hidden', document_archive_path(document), method: :post, :class => 'btn btn-default btn-sm' %>
-            <% end %>
-          </div>
-        <% else %>
-          <%= document.state %>
-        <% end %>
-      </td>
-    <% end %>
+              <% if document.published? %>
+                <%= link_to 'Publishable', document_publish_path(document), method: :post, :class => 'btn btn-default btn-sm active' %>
+              <% else %>
+                <%= link_to 'Publishable', document_publish_path(document), method: :post, :class => 'btn btn-default btn-sm' %>
+              <% end %>
+
+
+              <% if document.archived? %>
+                <%= link_to 'Hidden', document_archive_path(document), method: :post, :class => 'btn btn-default btn-sm active' %>
+              <% else %>
+                <%= link_to 'Hidden', document_archive_path(document), method: :post, :class => 'btn btn-default btn-sm' %>
+              <% end %>
+            </div>
+          <% else %>
+            <%= document.state %>
+          <% end %>
+        </td>
+      <% end %>
   <td class="button-column">
     <% if can? :update, document %>
       <% if document.draft? %>
@@ -102,7 +110,7 @@
     <% end %>
   <% end %>
   </td>
-  </tr>
+</tr>
 </table>
 <script type="text/javascript">
   $(function () {
