@@ -19,14 +19,14 @@
       </div>
     </div>
   <% end %>
-  <%= form_tag(documents_path, :method => "get", class: 'navbar-form navbar-left') do %>
-    <div class="input-group">
-      <%= search_field_tag :edition, params[:edition], placeholder: "Edition", class: "form-control" %>
-      <div class="input-group-btn">
-        <%= button_tag "Search", :class => 'btn btn-info',:name => nil%>
-      </div>
-    </div>
-  <% end %>
+  <%#= form_tag(documents_path, :method => "get", class: 'navbar-form navbar-left') do %>
+<!--    <div class="input-group">-->
+      <%#= search_field_tag :edition, params[:edition], placeholder: "Edition", class: "form-control" %>
+<!--      <div class="input-group-btn">-->
+        <%#= button_tag "Search", :class => 'btn btn-info',:name => nil%>
+<!--      </div>-->
+<!--    </div>-->
+  <%# end %>
 </div>
 <div class="row">
   <div class="col-md-12">
