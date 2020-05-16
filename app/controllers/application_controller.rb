@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
           },
           ENV["API_SECRET"]
       )
-      user_url(user)
+      stored_location_for(user) || super
   end
 
   def authenticate
