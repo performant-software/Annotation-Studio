@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200121143333) do
+ActiveRecord::Schema.define(version: 20200506054220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,6 +132,7 @@ ActiveRecord::Schema.define(version: 20200121143333) do
     t.string   "cove_uri"
     t.string   "origin"
     t.boolean  "vetted"
+    t.string   "rep_group"
   end
 
   add_index "documents", ["slug"], name: "index_documents_on_slug", unique: true, using: :btree
@@ -268,6 +269,7 @@ ActiveRecord::Schema.define(version: 20200121143333) do
     t.string   "uid"
     t.integer  "cove_id"
     t.string   "full_name"
+    t.string   "rep_group"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

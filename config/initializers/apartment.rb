@@ -5,7 +5,7 @@ Apartment.configure do |config|
   # These models will not be multi-tenanted,
   # but remain in the global (public) namespace
   #
-  config.excluded_models = %w{Tenant AdminUser Delayed::Backend::ActiveRecord::Job}
+  config.excluded_models = %w{AdminUser Tenant Delayed::Backend::ActiveRecord::Job}
 
   config.use_schemas = true
 
@@ -18,11 +18,12 @@ end
 
 Rails.application.config.middleware.use 'Apartment::Elevators::Generic', lambda { |request|
   domain = request.host
-  if tenant = Tenant.where(domain: domain).first
-    tenant.database_name
-  else
-    'public'
-  end
+  # if tenant = Tenant.where(domain: domain).first
+  #   tenant.database_name
+  # else
+  #   'public'
+  # end
+  'cove-studio'
 }
 
 Rails.application.config.default_email_link_protocol = (ENV['DEFAULT_EMAIL_LINK_PROTOCOL'] || 'http')
