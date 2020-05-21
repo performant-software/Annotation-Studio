@@ -43,7 +43,12 @@ ActiveAdmin.register Tenant do
       f.input :wp_auth_secret, :as => :string, label: 'Enter WordPress Auth Secret'
     end
     f.actions do
-      f.action :submit
+      f.action :submit,
+               button_html: {
+                   label: 'Custom label',
+                   class: "btn primary",
+                   data: {disable_with:  'Creating...'}
+               }
       f.action :cancel, :wrapper_html => { :class => "cancel" }
     end
   end

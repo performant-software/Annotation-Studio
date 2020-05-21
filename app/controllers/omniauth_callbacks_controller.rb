@@ -12,10 +12,10 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def setup
     @tenant = Tenant.current_tenant
-    Rails.logger.info("**********Setup Started************")
-    request.env['omniauth.strategy'].options[:client_id] = @tenant.wp_auth_key || ENV["WP_AUTH_KEY"]
-    request.env['omniauth.strategy'].options[:client_secret] = @tenant.wp_auth_secret || ENV["WP_AUTH_SECRET"]
-    request.env['omniauth.strategy'].options[:client_options].site = @tenant.wp_url || ENV["WP_URL"]
+    Rails.logger.info("**********Setup Started for #{@tenant.database_name}************")
+    request.env['omniauth.strategy'].options[:client_id] = @tenant.wp_auth_key.present? ? @tenant.wp_auth_key : ENV["WP_AUTH_KEY"]
+    request.env['omniauth.strategy'].options[:client_secret] = @tenant.wp_auth_secret.present? ? @tenant.wp_auth_secret : ENV["WP_AUTH_SECRET"]
+    request.env['omniauth.strategy'].options[:client_options].site = @tenant.wp_url.present? ? @tenant.wp_url : ENV["WP_URL"]
     render :text => "Setup complete.", :status => 404
   end
 
