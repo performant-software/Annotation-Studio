@@ -41,7 +41,7 @@ class DocumentsController < ApplicationController
         elsif documents.count > 2
           docs_string = "s #{documents[ 0..-2 ].join(", ")} and #{documents.last}"
         end
-        format.html { redirect_to anthology_path(Anthology.find(params[:anthology])), notice: "You added the document#{docs_string} to this anthology" }
+        format.html { redirect_to anthology_path(Anthology.find(params[:anthology]), title: params[:title], author: params[:author]), notice: "You added the document#{docs_string} to this anthology" }
       else
         format.html { redirect_to documents_path, alert: "There was a problem adding documents to the anthology selected"}
       end

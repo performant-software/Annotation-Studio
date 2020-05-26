@@ -121,7 +121,7 @@
             { action: :remove_doc, controller: 'anthologies', anthology_id: @anthology.id, document_id: document.id }, method: :post, :class => 'btn btn-danger btn-sm' %>
       <% else %>
         <%= link_to 'Assign to Anthology',
-          { action: :anthology_add, controller: 'documents', anthology: @anthology.id, document_ids: [document.id]}, method: :post, :class => 'btn btn-primary btn-sm' %>
+          { action: :anthology_add, controller: 'documents', anthology: @anthology.id, document_ids: [document.id], title: params[:title], author: params[:author]}, method: :post, :class => 'btn btn-primary btn-sm' %>
       <% end %>
     <% end %>
   <% end %>

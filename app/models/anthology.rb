@@ -29,12 +29,12 @@ class Anthology < ActiveRecord::Base
 
   def check_file_size
     if self.banner_file_size.present?
-      if !( self.banner_file_size < 1.megabytes )
+      if !( self.banner_file_size < 5.megabytes )
         errors.add(:banner, "File is too big")
         unless self.error_messages
-          self.error_messages =  "File '#{self.banner_file_name}' should be less than 1 MB"
+          self.error_messages =  "File '#{self.banner_file_name}' should be less than 5 MB"
         else
-          self.error_messages =  "#{self.error_messages} and File '#{self.banner_file_name}' should be less than 1 MB"
+          self.error_messages =  "#{self.error_messages} and File '#{self.banner_file_name}' should be less than 5 MB"
         end
       end
     end
