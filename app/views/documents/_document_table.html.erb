@@ -118,7 +118,8 @@
       <% end %>
         <% end %>
       <% if controller_name == 'anthologies' %>
-        <% if document.anthologies.include?(@anthology) && (current_user.admin? || @anthology.user == current_user)  %>
+      <% if current_user.admin? || @anthology.user == current_user %>
+        <% if document.anthologies.include?(@anthology)  %>
           <%= link_to 'Remove from anthology',
               { action: :remove_doc, controller: 'anthologies', anthology_id: @anthology.id, document_id: document.id }, method: :post, :class => 'btn btn-danger btn-sm' %>
         <% else %>
