@@ -18,12 +18,11 @@ end
 
 Rails.application.config.middleware.use 'Apartment::Elevators::Generic', lambda { |request|
   domain = request.host
-  # if tenant = Tenant.where(domain: domain).first
-  #   tenant.database_name
-  # else
-  #   'public'
-  # end
-  'cove-studio'
+  if tenant = Tenant.where(domain: domain).first
+    tenant.database_name
+  else
+    'cove-studio'
+  end
 }
 
 Rails.application.config.default_email_link_protocol = (ENV['DEFAULT_EMAIL_LINK_PROTOCOL'] || 'http')
