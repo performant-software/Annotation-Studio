@@ -7,7 +7,7 @@ class DocumentsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :set_relevant_users
 
-  load_and_authorize_resource :except => :create
+  load_and_authorize_resource :except => [:create, :anthology_add]
 
   # GET /documents
   # GET /documents.json
