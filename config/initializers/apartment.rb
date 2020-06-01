@@ -5,7 +5,7 @@ Apartment.configure do |config|
   # These models will not be multi-tenanted,
   # but remain in the global (public) namespace
   #
-  config.excluded_models = %w{Tenant AdminUser Delayed::Backend::ActiveRecord::Job}
+  config.excluded_models = %w{AdminUser Tenant Delayed::Backend::ActiveRecord::Job}
 
   config.use_schemas = true
 
@@ -21,7 +21,7 @@ Rails.application.config.middleware.use 'Apartment::Elevators::Generic', lambda 
   if tenant = Tenant.where(domain: domain).first
     tenant.database_name
   else
-    'public'
+    'cove-studio'
   end
 }
 

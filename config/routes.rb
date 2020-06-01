@@ -13,6 +13,9 @@ AnnotationStudio::Application.routes.draw do
   devise_for :users, controllers: {registrations: 'registrations', omniauth_callbacks: 'omniauth_callbacks'}
 
   devise_for :admin_users, ActiveAdmin::Devise.config
+  devise_scope :user do
+    match '/users/auth/wordpress_hosted/setup' => 'omniauth_callbacks#setup', via: :all, as: 'wordpress_host_setup'
+  end
   ActiveAdmin.routes(self)
 
   # catalog routes

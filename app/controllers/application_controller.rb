@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
           },
           ENV["API_SECRET"]
       )
-      user_url(user)
+      stored_location_for(user) || super
   end
 
   def authenticate
@@ -36,11 +36,11 @@ class ApplicationController < ActionController::Base
   end
 
   def set_domain_config
-    $DOMAIN_CONFIG = DOMAIN_CONFIGS['public']
-    if (request.subdomain.present? && DOMAIN_CONFIGS[request.subdomain].present?)
-      $DOMAIN_CONFIG = DOMAIN_CONFIGS[request.subdomain]
+    $DOMAIN_CONFIG = set_domain_configs('public')
+    if (request.subdomain.present?)
+      $DOMAIN_CONFIG = set_domain_configs(request.subdomain)
     else
-      $DOMAIN_CONFIG = DOMAIN_CONFIGS['default']
+      $DOMAIN_CONFIG = set_domain_configs('public')
     end
   end
 
@@ -51,4 +51,8 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up) << [:firstname, :lastname, :rep_group_list, :agreement, :affiliation]
   end
 
+  private
+  def set_domain_configs(args)
+    Tenant.find_by(database_name: args).as_json
+  end
 end

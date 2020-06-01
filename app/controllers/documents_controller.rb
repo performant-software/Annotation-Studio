@@ -7,7 +7,7 @@ class DocumentsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :set_relevant_users
 
-  load_and_authorize_resource :except => :create
+  load_and_authorize_resource :except => [:create, :anthology_add]
 
   # GET /documents
   # GET /documents.json
@@ -41,7 +41,7 @@ class DocumentsController < ApplicationController
         elsif documents.count > 2
           docs_string = "s #{documents[ 0..-2 ].join(", ")} and #{documents.last}"
         end
-        format.html { redirect_to anthology_path(Anthology.find(params[:anthology])), notice: "You added the document#{docs_string} to this anthology" }
+        format.html { redirect_to anthology_path(Anthology.find(params[:anthology]), title: params[:title], author: params[:author]), notice: "You added the document#{docs_string} to this anthology" }
       else
         format.html { redirect_to documents_path, alert: "There was a problem adding documents to the anthology selected"}
       end
@@ -140,6 +140,12 @@ class DocumentsController < ApplicationController
     # end
 
     # configuration for annotator [note that public schema won't have mel_catalog enabled]
+    if params[:anthology_id].present?
+      anthology = Anthology.find_by(slug: params[:anthology_id])
+      @filtered_users = anthology.users.order(:firstname) if anthology.present?
+    else
+      @filtered_users = User.tagged_with(@document.rep_group_list, :any => true).order(:firstname)
+    end
     @mel_catalog_enabled =  Tenant.mel_catalog_enabled
     @annotation_categories_enabled =  Tenant.annotation_categories_enabled
     @enable_rich_text_editor = ENV["ANNOTATOR_RICHTEXT"]

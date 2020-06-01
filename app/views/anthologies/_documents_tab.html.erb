@@ -16,13 +16,6 @@
               </div>
             </div>
           <% end %>
-          <%= form_tag(anthology_path(id: anthology.friendly_id, docs: "search_results"), :method => "get", class: 'navbar-form navbar-left') do %>
-            <div class="input-group">
-              <%= search_field_tag :edition, params[:edition], placeholder: "Edition", class: "form-control" %>
-              <div class="input-group-btn">
-                <%= button_tag "Search", :class => 'btn btn-info',:name => nil %>
-              </div>
-            </div>
-          <% end %>
         </div>
-      </div>
+  <p style="font-style: italic">Search to add documents to your anthology</p>
+</div>

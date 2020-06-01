@@ -1,10 +1,13 @@
-<%= content_for :page_title, @anthology.name %>
 <%= content_for :body_id, 'documents' %>
 <div class="row">
   <div class="col-md-12">
     <div class="panel panel-default" id="document-form">
       <div class="panel-heading">
         <span class="panel-title">Anthology: <%= @anthology.name %></span>
+        <% if @anthology.user == current_user %>
+          <%= link_to 'Edit', edit_anthology_path(id: @anthology.friendly_id), :class => 'btn btn-primary btn-sm pull-right' %>
+          <span class="clearfix"></span>
+        <% end %>
       </div>
       <% unless @anthology.description.blank? %>
         <div class="container anthology-description">

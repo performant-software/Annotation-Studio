@@ -34,6 +34,7 @@ group :development do
   gem 'meta_request'#, '0.2.1'
   gem 'highline'
   gem 'figaro'
+  gem 'byebug'
 end
 
 group :assets do
