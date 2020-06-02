@@ -12,11 +12,13 @@
             <span class='badge'><%= search_documents_count %></span> Search Results
           <% end %>
         </li>
+        <% if (can?(:manage, Document) || @anthology.user == current_user) %>
           <li class="<%= tab_state['all'] %>">
             <%= link_to anthology_path( docs: 'all', title: params[:title],author: params[:author], edition: params[:edition], id: anthology.friendly_id, tab: params[:tab] ), params do %>
               <span class='badge'><%= all_documents_count %></span> All
             <% end %>
           </li>
+        <% end %>
       </ul>
     </div>
     <div class="tab-content">

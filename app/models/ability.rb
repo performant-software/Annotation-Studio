@@ -14,22 +14,24 @@ class Ability
 
     elsif user.has_role? :teacher
       cannot :manage, Document do |tors|
-        if tors.user.nil?  # This has been driving me insane.
+        if tors.user.nil?
           false
         else
           tors.user.id == user.id
         end
       end
-      can :create, Document
-      can [:read, :update, :annotatable, :review, :publish, :archive, :preview, :post_to_cove, :export, :set_default_state, :snapshot], Document, { :user_id => user.id }
-      can [:read, :update], Anthology, { :user_id => user.id }
+      can [:read, :create], Document
+      can [:read, :update, :annotatable, :review, :publish, :archive, :preview, :post_to_cove, :export, :set_default_state, :snapshot, :anthology_add], Document, { :user_id => user.id }
+      can [:read], Anthology
+      can [:update, :remove_doc], Anthology, { :user_id => user.id }
       can :destroy, Document, { :user_id => user.id, :published? => false }
 
     elsif user.has_role? :student
       cannot :manage, Document
-      can :create, Document
-      can [:read, :update], Document, { :user_id => user.id }
-      can [:read, :update], Anthology, { :user_id => user.id }
+      can [:read, :create], Document
+      can [:read, :update, :anthology_add], Document, { :user_id => user.id }
+      can [:read], Anthology
+      can [:update, :remove_doc], Anthology, { :user_id => user.id }
       can :destroy, Document, { :user_id => user.id, :published? => false }
       can :read, Document do |tors|
         !(user.rep_group_list & tors.rep_group_list).empty?
