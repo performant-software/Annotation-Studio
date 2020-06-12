@@ -1,5 +1,6 @@
 ActiveAdmin.register Tenant do
-  permit_params :domain, :database_name, :mel_catalog_enabled, :mel_catalog_url, :annotation_categories_enabled, :site_name, :welcome_message, :welcome_blurb, :site_color, :brand, :wp_url, :wp_auth_key, :wp_auth_secret
+  permit_params :domain, :database_name, :mel_catalog_enabled, :mel_catalog_url, :annotation_categories_enabled, :site_name, :welcome_message, :welcome_blurb, :site_color, :brand, :wp_url, :wp_auth_key, :wp_auth_secret,
+                :auth_allowed
 
   scope :all, :default => true
 
@@ -12,6 +13,7 @@ ActiveAdmin.register Tenant do
   filter :welcome_message
   filter :site_color
   filter :brand
+  filter :auth_allowed
 
   index do
     selectable_column
@@ -23,6 +25,9 @@ ActiveAdmin.register Tenant do
     column "Welcome Message", :welcome_message
     column "Site Color", :site_color
     column "Brand", :brand
+    column "Auth Allowed" do |tenant|
+      tenant.auth_allowed.titleize
+    end
     actions
   end
 
@@ -41,6 +46,7 @@ ActiveAdmin.register Tenant do
       f.input :wp_url, :as => :string, label: 'Enter WordPress hosted Url'
       f.input :wp_auth_key, :as => :string, label: 'Enter WordPress Auth Key'
       f.input :wp_auth_secret, :as => :string, label: 'Enter WordPress Auth Secret'
+      f.input :auth_allowed, as: :radio
     end
     f.actions do
       f.action :submit,

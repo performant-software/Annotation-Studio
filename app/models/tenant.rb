@@ -3,6 +3,8 @@ class Tenant < ActiveRecord::Base
   after_create :initialize_apartment_schema
   after_destroy :drop_apartment_schema
 
+  enum auth_allowed: %i[oauth saml_auth]
+
   validates :domain, presence: true, uniqueness: true
   validates :database_name, presence: true, uniqueness: true
 
@@ -11,7 +13,7 @@ class Tenant < ActiveRecord::Base
   end
 
   def self.mel_catalog_enabled
-    tenant = self.current_tenant    
+    tenant = self.current_tenant
     if !tenant.present?
       return false
     else
@@ -20,7 +22,7 @@ class Tenant < ActiveRecord::Base
   end
 
   def self.annotation_categories_enabled
-    tenant = self.current_tenant    
+    tenant = self.current_tenant
     if !tenant.present?
       return false
     else
@@ -31,7 +33,7 @@ class Tenant < ActiveRecord::Base
 
   def initialize_apartment_schema
     return if database_name == 'public'
-    
+
     begin
       # Apartment doesn't check schema existence internally... -_-
       schema = Arel::Table.new('information_schema.schemata')
