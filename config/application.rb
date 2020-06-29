@@ -36,23 +36,13 @@ module AnnotationStudio
     # parameters by using an attr_accessible or attr_protected declaration.
     # config.active_record.whitelist_attributes = true
 
-    # config.assets.precompile += %w(active_admin.css active_admin.js)
-    config.assets.precompile += %w(application.js application.css 
-        active_admin.css active_admin.js users.css widget.js 
-        summernote.eot summernote.ttf summernote.woff glyphicons-halflings-regular.eot 
-        glyphicons-halflings-regular.woff2 
-        glyphicons-halflings-regular.woff 
-        glyphicons-halflings-regular.ttf 
-        documents.css catalog.css tiny_mce_popup.js groups.css annotations.css)
-
-    config.serve_static_assets = true
-    config.serve_static_files = true
+    config.assets.precompile += %w(active_admin.css active_admin.js)
 
     # Enable the asset pipeline
     config.assets.enabled = true
 
     # Version of your assets, change this if you want to expire all your assets
-    config.assets.version = '2.0'
+    config.assets.version = '1.0'
 
     config.assets.initialize_on_precompile = false
   end

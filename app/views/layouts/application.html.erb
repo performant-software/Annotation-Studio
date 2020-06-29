@@ -29,7 +29,7 @@
 
     <nav class="navbar navbar-inverse navbar-fixed-top" id="navbar">
       <div class="container">
-        <%= render_brand %>
+        <%= render "#{ $DOMAIN_CONFIG['brand'] }" %>
       </div>
     </nav>
 
@@ -64,9 +64,9 @@
 
 	<% if params[:controller] == 'devise/sessions' %>
 	<div class="home-image">
-		<%= image_tag(home_banner, { alt: 'Cover Photo' }) %>
+		<img src="/assets/<%= $DOMAIN_CONFIG['home_banner'] %>" />
 	</div>
-<% end %>
+  <% end %>
     <div class="container">
       <%= render partial: "shared/noscript" %>
       <%= render partial: "shared/flash_messages", flash: flash %>

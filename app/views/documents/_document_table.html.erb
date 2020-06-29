@@ -1,139 +1,89 @@
 <table class="table table-striped table-bordered">
   <tr>
-    <th>
-      <% if %w[documents].include?(controller_name) %>
-        <%= link_to "Title", documents_path( order: "title", docs: params[:docs], title: params[:title],author: params[:author], edition: params[:edition], anthology_id: params[:anthology_id] ) %>
-      <% else %>
-        <%= link_to "Title", anthology_path(@anthology, order: "title") %>
-      <% end %>
-    </th>
-    <th>
-      <% if %w[documents].include?(controller_name) %>
-        <%= link_to "Author", documents_path( order: "author", docs: params[:docs], title: params[:title],author: params[:author], edition: params[:edition], anthology_id: params[:anthology_id] ) %>
-      <% else %>
-        <%= link_to "Author", anthology_path(@anthology, order: "author") %>
-      <% end %>
-    </th>
-    <th>
-      <% if %w[documents].include?(controller_name) %>
-        <%= link_to "Created", documents_path( order: "created_at", docs: params[:docs], title: params[:title],author: params[:author], edition: params[:edition], anthology_id: params[:anthology_id] ) %>
-      <% else %>
-        <%= link_to "Created", anthology_path(@anthology, order: "created_at") %>
-      <% end %>
-    </th>
-    <% if %w[anthologies].include?(controller_name) %>
-      <th>Vetted</th>
-    <% end %>
-    <% if %w[anthologies].exclude?(controller_name) and current_user.admin?%>
-      <th><%= ENV["CLASS_TERM_PLURAL"] %></th>
-    <% end %>
-    <% if current_user.admin?%>
-      <th>Status</th>
-    <% end %>
+    <th>Title</th>
+    <th>Author</th>
+    <th>Created</th>
+    <th><%= ENV["CLASS_TERM_PLURAL"] %></th>
+    <th>Status</th>
     <th>Actions</th>
   </tr>
-  <% documents.each do |document| %>
-    <tr>
-      <td>
-        <% if controller_name == 'anthologies' %>
-          <%= link_to document.title, anthology_document_path(@anthology.friendly_id, document.friendly_id) %></td>
-        <% else %>
-          <%= link_to document.title, document_path(document.friendly_id) %>
-        <% end %>
-        </td>
+  <% unless documents.nil? || documents.empty? %>
+    <% documents.each do |document| %>
+      <tr>
+        <td>
+          <%= link_to document.title, document_path(document.friendly_id) %></td>
         <td>
           <%= document.author %></td>
         <td>
           <%= document.created_at.strftime("%m/%d/%Y") %></td>
-        <% if %w[anthologies].include?(controller_name) %>
-          <td>
-            <%= document.vetted.present?.to_s.capitalize %>
-          </td>
-        <% end %>
-        <% if %w[anthologies].exclude?(controller_name) and current_user.admin?%>
-          <td>
-            <% document.rep_group_list.each do |group| %>
-            <span class="label label-info">
-          <%= group %></span>
-            <% end %></td>
-        <% end %>
-        <% if current_user.admin? %>
-          <td>
-            <% if can? :update, document %>
-              <div class="btn-group" role="group" aria-label="document states">
+        <td>
+          <% document.rep_group_list.each do |group| %>
+          <span class="label label-info">
+            <%= link_to group, params.merge(:group => group) %>
+          </span>
+          <% end %>
+        </td>
+        <td>
+          <% if can? :update, document %>
+          <div class="btn-group" role="group" aria-label="document states">
 
-                <% if document.draft? %>
-                  <%= link_to 'Editable', "#", :class => 'btn btn-default btn-sm active' %>
-                <% else %>
-                  <%= link_to 'Editable', "#", :class => 'btn btn-default btn-sm disabled' %>
-                <% end %>
+              <% if document.draft? %>
+                <%= link_to 'Editable', "#", :class => 'btn btn-default btn-sm active' %>
+              <% else %>
+                <%= link_to 'Editable', "#", :class => 'btn btn-default btn-sm disabled' %>
+              <% end %>
 
 
-                <% if document.annotatable? %>
-                  <%= link_to 'Annotatable', document_annotatable_path(document), method: :post, :class => 'btn btn-default btn-sm active' %>
-                <% else %>
-                  <%= link_to 'Annotatable', document_annotatable_path(document), method: :post, :class => 'btn btn-default btn-sm' %>
-                <% end %>
+              <% if document.annotatable? %>
+                <%= link_to 'Annotatable', document_annotatable_path(document), method: :post, :class => 'btn btn-default btn-sm active' %>
+              <% else %>
+                <%= link_to 'Annotatable', document_annotatable_path(document), method: :post, :class => 'btn btn-default btn-sm' %>
+              <% end %>
 
 
-                <% if document.review? %>
-                  <%= link_to 'Reviewable', document_review_path(document), method: :post, :class => 'btn btn-default btn-sm active' %>
-                <% else %>
-                  <%= link_to 'Reviewable', document_review_path(document), method: :post, :class => 'btn btn-default btn-sm' %>
-                <% end %>
+              <% if document.review? %>
+                <%= link_to 'Reviewable', document_review_path(document), method: :post, :class => 'btn btn-default btn-sm active' %>
+              <% else %>
+                <%= link_to 'Reviewable', document_review_path(document), method: :post, :class => 'btn btn-default btn-sm' %>
+              <% end %>
 
 
-                <% if document.published? %>
-                  <%= link_to 'Publishable', document_publish_path(document), method: :post, :class => 'btn btn-default btn-sm active' %>
-                <% else %>
-                  <%= link_to 'Publishable', document_publish_path(document), method: :post, :class => 'btn btn-default btn-sm' %>
-                <% end %>
+              <% if document.published? %>
+                <%= link_to 'Publishable', document_publish_path(document), method: :post, :class => 'btn btn-default btn-sm active' %>
+              <% else %>
+                <%= link_to 'Publishable', document_publish_path(document), method: :post, :class => 'btn btn-default btn-sm' %>
+              <% end %>
 
 
-                <% if document.archived? %>
-                  <%= link_to 'Hidden', document_archive_path(document), method: :post, :class => 'btn btn-default btn-sm active' %>
-                <% else %>
-                  <%= link_to 'Hidden', document_archive_path(document), method: :post, :class => 'btn btn-default btn-sm' %>
-                <% end %>
-              </div>
-            <% else %>
-              <%= document.state %>
-            <% end %>
-          </td>
-        <% end %>
+              <% if document.archived? %>
+                <%= link_to 'Hidden', document_archive_path(document), method: :post, :class => 'btn btn-default btn-sm active' %>
+              <% else %>
+                <%= link_to 'Hidden', document_archive_path(document), method: :post, :class => 'btn btn-default btn-sm' %>
+              <% end %>
+          </div>
+          <% else %>
+            <%= document.state %>
+          <% end %>
+        </td>
         <td class="button-column">
           <% if can? :update, document %>
             <% if document.draft? %>
-              <% if controller_name == 'anthologies' %>
-                <%= link_to 'Edit', edit_anthology_document_path(@anthology.friendly_id,document.friendly_id), :class => 'btn btn-default btn-sm', data: { toggle: 'tooltip', placement: 'top', original_title: 'Text and Metadata are editable' } %>
-              <% else %>
-                <%= link_to 'Edit', edit_document_path(document), :class => 'btn btn-default btn-sm', data: { toggle: 'tooltip', placement: 'top', original_title: 'Text and Metadata are editable' } %>
-              <% end %>
+              <%= link_to 'Edit', edit_document_path(document), :class => 'btn btn-default btn-sm', data: { toggle: 'tooltip', placement: 'top', original_title: 'Text and Metadata are editable' } %>
             <% else %>
-              <% if controller_name == 'anthologies' %>
-                <%= link_to 'Edit', edit_anthology_document_path(@anthology.friendly_id,document.friendly_id), :class => 'btn btn-default btn-sm', data: { toggle: 'tooltip', placement: 'top', original_title: 'Only metadata are editable' } %>
-              <% else %>
-                <%= link_to 'Edit', edit_document_path(document), :class => 'btn btn-default btn-sm', data: { toggle: 'tooltip', placement: 'top', original_title: 'Only metadata are editable' } %>
-              <% end %>
+              <%= link_to 'Edit', edit_document_path(document), :class => 'btn btn-default btn-sm', data: { toggle: 'tooltip', placement: 'top', original_title: 'Only metadata are editable' } %>
             <% end %>
-          <% end %>
-          <% if controller_name == 'anthologies' %>
-            <% if current_user.admin? || @anthology.user == current_user %>
-              <% if document.anthologies.include?(@anthology)  %>
-                <%= link_to 'Remove from anthology',
-                            { action: :remove_doc, controller: 'anthologies', anthology_id: @anthology.id, document_id: document.id }, method: :post, :class => 'btn btn-danger btn-sm' %>
-              <% else %>
-                <%= link_to 'Assign to Anthology',
-                            { action: :anthology_add, controller: 'documents', anthology: @anthology.id, document_ids: [document.id], title: params[:title], author: params[:author]}, method: :post, :class => 'btn btn-primary btn-sm' %>
-              <% end %>
-            <% end %>
-          <% end %>
+            <%= link_to 'Delete', document_path(document), method: :delete, data: {confirm: "Are you sure?"}, :class => 'btn btn-danger btn-sm' %>
           <% end %>
         </td>
-        </tr>
-    </table>
-    <script type="text/javascript">
-      $(function () {
-        $('[data-toggle="tooltip"]').tooltip();
-      });
-    </script>
+      </tr>
+    <% end %>
+  <% else %>
+  <tr>
+    <td colspan="6">No documents to view.</td>
+  </tr>
+  <% end %></table>
+<script type="text/javascript">
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
+});
+</script>

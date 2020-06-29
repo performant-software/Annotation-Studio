@@ -33,18 +33,7 @@ class Tenant < ActiveRecord::Base
     return if database_name == 'public'
     
     begin
-      # Apartment doesn't check schema existence internally... -_-
-      schema = Arel::Table.new('information_schema.schemata')
-      schema_existence_sql = schema.project('schema_name').where(
-          schema[:schema_name].eq(database_name)
-      ).to_sql
-
-      if ActiveRecord::Base.connection.select_one(schema_existence_sql).present?
-        Apartment::Tenant.drop(database_name)
-        Apartment::Tenant.create(database_name)
-      else
-        Apartment::Tenant.create(database_name)
-      end
+      Apartment::Database.create(database_name)
     rescue Apartment::TenantExists => e
       Rails.logger.warn "Schema already existed: #{e.inspect}"
     end

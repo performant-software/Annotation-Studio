@@ -2,34 +2,7 @@
 <%= content_for :body_class, 'index' %>
 <%= content_for :page_title, 'Documents' %>
 <%= stylesheet_link_tag "documents" %>
-<div class="row">
-  <%= form_tag(documents_path, :method => "get", class: 'navbar-form navbar-left') do %>
-    <div class="input-group form-group">
-      <%= search_field_tag :title, params[:title], placeholder: "Title", class: "form-control" %>
-      <div class="input-group-btn">
-        <%= button_tag "Search", :class => 'btn btn-info',:name => nil%>
-      </div>
-    </div>
-  <% end %>
-  <%= form_tag(documents_path, :method => "get", class: 'navbar-form navbar-left') do %>
-    <div class="input-group">
-      <%= search_field_tag :author, params[:author], placeholder: "Author", class: "form-control" %>
-      <div class="input-group-btn">
-        <%= button_tag "Search", :class => 'btn btn-info',:name => nil%>
-      </div>
-    </div>
-  <% end %>
-  <% if current_user.admin? %>
-    <%= form_tag(documents_path, :method => "get", class: 'navbar-form navbar-left') do %>
-      <div class="input-group">
-        <%= search_field_tag :edition, params[:edition], placeholder: "Edition", class: "form-control" %>
-        <div class="input-group-btn">
-          <%= button_tag "Search", :class => 'btn btn-info',:name => nil%>
-        </div>
-      </div>
-    <% end %>
-  <% end %>
-</div>
+
 <div class="row">
   <div class="col-md-12">
     <div class="panel panel-default" id="dashboard-documents">
@@ -37,64 +10,41 @@
         <span class="panel-title">
           <%= link_to "Documents", documents_path %></span>
         <ul class="nav nav-tabs nav-tabs-xs pull-right" id="document-tabs" role="tablist">
-          <li class="<%= @tab_state['search_results'] %>">
-            <%= link_to documents_path( docs: 'search_results', title: params[:title],author: params[:author], edition: params[:edition], anthology_id: params[:anthology_id] ), params do %>
-              <span class='badge'><%= @search_documents_count %></span> Search Results
-            <% end %>
-          </li>
           <li class="<%= @tab_state['assigned'] %>">
-            <%= link_to documents_path( docs: 'assigned', title: params[:title],author: params[:author], edition: params[:edition], anthology_id: params[:anthology_id] ), params do %>
+            <%= link_to documents_path( docs: 'assigned' ), params do %>
               <span class='badge'><%= @assigned_documents_count %></span> Shared
             <% end %>
           </li>
           <li class="<%= @tab_state['created'] %>">
-            <%= link_to documents_path( docs: 'created', title: params[:title],author: params[:author], edition: params[:edition], anthology_id: params[:anthology_id] ),params do %>
+            <%= link_to documents_path( docs: 'created' ),params do %>
               <span class='badge'><%= @created_documents_count %></span> Mine
-            <% end %>
-          </li>
-          <li class="<%= @tab_state['vetted'] %>">
-            <%= link_to documents_path( docs: 'vetted', title: params[:title],author: params[:author], edition: params[:edition], anthology_id: params[:anthology_id] ),params do %>
-              <span class='badge'><%= @vetted_documents_count %></span> Vetted
             <% end %>
           </li>
           <% if can? :manage, Document %>
             <li class="<%= @tab_state['all'] %>">
-              <%= link_to documents_path( docs: 'all', title: params[:title],author: params[:author], edition: params[:edition], anthology_id: params[:anthology_id] ), params do %>
+              <%= link_to documents_path( docs: 'all' ), params do %>
                 <span class='badge'><%= @all_documents_count %></span> All
               <% end %>
             </li>
           <% end %>
         </ul>
+      </div><!-- / .panel-heading -->
+    <div class="tab-content">
+      <div class="tab-pane no-padding active" id="all">
+        <%= render partial: 'document_table', locals: { documents: @documents } %>
       </div>
-      <!-- / .panel-heading -->
-      <div class="tab-content">
-        <div class="tab-pane no-padding active" id="all">
-          <% unless @documents.blank? %>
-            <%= form_tag(anthology_add_path, :method => "post") do %>
-              <%= render partial: 'document_table', locals: { documents: @documents } %>
-            <% end %>
-          <% else %>
-            <div class="container">
-              <tr>
-                <td colspan="6">No documents to view.</td>
-              </tr>
-            </div>
-          <% end %>
-        </div>
-      </div>
-      <div class="panel-footer doc-set-footer">
-        <% if can? :create, Document %>
-          <%= link_to document_path('new'), class: 'btn btn-primary create-new-button' do %>
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create New Document
-          <% end %>
+    </div>
+    <div class="panel-footer doc-set-footer">
+      <% if can? :create, Document %>
+        <%= link_to document_path('new'), class: 'btn btn-primary create-new-button' do %>
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create New Document
         <% end %>
-        <% if @documents.present? && @documents.count > 0 %>
-          <div class='pagination-controls'>
-            <%= will_paginate @documents, renderer: BootstrapPagination::Rails %>
-          </div>
-        <% end %>
+      <% end %>
+      <div class='pagination-controls'>
+        <%= will_paginate @documents, renderer: BootstrapPagination::Rails %>
       </div>
-    </div><!--/panel -->
+    </div>
+  </div><!--/panel -->
   </div><!--/col-md-12 -->
 </div><!--/row -->
 
