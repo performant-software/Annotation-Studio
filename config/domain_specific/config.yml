@@ -33,3 +33,10 @@ cove-staging:
   site_color: '#279eb2'
   home_banner: 'cove_home_banner.jpeg'
   brand: 'shared/cove_brand'
+cove-studio:
+  site_name: COVE
+  welcome_message: 'Sign in above, or via <a href="http://navsa.org">NAVSA</a>'
+  welcome_blurb: 'COVE Studio is the annotation and peer review workbench for COVE edition documents, which you can view on the <a href="http://dev-rc-distro.pantheonsite.io">COVE editions</a> website.'
+  site_color: '#279eb2'
+  home_banner: 'cove_home_banner.jpeg'
+  brand: 'shared/cove_brand'
