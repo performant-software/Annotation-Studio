@@ -10,6 +10,8 @@ Rails.application.config.assets.precompile += %w(application.js application.css 
 widget.js summernote.eot summernote.ttf summernote.woff glyphicons-halflings-regular.eot glyphicons-halflings-regular.woff2
 glyphicons-halflings-regular.woff glyphicons-halflings-regular.ttf documents.css
 catalog.css tiny_mce_popup.js groups.css annotations.css)
+Rails.application.config.assets.precompile += %w[*.png *.jpg *.jpeg *.gif]
+
 
 Rails.application.config.assets.enabled = true
 Rails.application.config.assets.digest = true
