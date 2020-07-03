@@ -16,6 +16,7 @@ class AnthologiesController < ApplicationController
     @tab_state = { document_set => 'active' }
     @current_tab = params[:tab]
     if @current_tab == 'users' && current_user.admin?
+      Rails.logger.info "******** We are in users tab"
       if !params[:docs].present? && !params[:email] && !params[:name] || params[:docs] == "all"
         @tab_state = { 'all' => 'active' }
         if params[:order].present? && ["full_name", "email"].include?(params[:order])
@@ -48,6 +49,7 @@ class AnthologiesController < ApplicationController
         end
       end
     else
+      Rails.logger.info "******** We are in documents tab"
       if !params[:docs].present? && !params[:author] && !params[:edition] && !params[:title] || params[:docs] == "all"
         @tab_state = { 'all' => 'active' }
         if params[:order].present? && ["title", "author", "created_at"].include?(params[:order])
@@ -74,6 +76,9 @@ class AnthologiesController < ApplicationController
               end
             end
           end
+          if params.has_key?(:order) && params[:order].present?
+            @documents = @documents.order(params[:order]) 
+          end
           @documents = @documents.paginate(:page => @page, :per_page =>10 )
         else
           @documents = []
@@ -89,7 +94,7 @@ class AnthologiesController < ApplicationController
     @anthology.user = current_user
     respond_to do |format|
       if @anthology.save
-        format.html { redirect_to anthologies_url, notice: 'Anthology was successfully created.', anchor: 'created'}
+        format.html { redirect_to current_user, notice: 'Anthology was successfully created.', anchor: 'created'}
         format.json { render json: @anthology, status: :created, location: @anthology }
       else
         format.html { render action: "new" }

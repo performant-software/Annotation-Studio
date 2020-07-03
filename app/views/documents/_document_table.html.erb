@@ -4,21 +4,21 @@
       <% if %w[documents].include?(controller_name) %>
         <%= link_to "Title", documents_path( order: "title", docs: params[:docs], title: params[:title],author: params[:author], edition: params[:edition], anthology_id: params[:anthology_id] ) %>
       <% else %>
-        <%= link_to "Title", anthology_path(@anthology, order: "title") %>
+        <%= link_to "Title", anthology_path(@anthology, order: "title", title: params[:title], author: params[:author], page: params[:page]) %>
       <% end %>
     </th>
     <th>
       <% if %w[documents].include?(controller_name) %>
         <%= link_to "Author", documents_path( order: "author", docs: params[:docs], title: params[:title],author: params[:author], edition: params[:edition], anthology_id: params[:anthology_id] ) %>
       <% else %>
-        <%= link_to "Author", anthology_path(@anthology, order: "author") %>
+          <%= link_to "Author", anthology_path(@anthology, order: "author", title: params[:title], author: params[:author], page: params[:page]) %>
       <% end %>
     </th>
     <th>
       <% if %w[documents].include?(controller_name) %>
         <%= link_to "Created", documents_path( order: "created_at", docs: params[:docs], title: params[:title],author: params[:author], edition: params[:edition], anthology_id: params[:anthology_id] ) %>
       <% else %>
-        <%= link_to "Created", anthology_path(@anthology, order: "created_at") %>
+          <%= link_to "Created", anthology_path(@anthology, order: "created_at", title: params[:title], author: params[:author], page: params[:page]) %>
       <% end %>
     </th>
     <% if %w[anthologies].include?(controller_name) %>
