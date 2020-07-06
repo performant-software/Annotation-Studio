@@ -13,8 +13,7 @@ class AnnotationsController < ApplicationController
             :context =>     'search'
         }
         if params[:document_id]
-          default_url = "http://cove-staging.herokuapp.com" 
-            loadOptions[:uri] = default_url + '/documents/' + params[:document_id]
+          loadOptions[:uri] = request.base_url + '/documents/' + params[:document_id]
         end
         @token = session['jwt']
         @loadOptions = loadOptions.to_json
