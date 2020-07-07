@@ -64,17 +64,30 @@ class AnthologiesController < ApplicationController
       else
         @tab_state = { 'search_results' => 'active' }
         if params[:author].present? || params[:edition].present? || params[:title].present?
-          [:title, :author, :edition].each do |query|
-            if params.has_key?(query) && params[query].present?
-              if query == :edition
-                tags = Tag.where('name ILIKE ?', "%#{params[query]}%").pluck(:name)
-                @search_documents_count = Document.tagged_with(tags, any: true).count
-                @documents = Document.tagged_with(tags, any: true)
-              elsif params.has_key?(query) && params[query].present?
-                @search_documents_count = Document.where("#{query} ILIKE ?", "%#{params[query]}%").count
-                @documents = Document.where("#{query} ILIKE ?", "%#{params[query]}%")
+          if params[:docs] == "search_results"
+            [:title, :author, :edition].each do |query|
+              if params.has_key?(query) && params[query].present?
+                if query == :edition
+                  tags = Tag.where('name ILIKE ?', "%#{params[query]}%").pluck(:name)
+                  @search_documents_count = Document.tagged_with(tags, any: true).count
+                  @documents = Document.tagged_with(tags, any: true)
+                elsif params.has_key?(query) && params[query].present?
+                  @search_documents_count = Document.where("#{query} ILIKE ?", "%#{params[query]}%").count
+                  @documents = Document.where("#{query} ILIKE ?", "%#{params[query]}%")
+                end
               end
             end
+          else
+            if params[:order].present? && ["title", "author", "created_at"].include?(params[:order])
+              if params[:order] == "created_at"
+                @documents = @anthology.documents.order(created_at: :desc).paginate(:page => @page, :per_page =>10 )
+              else
+                @documents = @anthology.documents.order(params[:order].to_sym).paginate(:page => @page, :per_page =>10 )
+              end
+            else
+              @documents = @anthology.documents.paginate(:page => @page, :per_page =>10 )
+            end
+
           end
           if params.has_key?(:order) && params[:order].present?
             @documents = @documents.order(params[:order]) 
