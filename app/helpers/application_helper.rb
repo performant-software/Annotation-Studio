@@ -26,8 +26,8 @@ module ApplicationHelper
   end
 
   def home_banner
-    if ENV['HOME_BANNER'] != ""
-      return ENV['HOME_BANNER']
+    if $DOMAIN_CONFIG['home_banner'] != ""
+      return $DOMAIN_CONFIG['home_banner']
     else
       return "home.png"
     end

@@ -34,11 +34,11 @@ group :development do
   gem 'meta_request'#, '0.2.1'
   gem 'highline'
   gem 'figaro'
-  gem 'byebug'
+  gem 'pry'
+  gem 'pry-rails'
 end
 
 group :assets do
-  gem "therubyracer", require: false
   gem 'coffee-rails' #, '~> 3.2.1'
   gem 'uglifier' #, '>= 1.0.3'
   gem 'underscore-rails'
@@ -49,7 +49,6 @@ end
 group :test, :development do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
-  gem 'pry-rails'
   # gem 'spring'
   gem 'simplecov'
   gem 'rails_best_practices'
