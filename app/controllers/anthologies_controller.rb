@@ -50,8 +50,9 @@ class AnthologiesController < ApplicationController
       end
     else
       Rails.logger.info "******** We are in documents tab"
-      if !params[:docs].present? && !params[:author] && !params[:edition] && !params[:title] || params[:docs] == "all"
+      if !params[:docs].present? && !params[:author] && !params[:edition] && !params[:title] || ( params[:docs] == "all" )
         @tab_state = { 'all' => 'active' }
+        @docs = "all"
         if params[:order].present? && ["title", "author", "created_at"].include?(params[:order])
           if params[:order] == "created_at"
             @documents = @anthology.documents.order(created_at: :desc).paginate(:page => @page, :per_page =>10 )
@@ -64,7 +65,7 @@ class AnthologiesController < ApplicationController
       else
         @tab_state = { 'search_results' => 'active' }
         if params[:author].present? || params[:edition].present? || params[:title].present?
-          if params[:docs] == "search_results"
+          if params[:docs] != "all"
             [:title, :author, :edition].each do |query|
               if params.has_key?(query) && params[query].present?
                 if query == :edition
