@@ -64,7 +64,7 @@
 
 	<% if params[:controller] == 'devise/sessions' %>
 	<div class="home-image">
-		<%= image_tag(home_banner, { alt: 'Cover Photo' }) %>
+		<%= image_tag("#{ENV['HOME_BANNER']}", { alt: 'Cover Photo' }) %>
 	</div>
 <% end %>
     <div class="container">
