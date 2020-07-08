@@ -114,7 +114,7 @@ aria-hidden=\"true\"></span> Create new document"), document_path('new') %></li>
         <div class="tab-pane no-padding fade active in" id="groups">
           <ul class="list-group">
             <% current_user.rep_group_list.each do |group| %>
-              <li class="list-group-item"><%= group %></li>
+              <li class="list-group-item"><%= link_to group, documents_path(group: group) %></li>
             <% end %>
           </ul>
         </div>
