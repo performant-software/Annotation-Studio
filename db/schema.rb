@@ -11,11 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200506054220) do
+ActiveRecord::Schema.define(version: 20200615142322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "pg_stat_statements"
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   limit: 255, null: false
@@ -132,7 +131,6 @@ ActiveRecord::Schema.define(version: 20200506054220) do
     t.string   "cove_uri"
     t.string   "origin"
     t.boolean  "vetted"
-    t.string   "rep_group"
   end
 
   add_index "documents", ["slug"], name: "index_documents_on_slug", unique: true, using: :btree
@@ -238,6 +236,17 @@ ActiveRecord::Schema.define(version: 20200506054220) do
     t.boolean  "mel_catalog_enabled",                       default: false
     t.boolean  "annotation_categories_enabled",             default: false
     t.string   "mel_catalog_url"
+    t.string   "site_name"
+    t.string   "welcome_message"
+    t.string   "welcome_blurb"
+    t.string   "site_color"
+    t.string   "brand"
+    t.string   "wp_url"
+    t.string   "wp_auth_key"
+    t.string   "wp_auth_secret"
+    t.integer  "auth_allowed",                              default: 0
+    t.string   "idp_sso_target_url"
+    t.string   "idp_cert_fingerprint"
   end
 
   add_index "tenants", ["database_name"], name: "index_tenants_on_database_name", using: :btree
@@ -269,7 +278,6 @@ ActiveRecord::Schema.define(version: 20200506054220) do
     t.string   "uid"
     t.integer  "cove_id"
     t.string   "full_name"
-    t.string   "rep_group"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
