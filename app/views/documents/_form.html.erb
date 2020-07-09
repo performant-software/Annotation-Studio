@@ -44,7 +44,7 @@
                 <% if current_user.admin? %>
           			<div class="form-group">
           				<%= f.label :vetted %>
-                  <%= f.check_box :vetted, :class => 'form-control', checked: @document.vetted %>
+                  <%= f.check_box :vetted, :class => 'form-check-input', checked: @document.vetted %>
           			</div>
               <% end %>
           		</div><!-- end span 6 -->

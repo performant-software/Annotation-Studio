@@ -618,3 +618,8 @@
 .input-group-addon:not(:first-child) {
   border-left: 0;
 }
+.form-group .form-check-input {
+  transform: scale(2);
+  display: block;
+  margin: 10px;
+}
