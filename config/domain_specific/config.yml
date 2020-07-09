@@ -14,7 +14,15 @@ cove-studio:
   welcome_message: 'Sign in above, or via <a href="http://navsa.org">NAVSA</a>'
   welcome_blurb: 'COVE Studio is the annotation and peer review workbench for COVE edition documents, which you can view on the <a href="http://dev-rc-distro.pantheonsite.io">COVE editions</a> website.'
   site_color: '#279eb2'
+  home_banner: 'cove_home_banner.jpeg'
   brand: 'shared/cove_brand'
+navsa-conference:
+  site_name: NAVSA Conference
+  welcome_message: 'Welcome to Conference COVE Studio'
+  welcome_blurb: 'COVE Studio is a web application that supports close reading and collaborative interpretation of online documents.'
+  site_color: '#279eb2'
+  home_banner: 'navsa_home_banner.png'
+  brand: 'shared/navsa_conference_brand'
 staging-annotationstudio:
   site_name: MIT Staging
   welcome_message: "Welcome to Annotation Studio Staging at <strong>MIT</strong>"
