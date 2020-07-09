@@ -1,7 +1,5 @@
-<ul class="nav navbar-nav">
-	<li class="active"><a class="navbar-link" href="#">COVE Studio</a></li>
-	<li><a class="navbar-link" target="cove-editions" href="https://editions.covecollective.org/">COVE Editions <i class="fa fa-external-link-square"></i></a></li>
-</ul>
+<a class="navbar-brand" href="/">COVE Studio <span style="color:<%= $DOMAIN_CONFIG['site_color'] %>;"><%= $DOMAIN_CONFIG['site_name'] %></span></a>
+
 <ul class="nav navbar-nav pull-right hidden-xs" id="globalnav">
 
 <% if user_signed_in? %>
@@ -13,27 +11,7 @@
 	<% end %>
 
 <% else %>
-	  <% if defined?(resource) != nil %>
-	  <li><div class="dropdown dont-overflow">
-		  <button class="dropdown-toggle menu-button" type="button" id="login-form" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-			  Log in
-			  <span class="caret"></span>
-		  </button>
-		  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="login-form">
-			  <li><%= render "/devise/sessions/navsa_sign_in" %></li>
-		  </ul>
-	  </div></li>
-
-	  <li><div class="dropdown dont-overflow">
-		  <button class="dropdown-toggle menu-button" type="button" id="login-form" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-			  Register
-			  <span class="caret"></span>
-		  </button>
-		  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="login-form">
-			  <li><%= render "/devise/sessions/navsa_sign_up" %></li>
-		  </ul>
-	  </div></li>
-	  <% end %>
+	<li><a class="navbar-link" href="/users/sign_in#email-login">Log in</a></li>
 <% end %>
 
 	<li class="header-logo">
