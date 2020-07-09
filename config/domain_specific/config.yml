@@ -11,14 +11,14 @@ public:
   welcome_blurb: "Annotation Studio is a web application that supports close reading and collaborative interpretation of online documents. For more information on the project click the About link at the top. If you don’t have an account yet, click Register at the top of this page otherwise just log in."
   site_color: '#CCC'
   home_banner: 'cove_home_banner.jpg'
-studio:
+studio.covecollective.org:
   site_name: COVE
   welcome_message: 'Sign in above, or via <a href="http://navsa.org">NAVSA</a>'
   welcome_blurb: 'COVE Studio is the annotation and peer review workbench for COVE edition documents, which you can view on the <a href="http://dev-rc-distro.pantheonsite.io">COVE editions</a> website.'
   site_color: '#279eb2'
   home_banner: 'cove_home_banner.jpg'
   brand: 'shared/cove_brand'
-navsaconference:
+navsaconference.covecollective.org:
   site_name: NAVSA Conference
   welcome_message: 'Welcome to Conference COVE Studio'
   welcome_blurb: 'COVE Studio is a web application that supports close reading and collaborative interpretation of online documents.'
@@ -32,7 +32,7 @@ bavs-staging.covecollective.org:
   site_color: '#279eb2'
   home_banner: 'navsa_2020.jpg'
   brand: 'shared/bavs_brand'
-bavs:
+bavs.covecollective.org:
   site_name: BAVS
   welcome_message: 'Sign in via <a href="https://bavs.ac.uk/">BAVS</a>'
   welcome_blurb: 'COVE Studio for BAVS is the annotation and peer review workbench for BAVS.'
