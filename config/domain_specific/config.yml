@@ -25,7 +25,7 @@ navsaconference:
   site_color: '#671900'
   home_banner: 'navsa_2020.png'
   brand: 'shared/navsa_conference_brand'
-bavs-staging:
+bavs-staging.covecollective.org:
   site_name: BAVS
   welcome_message: 'Sign in via <a href="https://bavs.ac.uk/">BAVS</a>'
   welcome_blurb: 'COVE Studio for BAVS is the annotation and peer review workbench for BAVS.'
