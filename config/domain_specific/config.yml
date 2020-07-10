@@ -48,5 +48,5 @@ bavs.covecollective.org:
   welcome_message: 'Sign in via <a href="https://bavs.ac.uk/">BAVS</a>'
   welcome_blurb: 'COVE Studio for BAVS is the annotation and peer review workbench for BAVS.'
   site_color: '#279eb2'
-  home_banner: 'navsa_2020.png'
+  home_banner: 'navsa_2020.jpg'
   brand: 'shared/bavs_brand'
