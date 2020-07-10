@@ -13,6 +13,7 @@ public:
   home_banner: 'cove_home_banner.jpg'
 studio.covecollective.org:
   site_name: COVE
+  oauth_provider: NAVSA
   welcome_message: 'Sign in above, or via <a href="http://navsa.org">NAVSA</a>'
   welcome_blurb: 'COVE Studio is the annotation and peer review workbench for COVE edition documents, which you can view on the <a href="http://dev-rc-distro.pantheonsite.io">COVE editions</a> website.'
   site_color: '#279eb2'
@@ -20,6 +21,7 @@ studio.covecollective.org:
   brand: 'shared/cove_brand'
 staging.covecollective.org:
   site_name: COVE Staging
+  oauth_provider: NAVSA
   welcome_message: 'Sign in above, or via <a href="http://navsa.org">NAVSA</a>'
   welcome_blurb: 'COVE Studio is the annotation and peer review workbench for COVE edition documents, which you can view on the <a href="http://dev-rc-distro.pantheonsite.io">COVE editions</a> website.'
   site_color: '#279eb2'
@@ -34,6 +36,7 @@ navsaconference.covecollective.org:
   brand: 'shared/navsa_conference_brand'
 bavs-staging.covecollective.org:
   site_name: BAVS
+  oauth_provider: BAVS
   welcome_message: 'Sign in via <a href="https://bavs.ac.uk/">BAVS</a>'
   welcome_blurb: 'COVE Studio for BAVS is the annotation and peer review workbench for BAVS.'
   site_color: '#279eb2'
@@ -41,6 +44,7 @@ bavs-staging.covecollective.org:
   brand: 'shared/bavs_brand'
 bavs.covecollective.org:
   site_name: BAVS
+  oauth_provider: BAVS
   welcome_message: 'Sign in via <a href="https://bavs.ac.uk/">BAVS</a>'
   welcome_blurb: 'COVE Studio for BAVS is the annotation and peer review workbench for BAVS.'
   site_color: '#279eb2'
