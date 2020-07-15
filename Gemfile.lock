@@ -141,12 +141,19 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    devise_saml_authenticatable (1.6.0)
+      devise (> 2.0.0)
+      ruby-saml (~> 1.7)
     diff-lcs (1.3)
     docile (1.3.2)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     doorkeeper (5.0.2)
       railties (>= 4.2)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
     dry-inflector (0.1.2)
     eco (1.0.0)
       coffee-script
@@ -517,6 +524,8 @@ GEM
     rspec-support (3.9.0)
     ruby-progressbar (1.10.1)
     ruby-rc4 (0.1.5)
+    ruby-saml (1.11.0)
+      nokogiri (>= 1.5.10)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -597,7 +606,9 @@ DEPENDENCIES
   database_cleaner
   delayed_job_active_record
   devise (~> 3.2)
+  devise_saml_authenticatable
   doorkeeper
+  dotenv-rails
   exception_notification
   factory_girl_rails
   figaro

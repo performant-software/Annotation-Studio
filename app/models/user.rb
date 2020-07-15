@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable, :rememberable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable,:saml_authenticatable,
          :recoverable, :trackable, :validatable, :confirmable,
          :timeoutable, :omniauthable, :omniauth_providers => [:wordpress_hosted]
 
@@ -69,6 +69,11 @@ class User < ActiveRecord::Base
     if authed_user.save
       authed_user
     end
+  end
+
+  protected
+  def password_required?
+    confirmed? ? super : false
   end
 
 end

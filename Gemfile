@@ -91,3 +91,5 @@ gem "rest-client"
 gem "doorkeeper"
 gem "octokit", "~> 4.0"
 gem 'foreman'
+gem 'devise_saml_authenticatable'
+gem 'dotenv-rails'

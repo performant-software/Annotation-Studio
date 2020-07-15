@@ -52,7 +52,7 @@ Devise.setup do |config|
   # Tell if authentication through request.params is enabled. True by default.
   # It can be set to an array that will enable params authentication only for the
   # given strategies, for example, `config.params_authenticatable = [:database]` will
-  # enable it only for database (email + password) authentication.
+  # enable it only for database (email  password) authentication.
   # config.params_authenticatable = true
 
   # Tell if authentication through HTTP Basic Auth is enabled. False by default.
@@ -131,7 +131,7 @@ Devise.setup do |config|
   # Email regex used to validate email formats. It simply asserts that
   # an one (and only one) @ exists in the given string. This is mainly
   # to give user feedback and not to assert the e-mail validity.
-  # config.email_regexp = /\A[^@]+@[^@]+\z/
+  # config.email_regexp = /\A[^@]@[^@]\z/
 
   # ==> Configuration for :timeoutable
   # The time you want to timeout the user session without activity. After this
@@ -228,4 +228,23 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
-end
+config.saml_create_user = true
+  config.saml_update_user = true
+  config.saml_default_user_key = :email
+  config.saml_session_index_key = :session_index
+  config.saml_use_subject = true
+  config.idp_settings_adapter = nil
+  config.saml_configure do |settings|
+    settings.assertion_consumer_service_url     = "http://localhost:3000/users/saml/auth"
+    settings.assertion_consumer_service_binding = "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+    settings.name_identifier_format             = "urn:oasis:names:tc:SAML:2.0:nameid-format:transient"
+    settings.issuer                             = "http://localhost:3000/users/saml/metadata"
+    settings.authn_context                      = ""
+    settings.idp_slo_target_url                 = ""
+    # settings.idp_sso_target_url                 = "https://dev-385305.okta.com/home/ebpearlsdev385305_annotationsamltest_1/0oahf507wuVoAO1mR4x6/alnhf945tQgcLaYWF4x6"
+    settings.idp_sso_target_url                 = "https://dev-385305.okta.com/app/ebpearlsdev385305_annotationsamltest_1/exkhf507vrep6Z1Mm4x6/sso/saml"
+    settings.idp_cert_fingerprint               = '6E:DA:11:33:05:35:30:F6:E1:96:5C:B9:2B:85:4F:E5:63:6B:DB:90:E0:01:A3:92:A6:3E:41:B4:46:EC:A9:93'
+    # settings.idp_cert_fingerprint               = '1E:7D:5B:AC:7F:F1:E9:06:7F:88:7A:1E:00:96:1A:A7:65:87:39:6A:C3:C9:CE:81:0B:AC:3D:11:E5:99:96:0F' #purdue
+    settings.idp_cert_fingerprint_algorithm     = 'http://www.w3.org/2000/09/xmldsig#sha256'
+  end
+ end
