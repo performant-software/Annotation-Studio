@@ -1,6 +1,6 @@
 	<ul class="list-group" id="omniauth-links">
 	  <%- resource_class.omniauth_providers.each do |provider| %>
-	  <li class="list-group-item"><%= link_to "Log in through #{I18n.t provider.to_sym, scope: [:devise, :omniauth]}", root_url(:protocol => "http").gsub(/\/$/, "") + omniauth_authorize_path(resource_name, provider), :class => "btn btn-default" %></li>
+	  <li class="list-group-item"><%= link_to "Log in through #{I18n.t provider.to_sym, scope: [:devise, :omniauth]}", root_url(:protocol => "https").gsub(/\/$/, "") + omniauth_authorize_path(resource_name, provider), :class => "btn btn-default" %></li>
 	  <% end -%>
 
 	  <li class="list-group-item"><a target="navsa" href="https://www.navsa.org/members/join-navsa/">Not a NAVSA member?</a></li>
