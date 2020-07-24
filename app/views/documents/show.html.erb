@@ -22,9 +22,7 @@
 
   </div><!--/col-md-8 -->
   <div class="col-md-4">
-    <% if @document.processed? and !@document.draft? %>
-      <%= render "documents/annotation_sidebar" %>
-    <% end %>
+    <%= render "documents/annotation_sidebar" %>
   </div><!--/col-md-3 -->
 </div><!--/row -->
 <%= render "documents/help" %>

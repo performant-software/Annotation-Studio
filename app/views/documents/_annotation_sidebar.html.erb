@@ -1,4 +1,6 @@
-<%= render :partial => "shared/annotator_base" %>
+<% if @document.processed? and !@document.draft? %>
+  <%= render :partial => "shared/annotator_base" %>
+<% end %>
 
 <script type="text/javascript" charset="utf-8">
 var document_slug = "<%= @document.slug %>";
