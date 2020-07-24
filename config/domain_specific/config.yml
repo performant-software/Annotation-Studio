@@ -38,15 +38,15 @@ bavs-staging.covecollective.org:
   site_name: BAVS
   oauth_provider: BAVS
   welcome_message: 'Sign in via <a href="https://bavs.ac.uk/">BAVS</a>'
-  welcome_blurb: 'COVE Studio for BAVS is the annotation and peer review workbench for BAVS.'
+  welcome_blurb: 'Welcome the BAVS imprint of COVE, The Central Online Victorian Educator. COVE is a scholar-driven open-access platform that publishes peer-reviewed Victorian material. It is maintained and supported by NAVSA, BAVSA, AVSA and a number of independent institutions, and aims to make access to diverse scholarly editions and Victorian voices more widely available. Although all peer-reviewed material is open access, we charge a modest amount for use of our tools (for more information, see COVE Tools and Anthology Builder below). To facilitate its use throughout the COVID-19 pandemic, BAVS are offering some funds to support student access to develop specific projects. For more information on this, and for any other BAVS-specific issues regarding COVE use, please contact <a href="mailto:Joanna.taylor@manchester.ac.uk">Joanna Taylor</a>. If you are interested in getting involved with COVE, please contact General Editor <a href="mailto:felluga@purdue.edu">Dino Franco Felluga</a>.'
   site_color: '#279eb2'
-  home_banner: 'navsa_2020.jpg'
+  home_banner: 'bavs-banner.jpg'
   brand: 'shared/bavs_brand'
 bavs.covecollective.org:
   site_name: BAVS
   oauth_provider: BAVS
   welcome_message: 'Sign in via <a href="https://bavs.ac.uk/">BAVS</a>'
-  welcome_blurb: 'COVE Studio for BAVS is the annotation and peer review workbench for BAVS.'
+  welcome_blurb: 'Welcome the BAVS imprint of COVE, The Central Online Victorian Educator. COVE is a scholar-driven open-access platform that publishes peer-reviewed Victorian material. It is maintained and supported by NAVSA, BAVSA, AVSA and a number of independent institutions, and aims to make access to diverse scholarly editions and Victorian voices more widely available. Although all peer-reviewed material is open access, we charge a modest amount for use of our tools (for more information, see COVE Tools and Anthology Builder below). To facilitate its use throughout the COVID-19 pandemic, BAVS are offering some funds to support student access to develop specific projects. For more information on this, and for any other BAVS-specific issues regarding COVE use, please contact <a href="mailto:Joanna.taylor@manchester.ac.uk">Joanna Taylor</a>. If you are interested in getting involved with COVE, please contact General Editor <a href="mailto:felluga@purdue.edu">Dino Franco Felluga</a>.'
   site_color: '#279eb2'
-  home_banner: 'navsa_2020.jpg'
+  home_banner: 'bavs-banner.jpg'
   brand: 'shared/bavs_brand'
