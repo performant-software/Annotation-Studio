@@ -15,7 +15,7 @@ class AnthologiesController < ApplicationController
     document_set = 'all'
     @tab_state = { document_set => 'active' }
     @current_tab = params[:tab]
-    if @current_tab == 'users' && current_user.admin?
+    if @current_tab == 'users' && (can? :update, Anthology)
       Rails.logger.info "******** We are in users tab"
       if !params[:docs].present? && !params[:email] && !params[:name] || params[:docs] == "all"
         @tab_state = { 'all' => 'active' }
@@ -91,7 +91,7 @@ class AnthologiesController < ApplicationController
 
           end
           if params.has_key?(:order) && params[:order].present?
-            @documents = @documents.order(params[:order]) 
+            @documents = @documents.order(params[:order])
           end
           @documents = @documents.paginate(:page => @page, :per_page =>10 )
         else
