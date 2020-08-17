@@ -2,6 +2,8 @@ class AnthologiesController < ApplicationController
   before_filter :find_anthology, :only => [:show, :edit, :destroy]
   before_filter :authenticate_user!
 
+  load_and_authorize_resource
+
   def show
     @page = 1
     if params[:page].present?
