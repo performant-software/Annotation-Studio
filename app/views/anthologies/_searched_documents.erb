@@ -7,7 +7,7 @@
           <br/>
           <span class="panel-title" style="font-style: italic; font-size: 15px ">Click on Title, Author, Created to sort</span>
           <ul class="nav nav-tabs nav-tabs-xs pull-right" id="document-tabs" role="tablist">
-            <% ( @anthology.user == current_user ) || current_user.admin? %>
+            <% if ( @anthology.user == current_user ) || current_user.admin? %>
               <li class="<%= tab_state['search_results'] %>">
                 <%= link_to anthology_path( docs: 'search_results', title: params[:title],author: params[:author], edition: params[:edition], id: anthology.friendly_id, tab: params[:tab] ), params do %>
                   <span class='badge'><%= search_documents_count %></span> Search Results
