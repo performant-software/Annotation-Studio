@@ -33,7 +33,7 @@
               <li role="presentation" class=<%= (params[:tab] == "documents" || params[:tab].nil?) ? 'active' : '' %>>
                 <a href="?tab=documents">Documents</a>
               </li>
-              <% ( @anthology.user == current_user ) || current_user.admin? %>
+              <% if ( @anthology.user == current_user ) || current_user.admin? %>
                 <li role="presentation" class=<%= params[:tab] == "users" ? 'active' : '' %> >
                   <a href="?tab=users">Users</a>
                 </li>
@@ -41,7 +41,7 @@
             </ul>
           </div>
         </div>
-        <% ( @anthology.user == current_user ) || current_user.admin? %>
+        <% if ( @anthology.user == current_user ) || current_user.admin? %>
           <% if params[:tab] == "users" %>
 
             <%= render 'users_tab', anthology: @anthology %>
@@ -58,7 +58,7 @@
             %>
         <% end %>
       <% else %>
-        <% ( @anthology.user == current_user ) || current_user.admin? %>
+        <% if ( @anthology.user == current_user ) || current_user.admin? %>
           <%= render 'documents_tab', anthology: @anthology %>
         <% end %>
         <%= render 'searched_documents',
