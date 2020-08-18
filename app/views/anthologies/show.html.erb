@@ -4,7 +4,7 @@
     <div class="panel panel-default" id="document-form">
       <div class="panel-heading">
         <span class="panel-title">Anthology: <%= @anthology.name %></span>
-        <% if @anthology.user == current_user %>
+        <% if ( @anthology.user == current_user ) || current_user.admin? %>
           <%= link_to 'Edit', edit_anthology_path(id: @anthology.friendly_id), :class => 'btn btn-primary btn-sm pull-right' %>
           <span class="clearfix"></span>
         <% end %>
@@ -27,19 +27,21 @@
         <% end %>
       </div>
       <div class="search-tabs-wrapper">
-        <% if can? :manage, User %>
-          <div class="container">
-            <div class="media-left">
-              <ul class="nav nav-tabs">
-                <li role="presentation" class=<%= (params[:tab] == "documents" || params[:tab].nil?) ? 'active' : '' %>>
-                  <a href="?tab=documents">Documents</a>
-                </li>
+        <div class="container">
+          <div class="media-left">
+            <ul class="nav nav-tabs">
+              <li role="presentation" class=<%= (params[:tab] == "documents" || params[:tab].nil?) ? 'active' : '' %>>
+                <a href="?tab=documents">Documents</a>
+              </li>
+              <% if ( @anthology.user == current_user ) || current_user.admin? %>
                 <li role="presentation" class=<%= params[:tab] == "users" ? 'active' : '' %> >
                   <a href="?tab=users">Users</a>
                 </li>
-              </ul>
-            </div>
+              <% end %>
+            </ul>
           </div>
+        </div>
+        <% if ( @anthology.user == current_user ) || current_user.admin? %>
           <% if params[:tab] == "users" %>
 
             <%= render 'users_tab', anthology: @anthology %>
@@ -48,23 +50,25 @@
           <% else %>
             <%= render 'documents_tab', anthology: @anthology %>
             <%= render 'searched_documents',
-                       search_documents_count: @search_documents_count,
-                       tab_state: @tab_state,
-                       all_documents_count: @all_documents_count,
-                       documents: @documents,
-                       anthology: @anthology
+              search_documents_count: @search_documents_count,
+              tab_state: @tab_state,
+              all_documents_count: @all_documents_count,
+              documents: @documents,
+              anthology: @anthology
             %>
-          <% end %>
-        <% else %>
-          <%= render 'documents_tab', anthology: @anthology %>
-          <%= render 'searched_documents',
-                     search_documents_count: @search_documents_count,
-                     tab_state: @tab_state,
-                     all_documents_count: @all_documents_count,
-                     documents: @documents,
-                     anthology: @anthology
-          %>
         <% end %>
+      <% else %>
+        <% if ( @anthology.user == current_user ) || current_user.admin? %>
+          <%= render 'documents_tab', anthology: @anthology %>
+        <% end %>
+        <%= render 'searched_documents',
+          search_documents_count: @search_documents_count,
+          tab_state: @tab_state,
+          all_documents_count: @all_documents_count,
+          documents: @documents,
+          anthology: @anthology
+        %>
+    <% end %>
       </div>
 
 

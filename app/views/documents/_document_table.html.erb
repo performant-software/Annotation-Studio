@@ -102,16 +102,12 @@
           </td>
         <% end %>
         <td class="button-column">
-            <% if can? :update, document %>
+          <% if can? :update, document %>
                 <% if document.draft? %>
                     <% if controller_name == 'anthologies' %>
                         <%= link_to 'Edit', edit_anthology_document_path(@anthology.friendly_id,document.friendly_id), :class => 'btn btn-default btn-sm', data: { toggle: 'tooltip', placement: 'top', original_title: 'Text and Metadata are editable' } %>
                     <% else %>
                         <%= link_to 'Edit', edit_document_path(document), :class => 'btn btn-default btn-sm', data: { toggle: 'tooltip', placement: 'top', original_title: 'Text and Metadata are editable' } %>
-                        <% if current_user.admin?%>
-                            <%= link_to 'Delete',url_for(action: :destroy,id: document.id),method: :delete,:class => 'btn btn-danger btn-sm', data: {confirm: "Are you sure you want to delete this document permanently? All annotations on this document will also be permanently invalidated. There is no undo"} %>
-                        <% end %>
-
               <% end %>
             <% else %>
               <% if controller_name == 'anthologies' %>
@@ -131,6 +127,9 @@
                             { action: :anthology_add, controller: 'documents', anthology: @anthology.id, document_ids: [document.id], title: params[:title], author: params[:author]}, method: :post, :class => 'btn btn-primary btn-sm' %>
               <% end %>
             <% end %>
+          <% end %>
+          <% if can? :destroy, document %>
+            <%= link_to 'Delete',url_for(action: :destroy,id: document.id),method: :delete,:class => 'btn btn-danger btn-sm', data: {confirm: "Are you sure you want to delete this document permanently? All annotations on this document will also be permanently invalidated. There is no undo"} %>
           <% end %>
           <% end %>
         </td>
