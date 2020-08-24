@@ -89,7 +89,7 @@ class AnnotationsController < ApplicationController
       if data
         send_data data
       else
-        redirect_to :back, alert: "There are not any annotations to generate a csv file"
+        redirect_to :back, alert: "There are no annotations to be downloaded."
       end
     end
 end
