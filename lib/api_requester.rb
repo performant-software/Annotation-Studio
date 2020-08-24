@@ -40,8 +40,12 @@ class ApiRequester
         request['x-annotator-auth-token'] = token
         response = Net::HTTP.start(url.host, url.port) {|http| http.request(request)}
         response.body
-        data = MultiJson.load(response.body)
-        to_csv == false ? data : CsvGenerator.to_csv(data)
+        if response.body == nil
+          false
+        else
+          data = MultiJson.load(response.body)
+          to_csv == false ? data : CsvGenerator.to_csv(data)
+        end
     end
 
     def self.field(params, token, to_csv: false)
