@@ -41,10 +41,13 @@ class ApiRequester
         # Rails.logger.info "****"
         # Rails.logger.info "The url object is #{url.inspect}"
         # Rails.logger.info "The request object is #{request.inspect}"
-        response = Net::HTTP.start(url.host, url.port) do |http|
-          http.use_ssl
-          http.request(request)
-        end
+        http = Net::HTTP.new(url.host, url.port)
+        http.use_ssl = true
+        response = http.request(request)
+        # response = Net::HTTP.start(url.host, url.port) do |http|
+        #   http.use_ssl
+        #   http.request(request)
+        # end
         if response.body == nil
           false
         else
