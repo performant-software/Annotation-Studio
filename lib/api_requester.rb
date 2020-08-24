@@ -34,7 +34,8 @@ class ApiRequester
     def self.search(params, token, to_csv: false)
         url = URI.parse(@@api_url + '/search')
         url.query = URI.encode_www_form(params)
-        request = Net::HTTP::Get.new(url)
+        # request = Net::HTTP::Get.new(url)
+        request = Net::HTTP.new(url.host, url.port)
         # request['accept'] = 'application/json'
         request['accept'] = 'text/csv'
         request['x-annotator-auth-token'] = token
