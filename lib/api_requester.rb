@@ -38,6 +38,7 @@ class ApiRequester
         # request['accept'] = 'application/json'
         request['accept'] = 'text/csv'
         request['x-annotator-auth-token'] = token
+        request.use_ssl = true
         Rails.logger.info "****"
         Rails.logger.info "The url object is #{url.inspect}"
         Rails.logger.info "The request object is #{request.inspect}"
