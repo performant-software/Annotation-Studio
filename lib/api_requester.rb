@@ -38,6 +38,9 @@ class ApiRequester
         # request['accept'] = 'application/json'
         request['accept'] = 'text/csv'
         request['x-annotator-auth-token'] = token
+        Rails.logger.info "****"
+        Rails.logger.info "The url object is #{url.inspect}"
+        Rails.logger.info "The request object is #{request.inspect}"
         response = Net::HTTP.start(url.host, url.port) {|http| http.request(request)}
         response.body
         if response.body == nil
