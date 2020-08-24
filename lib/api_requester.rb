@@ -34,17 +34,17 @@ class ApiRequester
     def self.search(params, token, to_csv: false)
         url = URI.parse(@@api_url + '/search')
         url.query = URI.encode_www_form(params)
-        # request = Net::HTTP::Get.new(url)
-        request = Net::HTTP.new(url.host, url.port)
+        request = Net::HTTP::Get.new(url)
         # request['accept'] = 'application/json'
         request['accept'] = 'text/csv'
         request['x-annotator-auth-token'] = token
-        request.use_ssl = true
-        Rails.logger.info "****"
-        Rails.logger.info "The url object is #{url.inspect}"
-        Rails.logger.info "The request object is #{request.inspect}"
-        response = Net::HTTP.start(url.host, url.port) {|http| http.request(request)}
-        response.body
+        # Rails.logger.info "****"
+        # Rails.logger.info "The url object is #{url.inspect}"
+        # Rails.logger.info "The request object is #{request.inspect}"
+        response = Net::HTTP.start(url.host, url.port) do |http|
+          http.use_ssl
+          http.request(request)
+        end
         if response.body == nil
           false
         else
