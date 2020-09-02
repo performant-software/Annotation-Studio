@@ -96,7 +96,7 @@ aria-hidden=\"true\"></span> Create new document"), document_path('new') %></li>
         </ul>
       </div><!-- / .panel-heading -->
       <div class="tab-content">
-        <div class="tab-pane no-padding fade in" id="ant-assigned">
+        <div class="tab-pane no-padding active fade in" id="ant-assigned">
           <ul id="anthologies-assigned" class="list-group">
             <% unless current_user.anthologies.empty? ||
                 current_user.anthologies.nil? %>
@@ -153,51 +153,6 @@ aria-hidden=\"true\"></span> Create new anthology"), anthology_path('new')
 </div>
 <!--/row -->
 
-
-<%= javascript_include_tag "widget" %>
-<script type="text/javascript" charset="utf-8">
-  jQuery(function ($) {
-    var widget = new Widget.App();
-    var endpoint = '<%= ENV["API_URL"] %>';
-    var token = '<%= session["jwt"] %>';
-    // Backbone.history.start({pushState: true, root: window.location})
-
-    var myLoadOptions = {
-      'limit': 10,
-      'groups': "<%= current_user.rep_group_list %>".split(/, /),
-      'subgroups': "<%= current_user.rep_subgroup_list %>".split(/, /),
-      'host': location.host,
-      'user': "<%= current_user.email %>",
-      'mode': 'user',
-      'context': 'dashboard',
-    };
-    var classLoadOptions = {
-      'limit': 10,
-      'groups': "<%= current_user.rep_group_list %>".split(/, /),
-      'subgroups': "<%= current_user.rep_subgroup_list %>".split(/, /),
-      'host': location.host,
-      'user': "<%= current_user.email %>",
-      'mode': 'class',
-      'context': 'dashboard',
-    };
-    var groupLoadOptions = {
-      'limit': 10,
-      'groups': "<%= current_user.rep_group_list %>".split(/, /),
-      'subgroups': "<%= current_user.rep_subgroup_list %>".split(/, /),
-      'host': location.host,
-      'user': "<%= current_user.email %>",
-      'mode': 'group',
-      'context': 'dashboard',
-    };
-
-    widget.listAnnotations('my-annotation-list', myLoadOptions, endpoint, token);
-    widget.listAnnotations('class-annotation-list', classLoadOptions, endpoint,
-      token);
-    widget.listAnnotations('group-annotation-list', groupLoadOptions, endpoint,
-      token);
-  });
-
-</script>
 <script type="text/template" id="user-comment-template">
   <span class="user-highlight"><span
 class="pull-right">{{formattedDate}}</span><div class="ellipsis"><a
