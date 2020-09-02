@@ -185,3 +185,49 @@ Widget.App = Backbone.Router.extend({
 		});
 	}
 });
+
+// Add this to dashboard to re-enable annotations Widget
+//
+// <script type="text/javascript" charset="utf-8">
+//   jQuery(function ($) {
+//     var widget = new Widget.App();
+//     var endpoint = '<%= ENV["API_URL"] %>';
+//     var token = '<%= session["jwt"] %>';
+//     // Backbone.history.start({pushState: true, root: window.location})
+//
+//     var myLoadOptions = {
+//       'limit': 10,
+//       'groups': "<%= current_user.rep_group_list %>".split(/, /),
+//       'subgroups': "<%= current_user.rep_subgroup_list %>".split(/, /),
+//       'host': location.host,
+//       'user': "<%= current_user.email %>",
+//       'mode': 'user',
+//       'context': 'dashboard',
+//     };
+//     var classLoadOptions = {
+//       'limit': 10,
+//       'groups': "<%= current_user.rep_group_list %>".split(/, /),
+//       'subgroups': "<%= current_user.rep_subgroup_list %>".split(/, /),
+//       'host': location.host,
+//       'user': "<%= current_user.email %>",
+//       'mode': 'class',
+//       'context': 'dashboard',
+//     };
+//     var groupLoadOptions = {
+//       'limit': 10,
+//       'groups': "<%= current_user.rep_group_list %>".split(/, /),
+//       'subgroups': "<%= current_user.rep_subgroup_list %>".split(/, /),
+//       'host': location.host,
+//       'user': "<%= current_user.email %>",
+//       'mode': 'group',
+//       'context': 'dashboard',
+//     };
+//
+//     widget.listAnnotations('my-annotation-list', myLoadOptions, endpoint, token);
+//     widget.listAnnotations('class-annotation-list', classLoadOptions, endpoint,
+//       token);
+//     widget.listAnnotations('group-annotation-list', groupLoadOptions, endpoint,
+//       token);
+//   });
+//
+// </script>
