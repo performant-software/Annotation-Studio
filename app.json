@@ -9,12 +9,6 @@
     "STAGING_DATABASE_URL": {
       "required": true
     },
-    "HEROKU_APP_NAME": {
-      "required": true
-    },
-    "HEROKU_PARENT_APP_NAME": {
-      "required": true
-    },
     "COVE_URL": {
       "required": true
     },
