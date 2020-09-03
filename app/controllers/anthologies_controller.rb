@@ -108,6 +108,8 @@ class AnthologiesController < ApplicationController
     @anthology.user = current_user
     respond_to do |format|
       if @anthology.save
+        current_user.add(@anthology.slug)
+        current_user.save
         format.html { redirect_to current_user, notice: 'Anthology was successfully created.', anchor: 'created'}
         format.json { render json: @anthology, status: :created, location: @anthology }
       else
