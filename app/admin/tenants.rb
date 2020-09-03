@@ -1,6 +1,7 @@
 ActiveAdmin.register Tenant do
-  permit_params :domain, :database_name, :mel_catalog_enabled, :mel_catalog_url, :annotation_categories_enabled, :site_name, :welcome_message, :welcome_blurb, :site_color, :brand, :wp_url, :wp_auth_key, :wp_auth_secret,
-                :auth_allowed
+  permit_params :domain, :database_name, :mel_catalog_enabled, :mel_catalog_url, :annotation_categories_enabled,
+                :site_name, :welcome_message, :welcome_blurb, :site_color, :brand, :wp_url, :wp_auth_key,
+                :wp_auth_secret, auth_allowed: []
 
   scope :all, :default => true
 
@@ -26,7 +27,7 @@ ActiveAdmin.register Tenant do
     column "Site Color", :site_color
     column "Brand", :brand
     column "Auth Allowed" do |tenant|
-      tenant.auth_allowed.titleize
+      tenant.auth_allowed && tenant.auth_allowed.map{ |a| I18n.t("authentication.#{Tenant::AUTHORIZATION_METHODS.key(a)}") }.join(', ')
     end
     actions
   end
@@ -46,7 +47,10 @@ ActiveAdmin.register Tenant do
       f.input :wp_url, :as => :string, label: 'Enter WordPress hosted Url'
       f.input :wp_auth_key, :as => :string, label: 'Enter WordPress Auth Key'
       f.input :wp_auth_secret, :as => :string, label: 'Enter WordPress Auth Secret'
-      f.input :auth_allowed, as: :radio
+      f.input :idp_cert_fingerprint, as: :string, label: 'IDP Certificate Fingerprint'
+      f.input :idp_sso_target_url, as: :string, label: 'IDP SSO Target URL'
+      f.input :auth_allowed, as: :check_boxes, multiple: true,
+              collection: Tenant::AUTHORIZATION_METHODS.keys.map { |k| [I18n.t("authentication.#{k}"), Tenant::AUTHORIZATION_METHODS[k]] }
     end
     f.actions do
       f.action :submit,
@@ -56,6 +60,12 @@ ActiveAdmin.register Tenant do
                    data: {disable_with:  'Creating...'}
                }
       f.action :cancel, :wrapper_html => { :class => "cancel" }
+    end
+  end
+
+  controller do
+    before_save do |tenant|
+      tenant.auth_allowed = params[:tenant][:auth_allowed].reject { |a| a.empty? } if params[:tenant][:auth_allowed].present?
     end
   end
 end
