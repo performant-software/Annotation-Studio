@@ -95,9 +95,10 @@ class DocumentsController < ApplicationController
       [:title, :author, :edition].each do |query|
         if params.has_key?(query) && params[query].present?
           if query == :edition
-            @documents = Document.tagged_with(params[query])
+            tags = Tag.where('name ILIKE ?', "%#{params[query]}%").pluck(:name)
+            @documents = Document.tagged_with(tags, any: true)
           elsif params.has_key?(query) && params[query].present?
-            @documents = Document.where("#{query} LIKE ?", "%#{params[query]}%")
+            @documents = Document.where("#{query} ILIKE ?", "%#{params[query]}%")
           end
         end
       end
