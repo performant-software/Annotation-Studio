@@ -1,7 +1,27 @@
 	<ul class="list-group" id="omniauth-links">
-	  <%- resource_class.omniauth_providers.each do |provider| %>
-	  <li class="list-group-item"><%= link_to "Log in through #{I18n.t provider.to_sym, scope: [:devise, :omniauth]}", root_url(:protocol => "https").gsub(/\/$/, "") + omniauth_authorize_path(resource_name, provider), :class => "btn btn-default" %></li>
-	  <% end -%>
 
-	  <li class="list-group-item"><a target="navsa" href="https://www.navsa.org/members/join-navsa/">Not a NAVSA member?</a></li>
+    <% tenant = Tenant.current_tenant %>
+
+    <% if allow_wordpress_oauth_authentication?(tenant) %>
+      <li class="list-group-item">
+        <%= build_omniauth_link(:wordpress_hosted) %>
+      </li>
+    <% end %>
+
+    <% if allow_saml_authentication?(tenant) %>
+      <li class="list-group-item">
+        <%= build_omniauth_link(:saml) %>
+      </li>
+    <% end %>
+
+    <% if allow_devise_authentication?(tenant) %>
+      <li class="list-group-item">
+        <%= link_to I18n.t('devise.buttons.login_email'), user_session_path(anchor: 'email-login'), class: 'btn btn-default' %>
+      </li>
+    <% end %>
+
+    <% if local_assigns[:footer].present? %>
+      <%= render footer %>
+    <% end %>
+
 	</ul>

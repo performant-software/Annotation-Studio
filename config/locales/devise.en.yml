@@ -2,6 +2,8 @@
 
 en:
   devise:
+    buttons:
+      login_email: "Log in with email"
     confirmations:
       confirmed: "Your account was successfully confirmed."
       send_instructions: "You will receive an email with instructions about how to confirm your account in a few minutes."
@@ -48,6 +50,7 @@ en:
       send_paranoid_instructions: "If your account exists, you will receive an email with instructions about how to unlock it in a few minutes."
       unlocked: "Your account has been unlocked successfully. Please sign in to continue."
     omniauth:
+      saml: "SAML"
       wordpress_hosted: "NAVSA"
   errors:
     messages:

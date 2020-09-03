@@ -1,9 +1,13 @@
 class Tenant < ActiveRecord::Base
 
+  AUTHORIZATION_METHODS = {
+    oauth: 0,
+    saml: 1,
+    email: 2
+  }
+
   after_create :initialize_apartment_schema
   after_destroy :drop_apartment_schema
-
-  enum auth_allowed: %i[oauth saml_auth]
 
   validates :domain, presence: true, uniqueness: true
   validates :database_name, presence: true, uniqueness: true
