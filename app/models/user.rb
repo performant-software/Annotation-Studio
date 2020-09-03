@@ -56,7 +56,7 @@ class User < ActiveRecord::Base
     Rails.logger.info "*****"
     Rails.logger.info "the auth under the find is #{auth}"
 
-    find_for_authentication(auth) do |user|
+    find_for_external_authentication(auth) do |user|
       user.firstname = auth.info.name.split(' ').first
       user.lastname = auth.info.name.split(' ').length > 1 ? auth.info.name.split(' ').last : " "
     end
@@ -66,7 +66,7 @@ class User < ActiveRecord::Base
     Rails.logger.info "*****"
     Rails.logger.info "the auth under the find is #{auth}"
 
-    find_for_authentication(auth) do |user|
+    find_for_external_authentication(auth) do |user|
       user.firstname = auth.info.first_name
       user.lastname = auth.info.last_name
     end
@@ -74,7 +74,7 @@ class User < ActiveRecord::Base
 
   private
 
-  def self.find_for_authentication(auth)
+  def self.find_for_external_authentication(auth)
     user = User.where(email: auth.info.email.downcase).first_or_initialize do |u|
       yield u, auth if block_given?
       u.agreement = true
