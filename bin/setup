@@ -41,6 +41,8 @@ SECRET=the-secret-the-annotator-gets-from-the-authorizing-site
 CONSUMER=name-of-the-app-on-which-the-annotator-runs
 VERSION=1.0
 DB=mongodb://localhost/annotationdb
+LOCAL_KEY_PATH=local-data-store.key
+LOCAL_CERT_PATH=local-data-store.cert
 
 EOF
 
