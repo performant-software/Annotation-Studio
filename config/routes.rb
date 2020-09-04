@@ -45,7 +45,7 @@ AnnotationStudio::Application.routes.draw do
   resources :users, only: [:index, :show, :edit]
 
   authenticated :user do
-    root :to => "users#show"
+    root :to => "anthologies#index"
     get 'dashboard', to: 'users#show', as: :dashboard
     get 'annotations', to: 'annotations#index'
     get 'annotations/:id', to: 'annotations#show'

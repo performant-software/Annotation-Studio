@@ -1,6 +1,6 @@
 <% second_line = params[:controller] == 'documents' && (params[:action] == 'show' || params[:action] == 'edit') %>
 <ol class="breadcrumb breadcrumb-inverse hidden-xs<%= " second-line" if second_line %>">
-  <% if current_page?(dashboard_path) || current_page?(root_path) %>
+  <% if current_page?(dashboard_path) %>
     <li class="active">Dashboard</li>
   <% else %>
     <li><%= link_to("Dashboard", "/dashboard", :id => "dashboard-link") %></li>
