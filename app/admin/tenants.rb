@@ -1,7 +1,7 @@
 ActiveAdmin.register Tenant do
   permit_params :domain, :database_name, :mel_catalog_enabled, :mel_catalog_url, :annotation_categories_enabled,
                 :site_name, :welcome_message, :welcome_blurb, :site_color, :brand, :wp_url, :wp_auth_key,
-                :wp_auth_secret, auth_allowed: []
+                :wp_auth_secret, :idp_sso_target_url, :idp_cert_fingerprint, auth_allowed: []
 
   scope :all, :default => true
 
