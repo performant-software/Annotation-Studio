@@ -58,6 +58,7 @@ purdue-staging.covecollective.org:
   home_banner: 'cove_home_banner.jpg'
   brand: 'shared/cove_brand'
   saml_provider: 'purdue.edu'
+  saml_metadata: '/saml/purdue_metadata.xml'
 purdue.covecollective.org:
   site_name: COVE for Purdue
   welcome_message: 'Welcome to COVE Studio for Purdue'
@@ -66,3 +67,4 @@ purdue.covecollective.org:
   home_banner: 'cove_home_banner.jpg'
   brand: 'shared/cove_brand'
   saml_provider: 'purdue.edu'
+  saml_metadata: '/saml/purdue_metadata.xml'

@@ -70,4 +70,5 @@ AnnotationStudio::Application.routes.draw do
     to: 'admin/students#autocomplete_tags',
     as: 'autocomplete_tags'
 
+  get '/sp/metadata' => 'saml#metadata', defaults: { format: 'xml' }
 end
