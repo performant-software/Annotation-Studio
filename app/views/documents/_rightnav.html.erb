@@ -18,7 +18,7 @@
     <% end %>
   </div>
   <p>By User</p>
-  <%= select_tag "users", options_from_collection_for_select(@filtered_users, "email", "fullname"), class: 'form-control' %>
+  <%= select_tag("users", options_from_collection_for_select(@filtered_users, "email", "fullname"), { prompt: 'All Users', class: 'form-control' }) %>
   <p><strong>Where</strong> they occur:</p>
   <div class="btn-group btn-group-sm" data-toggle="buttons" id="filter-chooser">
     <label class="btn btn-default btn-sm active" id="visibleannotations">
