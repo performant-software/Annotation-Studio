@@ -22,7 +22,7 @@ class AnnotationsController < ApplicationController
         respond_to do |format|
             format.html { render :index }
             format.json { render json: ApiRequester.search(loadOptions, @token) }
-            format.csv { send_data ApiRequester.search(loadOptions, @token, to_csv: true) }
+            format.csv { generate_csv(loadOptions, @token)}
         end
     end
 
@@ -80,5 +80,16 @@ class AnnotationsController < ApplicationController
 
     def exception_test
         raise "This is a test of the exception handler. If you received this email, it is working properly."
+    end
+
+    private
+
+    def generate_csv(loadOptions, token)
+      data =  ApiRequester.search(loadOptions, token, to_csv: true) 
+      if data
+        send_data data
+      else
+        redirect_to :back, alert: "There are no annotations to be downloaded."
+      end
     end
 end

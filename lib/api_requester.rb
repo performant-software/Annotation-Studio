@@ -38,10 +38,22 @@ class ApiRequester
         # request['accept'] = 'application/json'
         request['accept'] = 'text/csv'
         request['x-annotator-auth-token'] = token
-        response = Net::HTTP.start(url.host, url.port) {|http| http.request(request)}
-        response.body
-        data = MultiJson.load(response.body)
-        to_csv == false ? data : CsvGenerator.to_csv(data)
+        # Rails.logger.info "****"
+        # Rails.logger.info "The url object is #{url.inspect}"
+        # Rails.logger.info "The request object is #{request.inspect}"
+        http = Net::HTTP.new(url.host, url.port)
+        http.use_ssl = true
+        response = http.request(request)
+        # response = Net::HTTP.start(url.host, url.port) do |http|
+        #   http.use_ssl
+        #   http.request(request)
+        # end
+        if response.body == nil
+          false
+        else
+          data = MultiJson.load(response.body)
+          to_csv == false ? data : CsvGenerator.to_csv(data)
+        end
     end
 
     def self.field(params, token, to_csv: false)
