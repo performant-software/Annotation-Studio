@@ -28,7 +28,13 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @tenant = Tenant.current_tenant
     return unless allow_wordpress_oauth_authentication?(@tenant)
 
-    Rails.logger.info("**********Setup Started for #{@tenant.database_name}************") if @tenant.present?
+    if @tenant.present?
+      Rails.logger.info("**********Setup Started for #{@tenant.database_name}************")
+      Rails.logger.info("The tenant auth key is #{@tenant.wp_auth_key}")
+      Rails.logger.info("The tenant secret is #{@tenant.wp_auth_secret}")
+      Rails.logger.info("The tenant url is #{@tenant.wp_url}")
+    end
+
     request.env['omniauth.strategy'].options[:client_id] = wp_auth_key(@tenant)
     request.env['omniauth.strategy'].options[:client_secret] = wp_auth_secret(@tenant)
     request.env['omniauth.strategy'].options[:client_options].site = wp_url(@tenant)
@@ -39,9 +45,16 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @tenant = Tenant.current_tenant
     return unless allow_saml_authentication?(@tenant)
 
-    Rails.logger.info("**********Setup Started for #{@tenant.database_name}************") if @tenant.present?
+    if @tenant.present?
+      Rails.logger.info("**********Setup Started for #{@tenant.database_name}************")
+      Rails.logger.info("The tenant auth key is #{@tenant.wp_auth_key}")
+      Rails.logger.info("The tenant secret is #{@tenant.wp_auth_secret}")
+      Rails.logger.info("The tenant url is #{@tenant.wp_url}")
+    end
+
     request.env['omniauth.strategy'].options[:idp_cert_fingerprint] = idp_cert_fingerprint(@tenant)
     request.env['omniauth.strategy'].options[:idp_sso_target_url] = idp_sso_target_url(@tenant)
+
     render :text => "Setup complete.", :status => 404
   end
 
