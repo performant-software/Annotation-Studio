@@ -2,23 +2,23 @@
   <h4>Filter annotations by:</h4>
   <p><strong>Who</strong> made them:</p>
   <div class="btn-group btn-group-sm" data-toggle="buttons" id="view-chooser">
-    <label class="btn btn-default btn-sm viewchoice active" id="user">
+    <label class="btn btn-default btn-sm viewchoice active who-made" id="user">
       <input type="radio" checked value="user">Me</input>
     </label>
-    <label class="btn btn-default btn-sm viewchoice" id="group">
+    <label class="btn btn-default btn-sm viewchoice who-made" id="group">
       <input type="radio" value="group"><%= ENV["GROUP_TERM_PLURAL"] %></input>
     </label>
-    <label class="btn btn-default btn-sm viewchoice" id="class">
+    <label class="btn btn-default btn-sm viewchoice who-made" id="class">
       <input type="radio" value="class"><%= ENV["CLASS_TERM_PLURAL"] %></input>
     </label>
     <% if current_user.has_role?(:admin) %>
-      <label class="btn btn-default btn-sm viewchoice" id="admin">
+      <label class="btn btn-default btn-sm viewchoice who-made" id="admin">
         <input type="radio" value="admin">All</input>
       </label>
     <% end %>
   </div>
   <p>By User</p>
-  <%= select_tag("users", options_from_collection_for_select(@filtered_users, "email", "fullname"), { prompt: 'All Users', class: 'form-control' }) %>
+  <%= select_tag("users", options_from_collection_for_select(@filtered_users, "email", "fullname"), { prompt: 'All Users', class: 'form-control by-user' }) %>
   <p><strong>Where</strong> they occur:</p>
   <div class="btn-group btn-group-sm" data-toggle="buttons" id="filter-chooser">
     <label class="btn btn-default btn-sm active" id="visibleannotations">

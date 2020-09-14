@@ -114,8 +114,17 @@ var annotation_studio = {
     };
     annotation_studio.filterAnnotations(overrides);
   },
+  resetByUser: function(event) {
+    $('.by-user').val("");
+  },
   userFilter: function(event) {
     console.log('*** went into user filter');
+    if ($( "#users option:selected" ).text() === "All Users") {
+      $('label.who-made:nth-child(3)').addClass('active');
+    }
+    else {
+      $('label.who-made').removeClass('active');
+    }
     var overrides = { };
     console.log("*** event is");
     console.log(event)
@@ -307,6 +316,7 @@ jQuery(function($) {
   });
 
   $('.viewchoice').on('click', annotation_studio.modeFilter);
+  $('.who-made').on('click', annotation_studio.resetByUser);
   $('#users').on('change', annotation_studio.userFilter);
 
 	var tagsElement = $("#annotation-tag-list");
