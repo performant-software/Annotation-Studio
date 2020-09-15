@@ -121,7 +121,7 @@ var annotation_studio = {
     console.log('*** went into user filter');
     if ($( "#users option:selected" ).text() === "All Users") {
       $('label.who-made:nth-child(3)').addClass('active');
-    }
+    } 
     else {
       $('label.who-made').removeClass('active');
     }
@@ -290,7 +290,7 @@ var annotation_studio = {
 };
 
 jQuery(function($) {
-  if(!($('body').attr('id') == 'documents' && $('body').attr('class') == 'show')) {
+  if(!($('body').attr('id') == 'documents' && $('body').attr('class') == 'show annotable')) {
     return;
   }
   annotation_studio.startSpinner();

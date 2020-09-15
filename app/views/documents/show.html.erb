@@ -1,5 +1,5 @@
 <%= content_for :body_id, 'documents' %>
-<%= content_for :body_class, 'show' %>
+<%= content_for :body_class, "show #{'annotable' if @document.processed? and !@document.draft?}" %>
 <%= content_for :page_title, @document.title %>
 <%= stylesheet_link_tag "documents" %>
 <div class="row">
