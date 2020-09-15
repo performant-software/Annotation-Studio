@@ -45,7 +45,7 @@ AnnotationStudio::Application.routes.draw do
   resources :users, only: [:index, :show, :edit]
 
   authenticated :user do
-    root :to => "anthologies#index"
+    root :to => "users#show"
     get 'dashboard', to: 'users#show', as: :dashboard
     get 'annotations', to: 'annotations#index'
     get 'annotations/:id', to: 'annotations#show'
@@ -67,4 +67,5 @@ AnnotationStudio::Application.routes.draw do
     to: 'admin/students#autocomplete_tags',
     as: 'autocomplete_tags'
 
+  get '*path' => redirect('/')
 end
