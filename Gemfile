@@ -28,6 +28,7 @@ gem 'net-ssh'
 gem 'select2-rails', '< 4.0'
 gem 'omniauth-oauth2', '1.3.1'
 gem 'omniauth-wordpress_hosted', github: 'jwickard/omniauth-wordpress-oauth2-plugin'
+gem 'omniauth-saml'
 
 group :development do
   gem 'sextant'
@@ -91,3 +92,5 @@ gem "rest-client"
 gem "doorkeeper"
 gem "octokit", "~> 4.0"
 gem 'foreman'
+
+gem 'dotenv-rails'

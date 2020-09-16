@@ -220,6 +220,11 @@ Devise.setup do |config|
   config.omniauth :wordpress_hosted,
                   :setup => true
 
+  config.omniauth :saml,
+                  setup: true,
+                  skip_destination: true,
+                  skip_subject_confirmation: true
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
