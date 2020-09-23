@@ -27,7 +27,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def setup_wordpress_hosted
     @tenant = Tenant.current_tenant
     return unless allow_wordpress_oauth_authentication?(@tenant)
-
+    
     if @tenant.present?
       Rails.logger.info("**********Setup Started for #{@tenant.database_name}************")
       Rails.logger.info("The tenant auth key is #{@tenant.wp_auth_key}")
