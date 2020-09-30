@@ -59,6 +59,10 @@ purdue-staging.covecollective.org:
   brand: 'shared/cove_brand'
   saml_provider: 'purdue.edu'
   saml_metadata: '/saml/purdue_metadata.xml'
+  saml_attributes:
+    email: 'mail'
+    first_name: 'givenName'
+    last_name: 'sn'
 purdue.covecollective.org:
   site_name: COVE for Purdue
   welcome_message: 'Welcome to COVE Studio for Purdue'
@@ -68,3 +72,7 @@ purdue.covecollective.org:
   brand: 'shared/cove_brand'
   saml_provider: 'purdue.edu'
   saml_metadata: '/saml/purdue_metadata.xml'
+  saml_attributes:
+    email: 'mail'
+    first_name: 'givenName'
+    last_name: 'sn'

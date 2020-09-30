@@ -223,7 +223,8 @@ Devise.setup do |config|
   config.omniauth :saml,
                   setup: true,
                   skip_destination: true,
-                  skip_subject_confirmation: true
+                  skip_subject_confirmation: true,
+                  skip_recipient_check: true
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
