@@ -1,6 +1,7 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   include AuthenticationHelper
   skip_before_filter :verify_authenticity_token, only: :saml
+  skip_before_filter :protect_from_forgery, only: :saml
 
   def wordpress_hosted
     @user = User.find_for_wordpress_oauth2(request.env["omniauth.auth"], current_user)
