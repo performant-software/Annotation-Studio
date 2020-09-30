@@ -26,7 +26,7 @@ ActiveAdmin.register Tenant do
     column "Site Color", :site_color
     column "Brand", :brand
     column "Auth Allowed" do |tenant|
-      tenant.auth_allowed.titleize
+      tenant.auth_allowed.try(:titleize)
     end
     actions
   end
