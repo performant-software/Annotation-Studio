@@ -105,7 +105,7 @@ class DocumentsController < ApplicationController
       if @documents.present?
         @documents = @documents.paginate(:page => params[:page], :per_page => per_page)
       else
-        @documents = Document.paginate(:page => params[:page], :per_page => per_page ) 
+        @documents = Document.paginate(:page => params[:page], :per_page => per_page )
         @search_documents_count = Document.count
       end
     end
@@ -214,7 +214,7 @@ class DocumentsController < ApplicationController
 
     respond_to do |format|
       if @document.update_attributes(documents_params)
-        format.html { redirect_to documents_url, notice: 'Document was successfully updated.' }
+        format.html { redirect_to :back, notice: 'Document was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
