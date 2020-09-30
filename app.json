@@ -10,10 +10,10 @@
       "required": true
     },
     "HEROKU_APP_NAME": {
-      "required": true
+      "required": false
     },
     "HEROKU_PARENT_APP_NAME": {
-      "required": true
+      "required": false
     },
     "COVE_URL": {
       "required": true
