@@ -77,7 +77,7 @@ module AuthenticationHelper
 
   def saml_attributes
     attrs = $DOMAIN_CONFIG['saml_attributes'] || {}
-    attrs.keys.inject({}) { |h, k| h[k] = attrs[k]; h }
+    attrs.keys.inject({}) { |h, k| h[k] = [attrs[k]]; h }
   end
 
 end
