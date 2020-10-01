@@ -75,4 +75,9 @@ module AuthenticationHelper
     link_to "#{login_label} #{provider_label}", "#{url_prefix}#{url}", :class => "btn btn-default"
   end
 
+  def saml_attributes
+    attrs = $DOMAIN_CONFIG['saml_attributes'] || {}
+    attrs.keys.inject({}) { |h, k| h[k] = attrs[k]; h }
+  end
+
 end

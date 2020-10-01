@@ -55,6 +55,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     request.env['omniauth.strategy'].options[:idp_cert_fingerprint] = idp_cert_fingerprint(@tenant)
     request.env['omniauth.strategy'].options[:idp_sso_target_url] = idp_sso_target_url(@tenant)
     request.env['omniauth.strategy'].options[:issuer] = url_for(action: 'metadata', controller: 'saml')
+    request.env['omniauth.strategy'].options[:attribute_statements] = saml_attributes
 
     render :text => "Setup complete.", :status => 404
   end
