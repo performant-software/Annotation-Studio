@@ -74,5 +74,5 @@ purdue.covecollective.org:
   saml_metadata: '/saml/purdue_metadata.xml'
   saml_attributes:
     email: 'mail'
-    first_name: 'givenName'
-    last_name: 'sn'
+    firstname: 'givenName'
+    lastname: 'sn'
