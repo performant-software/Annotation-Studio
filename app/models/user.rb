@@ -56,7 +56,7 @@ class User < ActiveRecord::Base
     Rails.logger.info "*****"
     Rails.logger.info "the auth under the find is #{auth}"
 
-    find_for_external_authentication(auth, auth.info.email) do |user|
+    find_for_external_authentication(auth) do |user|
       user.firstname = auth.info.name.split(' ').first
       user.lastname = auth.info.name.split(' ').length > 1 ? auth.info.name.split(' ').last : " "
     end
@@ -66,22 +66,16 @@ class User < ActiveRecord::Base
     Rails.logger.info "*****"
     Rails.logger.info "the auth under the find is #{auth}"
 
-    saml_attributes = $DOMAIN_CONFIG['saml_attributes'] || {}
-    email_attribute = saml_attributes['email']
-    email = auth.info[email_attribute]
-
-    find_for_external_authentication(auth, email) do |user|
-      saml_attributes.keys.each do |attribute|
-        saml_attribute = saml_attributes[attribute]
-        user[attribute] = auth.info[saml_attribute]
-      end
+    find_for_external_authentication(auth) do |user|
+      user.firstname = auth.info.first_name
+      user.lastname = auth.info.last_name
     end
   end
 
   private
 
-  def self.find_for_external_authentication(auth, email)
-    user = User.where(email: email).first_or_initialize do |u|
+  def self.find_for_external_authentication(auth)
+    user = User.where(email: auth.info.email).first_or_initialize do |u|
       yield u, auth if block_given?
       u.agreement = true
       u.password = Devise.friendly_token[0,20]
