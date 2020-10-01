@@ -67,8 +67,8 @@ class User < ActiveRecord::Base
     Rails.logger.info "the auth under the find is #{auth}"
 
     find_for_external_authentication(auth) do |user|
-      user.firstname = auth.info.first_name
-      user.lastname = auth.info.last_name
+      user.firstname = auth.info.firstname
+      user.lastname = auth.info.lastname
     end
   end
 
