@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable, :rememberable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :trackable, :validatable, :confirmable,
-         :timeoutable, :omniauthable, :omniauth_providers => [:wordpress_hosted]
+         :timeoutable, :omniauthable, :omniauth_providers => [:wordpress_hosted, :saml]
 
   validates :agreement, presence: { message: "must be checked. Please check the box to confirm you have read and accepted the terms and conditions." }
 
@@ -55,19 +55,39 @@ class User < ActiveRecord::Base
   def self.find_for_wordpress_oauth2(auth, current)
     Rails.logger.info "*****"
     Rails.logger.info "the auth under the find is #{auth}"
-    authed_user = User.where(email: auth.info.email.downcase).first_or_initialize do |user|
+
+    find_for_external_authentication(auth) do |user|
       user.firstname = auth.info.name.split(' ').first
       user.lastname = auth.info.name.split(' ').length > 1 ? auth.info.name.split(' ').last : " "
-      user.agreement = true
-      user.password = Devise.friendly_token[0,20]
     end
-    authed_user.provider = auth.provider
-    authed_user.uid = auth.uid
-    if authed_user.new_record?
-      authed_user.skip_confirmation!
+  end
+
+  def self.find_for_saml(auth, current)
+    Rails.logger.info "*****"
+    Rails.logger.info "the auth under the find is #{auth}"
+
+    find_for_external_authentication(auth) do |user|
+      user.firstname = auth.info.firstname
+      user.lastname = auth.info.lastname
     end
-    if authed_user.save
-      authed_user
+  end
+
+  private
+
+  def self.find_for_external_authentication(auth)
+    user = User.where(email: auth.info.email).first_or_initialize do |u|
+      yield u, auth if block_given?
+      u.agreement = true
+      u.password = Devise.friendly_token[0,20]
+    end
+
+    user.provider = auth.provider
+    user.uid = auth.uid
+
+    user.skip_confirmation! if user.new_record?
+
+    if user.save
+      user
     end
   end
 

@@ -21,3 +21,8 @@ en:
       batch_actions:
         labels:
           make_admin: "Create admins w/"
+    authentication:
+      login_in: "Log in through"
+      oauth: "OAuth"
+      saml: "SAML"
+      email: "Email"

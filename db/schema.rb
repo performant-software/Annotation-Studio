@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200615142322) do
+ActiveRecord::Schema.define(version: 20200903142800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -244,7 +244,7 @@ ActiveRecord::Schema.define(version: 20200615142322) do
     t.string   "wp_url"
     t.string   "wp_auth_key"
     t.string   "wp_auth_secret"
-    t.integer  "auth_allowed",                              default: 0
+    t.integer  "auth_allowed",                              default: [],    null: false, array: true
     t.string   "idp_sso_target_url"
     t.string   "idp_cert_fingerprint"
   end
