@@ -98,7 +98,7 @@
 			  </div><!-- end span 6 -->
 			  </div><!-- end row -->
 
-            <%= f.submit nil, :class => 'btn btn-default btn btn-default-primary btn-primary' %>
+            <%= f.submit nil, :class => 'btn btn-default btn btn-default-primary btn-primary codeview-submit' %>
           	<%= link_to 'Cancel', documents_url, :class => 'btn btn-default' %>
           <% end %>
 
@@ -145,6 +145,9 @@
             $('#chapter-label').click(function(){
               $("[data-event='codeview']").click()
               $('#chapter-editor').toggle();
+            });
+            $('.codeview-submit').click(function(){
+              $('.btn-codeview.active').click()
             });
 
             // handle catalog texts
