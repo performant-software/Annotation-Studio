@@ -60,7 +60,7 @@ class AnnotationsController < ApplicationController
                     user["text"] = "#{author.firstname} #{author.lastname[0]}."
                 else
                     next
-                end                
+                end
             end
         end
 
@@ -85,7 +85,7 @@ class AnnotationsController < ApplicationController
     private
 
     def generate_csv(loadOptions, token)
-      data =  ApiRequester.search(loadOptions, token, to_csv: true) 
+      data =  ApiRequester.search(loadOptions, token, to_csv: true)
       if data
         send_data data
       else

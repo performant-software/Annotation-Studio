@@ -62,7 +62,10 @@ class ApiRequester
         request = Net::HTTP::Get.new(url)
         request['accept'] = 'application/json'
         request['x-annotator-auth-token'] = token
-        response = Net::HTTP.start(url.host, url.port) {|http| http.request(request)}
+        # response = Net::HTTP.start(url.host, url.port) {|http| http.request(request)}
+        http = Net::HTTP.new(url.host, url.port)
+        http.use_ssl = true
+        response = http.request(request)
         data = MultiJson.load(response.body)
     end
 
@@ -132,7 +135,7 @@ class CoveClient
         else
             puts "unAuth Request unsuccessful."
         end
-        return response.body    
+        return response.body
     end
 
     def self.get_cookie(token)
@@ -171,7 +174,7 @@ class CoveClient
         else
             puts "Login GET Request not successful"
         end
-        return response.body    
+        return response.body
     end
 
 
@@ -195,7 +198,7 @@ end
 
 
 class UserIngester
-  # Assumptions: 
+  # Assumptions:
   # - users will use the same email address for all accounts
   # - this will be run as a rake task, and should be repeatable with no risk
   def self.get_users
@@ -215,7 +218,7 @@ class UserIngester
 end
 
 class DocumentIngester
-  # Assumptions: 
+  # Assumptions:
   # - users will use the same email address for all accounts
   # - this will be run as a rake task, and should be repeatable with no risk
   def self.get_documents
@@ -236,7 +239,7 @@ class DocumentIngester
 end
 
 class AnnotationIngester
-  # Assumptions: 
+  # Assumptions:
   # - users will use the same email address for all accounts
   # - this will be run as a rake task, and should be repeatable with no risk
   def self.get_annotations
@@ -257,7 +260,7 @@ class AnnotationIngester
 end
 
 class CsvGenerator
-    @@fields = ['id', 'user', 'username', 'text', 'uri', 'quote', 
+    @@fields = ['id', 'user', 'username', 'text', 'uri', 'quote',
                 'tags', 'ranges', 'subgroups', 'groups', 'updated', 'created']
 
     def self.to_csv(data)
