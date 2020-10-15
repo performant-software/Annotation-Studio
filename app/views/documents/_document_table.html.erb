@@ -122,15 +122,17 @@
               <% if document.anthologies.include?(@anthology)  %>
                 <%= link_to 'Remove from anthology',
                             { action: :remove_doc, controller: 'anthologies', anthology_id: @anthology.id, document_id: document.id }, method: :post, :class => 'btn btn-danger btn-sm' %>
-              <% else %>
-                <%= link_to 'Assign to Anthology',
+                        <% else %>
+                          <%= link_to 'Assign to Anthology',
                             { action: :anthology_add, controller: 'documents', anthology: @anthology.id, document_ids: [document.id], title: params[:title], author: params[:author]}, method: :post, :class => 'btn btn-primary btn-sm' %>
-              <% end %>
-            <% end %>
-          <% end %>
-          <% if can? :destroy, document %>
-            <%= link_to 'Delete',url_for(action: :destroy,id: document.id),method: :delete,:class => 'btn btn-danger btn-sm', data: {confirm: "Are you sure you want to delete this document permanently? All annotations on this document will also be permanently invalidated. There is no undo"} %>
-          <% end %>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                    <% if controller_name != 'anthologies' %>
+                      <% if can? :destroy, document %>
+                        <%= link_to 'Delete',url_for(action: :destroy,id: document.id),method: :delete,:class => 'btn btn-danger btn-sm', data: {confirm: "Are you sure you want to delete this document permanently? All annotations on this document will also be permanently invalidated. There is no undo"} %>
+                      <% end %>
+                    <% end %>
           <% end %>
         </td>
         </tr>
