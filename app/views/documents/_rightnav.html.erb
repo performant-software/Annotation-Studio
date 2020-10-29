@@ -65,8 +65,12 @@
     <p><strong>Download HTML</strong> of the document snapshot</p>
     <%= link_to "Download HTML", document_export_path(@document), class: "btn btn-default btn-sm", role: "button" %>
     <p><strong>Download CSV</strong> of the document snapshot</p>
-    <%= link_to "Download CSV", "/documents/#{@document.slug}/annotations.csv", class: "btn btn-default btn-sm", role: "button" %>
-  <% end -%>
+    <% if params[:anthology_id].present? %>
+        <%= link_to "Download CSV", "/anthologies/#{params[:anthology_id]}/documents/#{@document.slug}/annotations.csv", class: "btn btn-default btn-sm", role: "button" %>
+    <% else %>
+        <%= link_to "Download CSV", "/documents/#{@document.slug}/annotations.csv", class: "btn btn-default btn-sm", role: "button" %>
+    <% end %>
+  <% end %>
   <h4>Switch User</h4>
   <p><strong>Remember me?</strong><%= switch_user_select class: 'form-control' %></p>
 <% end %>
