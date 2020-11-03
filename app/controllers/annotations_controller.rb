@@ -13,7 +13,7 @@ class AnnotationsController < ApplicationController
             :context =>     'search'
         }
         if params[:anthology_id]
-          loadOptions[:uri] = request.base_url + '/anthology/' + params[:anthology_id] +  '/documents/' + params[:document_id]
+          loadOptions[:uri] = request.base_url + '/anthologies/' + params[:anthology_id] +  '/documents/' + params[:document_id]
         elsif params[:document_id]
           loadOptions[:uri] = request.base_url + '/documents/' + params[:document_id]
           Rails.logger.info "request.base_url is #{request.base_url}"
