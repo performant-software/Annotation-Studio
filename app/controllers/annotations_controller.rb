@@ -14,6 +14,7 @@ class AnnotationsController < ApplicationController
         }
         if params[:document_id]
           loadOptions[:uri] = request.base_url + '/documents/' + params[:document_id]
+          Rails.logger.info "request.base_url is #{request.base_url}"
         end
         @token = session['jwt']
         @loadOptions = loadOptions.to_json
