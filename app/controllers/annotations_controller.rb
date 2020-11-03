@@ -12,7 +12,9 @@ class AnnotationsController < ApplicationController
             :user =>        current_user.email,
             :context =>     'search'
         }
-        if params[:document_id]
+        if params[:anthology_id]
+          loadOptions[:uri] = request.base_url + '/anthology/' + params[:anthology_id] +  '/documents/' + params[:document_id]
+        elsif params[:document_id]
           loadOptions[:uri] = request.base_url + '/documents/' + params[:document_id]
           Rails.logger.info "request.base_url is #{request.base_url}"
         end
