@@ -53,7 +53,7 @@ AnnotationStudio::Application.routes.draw do
     get 'annotations', to: 'annotations#index'
     get 'annotations/:id', to: 'annotations#show'
     get 'documents/:document_id/annotations/field/:field', to: 'annotations#field'
-    get 'anthologies/:anthology_id/documents/:document_id/annotations/field/:field', to: 'annotations#field'
+    get 'anthologies/:anthology_id/documents/:document_id/annotations', to: 'annotations#index'
     get 'groups', to: 'groups#index'
     get 'groups/:id', to: 'groups#show'
   end
