@@ -64,7 +64,7 @@ purdue-staging.covecollective.org:
     firstname: 'urn:oid:2.5.4.42'
     lastname: 'urn:oid:2.5.4.4'
 purdue.covecollective.org:
-  site_name: COVE for Purdue
+  site_name: Purdue
   welcome_message: 'Welcome to COVE Studio for Purdue'
   welcome_blurb: 'Welcome to COVE Studio for Purdue'
   site_color: '#cfb991'
