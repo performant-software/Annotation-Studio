@@ -69,7 +69,7 @@ purdue.covecollective.org:
   welcome_blurb: 'Welcome to COVE Studio for Purdue'
   site_color: '#cfb991'
   home_banner: 'cove_home_banner.jpg'
-  brand: 'shared/cove_brand'
+  brand: 'shared/purdue_brand'
   saml_provider: 'purdue.edu'
   saml_metadata: '/saml/purdue_metadata.xml'
   saml_attributes:
