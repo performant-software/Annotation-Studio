@@ -51,7 +51,7 @@ bavs.covecollective.org:
   home_banner: 'bavs-banner.jpg'
   brand: 'shared/bavs_brand'
 purdue-staging.covecollective.org:
-  site_name: COVE Staging for Purdue
+  site_name: Purdue
   welcome_message: 'Welcome to COVE Studio for Purdue'
   welcome_blurb: 'Welcome to COVE Studio for Purdue'
   site_color: '#cfb991'
