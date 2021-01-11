@@ -71,10 +71,10 @@ class AnthologiesController < ApplicationController
                 if query == :edition
                   tags = Tag.where('name ILIKE ?', "%#{params[query]}%").pluck(:name)
                   @search_documents_count = Document.tagged_with(tags, any: true).count
-                  @documents = Document.tagged_with(tags, any: true)
+                  @documents = Document.tagged_with(tags, any: true).order("vetted DESC NULLS LAST")
                 elsif params.has_key?(query) && params[query].present?
                   @search_documents_count = Document.where("#{query} ILIKE ?", "%#{params[query]}%").count
-                  @documents = Document.where("#{query} ILIKE ?", "%#{params[query]}%")
+                  @documents = Document.where("#{query} ILIKE ?", "%#{params[query]}%").order("vetted DESC NULLS LAST")
                 end
               end
             end

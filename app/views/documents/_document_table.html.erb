@@ -21,11 +21,11 @@
           <%= link_to "Created", anthology_path(@anthology, order: "created_at", title: params[:title], author: params[:author], page: params[:page], docs: params[:docs]) %>
       <% end %>
     </th>
-    <% if %w[anthologies].include?(controller_name) %>
-      <th>Vetted</th>
-    <% end %>
     <% if %w[anthologies].exclude?(controller_name) and current_user.admin?%>
-      <th><%= ENV["CLASS_TERM_PLURAL"] %></th>
+    <th><%= ENV["CLASS_TERM_PLURAL"] %></th>
+    <% end %>
+    <% if %w[anthologies documents].include?(controller_name) %>
+      <th>Vetted</th>
     <% end %>
     <% if current_user.admin?%>
       <th>Status</th>
@@ -45,17 +45,21 @@
           <%= document.author %></td>
         <td>
           <%= document.created_at.strftime("%m/%d/%Y") %></td>
-        <% if %w[anthologies].include?(controller_name) %>
-          <td>
-            <%= document.vetted.present?.to_s.capitalize %>
-          </td>
-        <% end %>
         <% if %w[anthologies].exclude?(controller_name) and current_user.admin?%>
           <td>
             <% document.rep_group_list.each do |group| %>
             <span class="label label-info">
           <%= group %></span>
             <% end %></td>
+        <% end %>
+        <% if %w[anthologies documents].include?(controller_name) %>
+          <td>
+            <% if document.vetted.present? %>
+              <span class="glyphicon glyphicon-check" style="color:springgreen;">
+            <% else %>
+              <span class="glyphicon glyphicon-ban-circle" style="color:red;">
+            <% end %>
+          </td>
         <% end %>
         <% if current_user.admin? %>
           <td>
