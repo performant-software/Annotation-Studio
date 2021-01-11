@@ -1,0 +1,20 @@
+/* line 1, /Users/Work/Documents/Work/Repos/Annotation-Studio/app/assets/stylesheets/groups.css.scss */
+.user-highlight {
+  font-style: italic;
+}
+
+/* line 5, /Users/Work/Documents/Work/Repos/Annotation-Studio/app/assets/stylesheets/groups.css.scss */
+#annotation-list li {
+  margin: 0 8px;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* line 10, /Users/Work/Documents/Work/Repos/Annotation-Studio/app/assets/stylesheets/groups.css.scss */
+#annotation-list {
+  border: 1px solid #dddddd;
+  border-collapse: separate;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
