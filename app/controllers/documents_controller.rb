@@ -96,9 +96,9 @@ class DocumentsController < ApplicationController
         if params.has_key?(query) && params[query].present?
           if query == :edition
             tags = Tag.where('name ILIKE ?', "%#{params[query]}%").pluck(:name)
-            @documents = Document.tagged_with(tags, any: true)
+            @documents = Document.tagged_with(tags, any: true).order("vetted DESC NULLS LAST")
           elsif params.has_key?(query) && params[query].present?
-            @documents = Document.where("#{query} ILIKE ?", "%#{params[query]}%")
+            @documents = Document.where("#{query} ILIKE ?", "%#{params[query]}%").order("vetted DESC NULLS LAST")
           end
         end
       end

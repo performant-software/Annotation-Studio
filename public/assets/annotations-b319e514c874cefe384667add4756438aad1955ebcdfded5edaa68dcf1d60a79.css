@@ -1,0 +1,41 @@
+/* line 5, /Users/Work/Documents/Work/Repos/Annotation-Studio/app/assets/stylesheets/annotations.css.scss */
+.user-highlight {
+  font-style: italic;
+}
+
+/* line 9, /Users/Work/Documents/Work/Repos/Annotation-Studio/app/assets/stylesheets/annotations.css.scss */
+#annotation-list li {
+  margin: 0 8px;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* line 15, /Users/Work/Documents/Work/Repos/Annotation-Studio/app/assets/stylesheets/annotations.css.scss */
+#annotation-list {
+  border: 1px solid #dddddd;
+  border-collapse: separate;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+/* line 23, /Users/Work/Documents/Work/Repos/Annotation-Studio/app/assets/stylesheets/annotations.css.scss */
+.viewer_indicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  margin: 0px 15px 0px 5px;
+}
+
+/* line 31, /Users/Work/Documents/Work/Repos/Annotation-Studio/app/assets/stylesheets/annotations.css.scss */
+.annotator-item button.btn {
+  margin: 5px;
+  padding: 2px 5px;
+}
+
+/* line 35, /Users/Work/Documents/Work/Repos/Annotation-Studio/app/assets/stylesheets/annotations.css.scss */
+.annotator-item button.btn-default:focus {
+  background-color: #FFF;
+  outline: none;
+}

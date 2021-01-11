@@ -1,0 +1,63 @@
+/* line 1, /Users/Work/Documents/Work/Repos/Annotation-Studio/app/assets/stylesheets/catalog.css.scss */
+body#catalog {
+  padding: 10px;
+}
+
+/* line 5, /Users/Work/Documents/Work/Repos/Annotation-Studio/app/assets/stylesheets/catalog.css.scss */
+.catalog-container {
+  padding-left: 0;
+  padding-right: 0;
+}
+/* line 10, /Users/Work/Documents/Work/Repos/Annotation-Studio/app/assets/stylesheets/catalog.css.scss */
+.catalog-container .col-lg-8 {
+  padding-left: 0;
+  padding-right: 0;
+}
+/* line 15, /Users/Work/Documents/Work/Repos/Annotation-Studio/app/assets/stylesheets/catalog.css.scss */
+.catalog-container .form-horizontal .form-group {
+  margin-left: 0;
+  margin-right: 0;
+}
+/* line 20, /Users/Work/Documents/Work/Repos/Annotation-Studio/app/assets/stylesheets/catalog.css.scss */
+.catalog-container .browse-panel {
+  padding-top: 5px;
+  width: 30%;
+}
+/* line 24, /Users/Work/Documents/Work/Repos/Annotation-Studio/app/assets/stylesheets/catalog.css.scss */
+.catalog-container .browse-panel .list-group-item {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  font-size: 12px;
+}
+/* line 30, /Users/Work/Documents/Work/Repos/Annotation-Studio/app/assets/stylesheets/catalog.css.scss */
+.catalog-container .browse-panel .icon {
+  font-size: 10px;
+}
+/* line 35, /Users/Work/Documents/Work/Repos/Annotation-Studio/app/assets/stylesheets/catalog.css.scss */
+.catalog-container .results-panel {
+  padding-top: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 65%;
+  height: 490px !important;
+}
+/* line 44, /Users/Work/Documents/Work/Repos/Annotation-Studio/app/assets/stylesheets/catalog.css.scss */
+.catalog-container .scrollable {
+  overflow-y: scroll;
+}
+
+/* line 50, /Users/Work/Documents/Work/Repos/Annotation-Studio/app/assets/stylesheets/catalog.css.scss */
+.button-column {
+  white-space: nowrap;
+}
+
+/* line 54, /Users/Work/Documents/Work/Repos/Annotation-Studio/app/assets/stylesheets/catalog.css.scss */
+.same-line {
+  float: left;
+  margin-right: 10px;
+}
+
+/* line 59, /Users/Work/Documents/Work/Repos/Annotation-Studio/app/assets/stylesheets/catalog.css.scss */
+.next-line {
+  clear: both;
+}
