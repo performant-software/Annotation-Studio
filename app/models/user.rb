@@ -39,6 +39,10 @@ class User < ActiveRecord::Base
     self.has_role?(:admin) || self == document.user
   end
 
+  def has_csv_export_permissions?
+    [:teacher, :student].any? {|role| self.has_role?(role)}
+  end
+
   def self.all_tags()
     tags = User.rep_group_counts.map{|t| t.name}
     return tags.sort!

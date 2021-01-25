@@ -64,6 +64,8 @@
     <%= link_to "Preview", document_preview_path(@document), class: "btn btn-default btn-sm", role: "button" %>
     <p><strong>Download HTML</strong> of the document snapshot</p>
     <%= link_to "Download HTML", document_export_path(@document), class: "btn btn-default btn-sm", role: "button" %>
+  <% end %>
+  <% if @document.present? && current_user.has_document_permissions?(@document) || current_user.has_csv_export_permissions? %>
     <p><strong>Download CSV</strong> of the document snapshot</p>
     <% if params[:anthology_id].present? %>
         <%= link_to "Download CSV", "/anthologies/#{params[:anthology_id]}/documents/#{@document.slug}/annotations.csv", class: "btn btn-default btn-sm", role: "button" %>
