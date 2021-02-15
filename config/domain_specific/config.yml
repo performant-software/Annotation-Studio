@@ -106,13 +106,13 @@ nassr-staging.covecollective.org:
   site_name: NASSR Staging
   welcome_message: 'Welcome to COVE Studio for NASSR'
   welcome_blurb: 'Welcome to COVE Studio for NASSR'
-  site_color: '#283e24'
+  site_color: '#5f7457'
   home_banner: 'nassr_banner.jpg'
   brand: 'shared/nassr_brand'
 nassr.covecollective.org:
   site_name: NASSR
   welcome_message: 'Welcome to COVE Studio for NASSR'
   welcome_blurb: 'Welcome to COVE Studio for NASSR'
-  site_color: '#283e24'
+  site_color: '#5f7457'
   home_banner: 'nassr_banner.jpg'
   brand: 'shared/nassr_brand'
