@@ -67,7 +67,6 @@ var annotation_studio = {
       "groups": groups,
       "subgroups": subgroups,
       'user': user_select,
-      'currentUser': filter_user,
       'mode': 'user',
       'context': search_context,
       'uri': [location.protocol, '//', location.host, location.pathname].join(''),
