@@ -117,7 +117,7 @@ ActiveRecord::Schema.define(version: 20200903142800) do
     t.string   "rights_status",       limit: 255
     t.string   "slug",                limit: 255
     t.integer  "user_id"
-    t.date     "publication_date"
+    t.string   "publication_date"
     t.text     "chapters"
     t.string   "state",               limit: 255
     t.string   "upload_file_name",    limit: 255
