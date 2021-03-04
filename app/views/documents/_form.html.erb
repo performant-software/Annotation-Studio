@@ -1,5 +1,8 @@
           <%= form_for (@document), :html => { :role => 'form', class: "confirm-changes" } do |f| %>
-<%= render 'document_content', f: f %>
+
+            <% if [nil, "draft"].any? {|state| state == @document.state} %>
+              <%= render 'document_content', f: f %>
+            <% end %>
 
           	<h4>Metadata</h4>
 
