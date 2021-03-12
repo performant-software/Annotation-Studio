@@ -116,3 +116,17 @@ nassr.covecollective.org:
   site_color: '#5f7457'
   home_banner: 'nassr_banner.jpg'
   brand: 'shared/nassr_brand'
+ua-staging.covecollective.org:
+  site_name: University of Alabama Staging
+  welcome_message: 'Welcome to COVE Studio for the University of Alabama'
+  welcome_blurb: 'Welcome to COVE Studio for the University of Alabama'
+  site_color: '#9e1b32'
+  home_banner: 'alabama_banner.jpg'
+  brand: 'shared/alabama_brand'
+ua.covecollective.org:
+  site_name: University of Alabama
+  welcome_message: 'Welcome to COVE Studio for the University of Alabama'
+  welcome_blurb: 'Welcome to COVE Studio for the University of Alabama'
+  site_color: '#9e1b32'
+  home_banner: 'alabama_banner.jpg'
+  brand: 'shared/alabama_brand'
