@@ -140,7 +140,7 @@ uchicago-staging.covecollective.org:
 uchicago.covecollective.org:
   site_name: University of Chicago
   welcome_message: 'Welcome to COVE Studio for the University of Chicago'
-  welcome_blurb: 'Welcome to COVE Studio for the University of cCicago'
+  welcome_blurb: 'Welcome to COVE Studio for the University of Chicago'
   site_color: '#800000'
   home_banner: 'chicago_banner.jpg'
   brand: 'shared/chicago_brand'
