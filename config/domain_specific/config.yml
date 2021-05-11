@@ -110,6 +110,10 @@ ua-staging.covecollective.org:
   site_color: '#9e1b32'
   home_banner: 'alabama_banner.jpg'
   brand: 'shared/alabama_brand'
+  saml_attributes:
+    email: 'urn:oid:0.9.2342.19200300.100.1.3'
+    firstname: 'urn:oid:2.5.4.42'
+    lastname: 'urn:oid:2.5.4.4'
 ua.covecollective.org:
   site_name: University of Alabama
   welcome_message: 'Welcome to COVE Studio for the University of Alabama'
@@ -117,6 +121,10 @@ ua.covecollective.org:
   site_color: '#9e1b32'
   home_banner: 'alabama_banner.jpg'
   brand: 'shared/alabama_brand'
+  saml_attributes:
+    email: 'urn:oid:0.9.2342.19200300.100.1.3'
+    firstname: 'urn:oid:2.5.4.42'
+    lastname: 'urn:oid:2.5.4.4'
 uchicago-staging.covecollective.org:
   site_name: University of Chicago Staging
   welcome_message: 'Welcome to COVE Studio for the University of Chicago'
@@ -124,6 +132,10 @@ uchicago-staging.covecollective.org:
   site_color: '#800000'
   home_banner: 'chicago_banner.jpg'
   brand: 'shared/chicago_brand'
+  saml_attributes:
+    email: 'urn:oid:0.9.2342.19200300.100.1.3'
+    firstname: 'urn:oid:2.5.4.42'
+    lastname: 'urn:oid:2.5.4.4'
 uchicago.covecollective.org:
   site_name: University of Chicago
   welcome_message: 'Welcome to COVE Studio for the University of Chicago'
@@ -131,6 +143,10 @@ uchicago.covecollective.org:
   site_color: '#800000'
   home_banner: 'chicago_banner.jpg'
   brand: 'shared/chicago_brand'
+  saml_attributes:
+    email: 'urn:oid:0.9.2342.19200300.100.1.3'
+    firstname: 'urn:oid:2.5.4.42'
+    lastname: 'urn:oid:2.5.4.4'
 ryerson-staging.covecollective.org:
   site_name: Ryerson University Staging
   welcome_message: 'Welcome to COVE Studio for Ryerson University'
@@ -138,6 +154,10 @@ ryerson-staging.covecollective.org:
   site_color: '#00a9ef'
   home_banner: 'ryerson_banner.jpg'
   brand: 'shared/ryerson_brand'
+  saml_attributes:
+    email: 'urn:oid:0.9.2342.19200300.100.1.3'
+    firstname: 'urn:oid:2.5.4.42'
+    lastname: 'urn:oid:2.5.4.4'
 ryerson.covecollective.org:
   site_name: Ryerson University
   welcome_message: 'Welcome to COVE Studio for Ryerson University'
@@ -145,3 +165,7 @@ ryerson.covecollective.org:
   site_color: '#00a9ef'
   home_banner: 'ryerson_banner.jpg'
   brand: 'shared/ryerson_brand'
+  saml_attributes:
+    email: 'urn:oid:0.9.2342.19200300.100.1.3'
+    firstname: 'urn:oid:2.5.4.42'
+    lastname: 'urn:oid:2.5.4.4'
