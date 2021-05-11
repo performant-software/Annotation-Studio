@@ -103,3 +103,45 @@ nassr.covecollective.org:
   site_color: '#5f7457'
   home_banner: 'nassr_banner.jpg'
   brand: 'shared/nassr_brand'
+ua-staging.covecollective.org:
+  site_name: University of Alabama Staging
+  welcome_message: 'Welcome to COVE Studio for the University of Alabama'
+  welcome_blurb: 'Welcome to COVE Studio for the University of Alabama'
+  site_color: '#9e1b32'
+  home_banner: 'alabama_banner.jpg'
+  brand: 'shared/alabama_brand'
+ua.covecollective.org:
+  site_name: University of Alabama
+  welcome_message: 'Welcome to COVE Studio for the University of Alabama'
+  welcome_blurb: 'Welcome to COVE Studio for the University of Alabama'
+  site_color: '#9e1b32'
+  home_banner: 'alabama_banner.jpg'
+  brand: 'shared/alabama_brand'
+uchicago-staging.covecollective.org:
+  site_name: University of Chicago Staging
+  welcome_message: 'Welcome to COVE Studio for the University of Chicago'
+  welcome_blurb: 'Welcome to COVE Studio for the University of Chicago'
+  site_color: '#800000'
+  home_banner: 'chicago_banner.jpg'
+  brand: 'shared/chicago_brand'
+uchicago.covecollective.org:
+  site_name: University of Chicago
+  welcome_message: 'Welcome to COVE Studio for the University of Chicago'
+  welcome_blurb: 'Welcome to COVE Studio for the University of Chicago'
+  site_color: '#800000'
+  home_banner: 'chicago_banner.jpg'
+  brand: 'shared/chicago_brand'
+ryerson-staging.covecollective.org:
+  site_name: Ryerson University Staging
+  welcome_message: 'Welcome to COVE Studio for Ryerson University'
+  welcome_blurb: 'Welcome to COVE Studio for Ryerson University'
+  site_color: '#00a9ef'
+  home_banner: 'ryerson_banner.jpg'
+  brand: 'shared/ryerson_brand'
+ryerson.covecollective.org:
+  site_name: Ryerson University
+  welcome_message: 'Welcome to COVE Studio for Ryerson University'
+  welcome_blurb: 'Welcome to COVE Studio for Ryerson University'
+  site_color: '#00a9ef'
+  home_banner: 'ryerson_banner.jpg'
+  brand: 'shared/ryerson_brand'
