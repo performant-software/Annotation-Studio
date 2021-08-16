@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200903142800) do
+ActiveRecord::Schema.define(version: 20210816051651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -247,6 +247,7 @@ ActiveRecord::Schema.define(version: 20200903142800) do
     t.integer  "auth_allowed",                              default: [],    null: false, array: true
     t.string   "idp_sso_target_url"
     t.string   "idp_cert_fingerprint"
+    t.string   "google_analytics_code"
   end
 
   add_index "tenants", ["database_name"], name: "index_tenants_on_database_name", using: :btree

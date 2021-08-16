@@ -51,6 +51,7 @@ ActiveAdmin.register Tenant do
       f.input :idp_sso_target_url, as: :string, label: 'IDP SSO Target URL'
       f.input :auth_allowed, as: :check_boxes, multiple: true,
               collection: Tenant::AUTHORIZATION_METHODS.keys.map { |k| [I18n.t("authentication.#{k}"), Tenant::AUTHORIZATION_METHODS[k]] }
+      f.input :google_analytics_code, as: :string, label: 'Google Analytics code'
     end
     f.actions do
       f.action :submit,
