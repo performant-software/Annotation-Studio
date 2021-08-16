@@ -147,6 +147,9 @@
     "EXCEPTION_SENDER": {
       "required": true
     },
+    "GOOGLE_ANALYTICS_CODE": {
+     "required": false
+   },
     "GOOGLE_VERIFICATION_CODE": {
       "required": false
     },
