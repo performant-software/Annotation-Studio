@@ -78,7 +78,6 @@ development:
   ENVIRONMENT_TAG:                        Development
   GMAIL_PASS:                             gmail_password
   GMAIL_USER:                             gmail_username
-  GOOGLE_ANALYTICS_CODE:                  analytics_code
   GOOGLE_VERIFICATION_CODE:               verification_code
   UNICORN_BACKLOG:                        16
   scope:                                  google_api_stuff

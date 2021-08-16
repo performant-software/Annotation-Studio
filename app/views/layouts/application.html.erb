@@ -1,15 +1,16 @@
+<% google_analytics_code = Tenant.find_by(database_name: Apartment::Tenant.current_tenant)&.google_analytics_code %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=<%= ENV["GOOGLE_ANALYTICS_CODE"] %>"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=<%=google_analytics_code%>"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      gtag('config', '<%= ENV["GOOGLE_ANALYTICS_CODE"] %>');
+      gtag('config', '<%=google_analytics_code%>');
     </script>
     <meta charset="utf-8">
 
@@ -23,7 +24,7 @@
     <%= stylesheet_link_tag "application", :media => "all" %>
     <meta name="robots" content="noindex">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="google-site-verification" content="<%= ENV["GOOGLE_VERIFICATION_CODE"] %>" />
+    <meta name="google-site-verification" content="<%=google_analytics_code%>" />
     <link rel="shortcut icon" type="image/png" href="/<%= ENV["FAVICON"] %>" sizes="32x32" />
     <%= javascript_include_tag "application" %>
     <% if ENV["USE_TYPEKIT"] == true %>
