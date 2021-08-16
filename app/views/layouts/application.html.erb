@@ -1,4 +1,4 @@
-<% google_analytics_code = Tenant.find_by(database_name: Apartment::Tenant.current_tenant)&.google_analytics_code %>
+<% google_analytics_code = Tenant.find_by(database_name: Apartment::Tenant.current_tenant)&.google_analytics_code || ENV["GOOGLE_ANALYTICS_CODE"] %>
 
 <!DOCTYPE html>
 <html lang="en">
