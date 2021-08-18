@@ -195,7 +195,7 @@ ryerson.covecollective.org:
     firstname: 'urn:oid:2.5.4.42'
     lastname: 'urn:oid:2.5.4.4'
 colum-staging.covecollective.org:
-  site_name: Columbia College Chicago Staging
+  site_name: Columbia College Staging
   welcome_message: 'Welcome to COVE Studio for Columbia College Chicago'
   welcome_blurb: 'Welcome to COVE Studio for Columbia College Chicago'
   site_color: '#048194'
@@ -208,7 +208,7 @@ colum-staging.covecollective.org:
     firstname: 'urn:oid:2.5.4.42'
     lastname: 'urn:oid:2.5.4.4'
 colum.covecollective.org:
-  site_name: Columbia College Chicago
+  site_name: Columbia College
   welcome_message: 'Welcome to COVE Studio for Columbia College Chicago'
   welcome_blurb: 'Welcome to COVE Studio for Columbia College Chicago'
   site_color: '#048194'
