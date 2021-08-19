@@ -2,6 +2,8 @@ desc 'Copy all vetted documents from source tenant to destination tenant'
 task :copy_vetted_documents, [:source_tenant, :destination_tenant, :user_email]  => :environment do |t, args|
   args.with_defaults(:user_email => nil)
 
+  puts "Started at #{Time.now.strftime("%I:%M:%S")}"
+
   # declare arg variables
   source = args[:source_tenant]
   destination = args[:destination_tenant]
@@ -46,4 +48,6 @@ task :copy_vetted_documents, [:source_tenant, :destination_tenant, :user_email] 
 
   # switch back to starting tenant
   Apartment::Tenant.switch(starting_tenant)
+
+  puts "Done at #{Time.now.strftime("%I:%M:%S")}"
 end
