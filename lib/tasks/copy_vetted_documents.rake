@@ -27,8 +27,10 @@ task :copy_vetted_documents, [:source_tenant, :destination_tenant, :user_email] 
   copied_docs_count = 0
   skipped_doc_slugs = []
 
+  existing_slugs = Document.all.pluck(:slug)
+
   vetted_docs.each do |doc|
-    if Document.where(slug: doc.slug).present?
+    if existing_slugs.include?(doc.slug)
       skipped_doc_slugs << doc.slug
     else
       new_doc = doc.deep_dup
@@ -42,7 +44,7 @@ task :copy_vetted_documents, [:source_tenant, :destination_tenant, :user_email] 
   puts "Copied #{copied_docs_count} vetted documents from #{source} to #{destination}"
 
   if skipped_doc_slugs.present?
-    puts "Skipped the following documents:"
+    puts "Skipped the following #{skipped_doc_slugs.count} documents:"
     skipped_doc_slugs.each { |slug| puts "   #{slug}" }
   end
 
