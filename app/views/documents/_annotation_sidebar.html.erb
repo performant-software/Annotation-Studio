@@ -9,6 +9,7 @@ var groups = "<%= current_user.rep_group_list %>".split(/, /);
 var subgroups = "<%= current_user.rep_subgroup_list %>".split(/, /);
 var annotatorOptions = {'readOnly': <%= @document.archived? %>};
 var filter_user = "<%= current_user.email %>";
+var admin_filter_user = <%= current_user.admin? %>;
 var token = '<%= session["jwt"] %>';
 var annotation_username = "<%= current_user.first_name_last_initial %>";
 var sidebar_sort_editable = <%= current_user && current_user.has_document_permissions?(@document) %>;
