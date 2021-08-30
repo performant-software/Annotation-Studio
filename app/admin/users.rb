@@ -1,5 +1,5 @@
 ActiveAdmin.register User, :as => "Student" do
-  permit_params :firstname, :lastname, :affiliation, :email, :rep_group_list
+  permit_params :firstname, :lastname, :affiliation, :email, :rep_group_list, :password, :password_confirmation, :confirmed_at, :agreement, role_ids: []
 
   scope :all, :default => true
 
@@ -46,11 +46,13 @@ ActiveAdmin.register User, :as => "Student" do
 
   form do |f|
     f.inputs "Details" do
-      f.input :firstname, :as => :string
-      f.input :lastname, :as => :string
+      f.input :firstname, :label => "First name", :as => :string
+      f.input :lastname, :label => "Last name", :as => :string
       f.input :affiliation, :as => :string
       f.input :email, :as => :string
-      f.input :rep_group_list, 
+      f.input :password, :as => :password
+      f.input :password_confirmation, :as => :password
+      f.input :rep_group_list,
         :label => "Add this student to a class",
         input_html: {
         multiple: true,
@@ -62,6 +64,14 @@ ActiveAdmin.register User, :as => "Student" do
         value: f.object.rep_group_list.join(', '),
         class: 'tagselect'
       }
+    f.input :roles, as: "check_boxes"
+
+    f.label "User agreement and confirmation", class: "custom-label"
+    f.input :agreement, as: :boolean, label: "Accept terms of use"
+    f.input :confirmed_at, as: :boolean, label: "Confirm user", checked_value: f.object.confirmed_at.nil? ? DateTime.now : f.object.confirmed_at, unchecked_value: nil
+
+
+
 
     end
     f.actions do
@@ -84,6 +94,13 @@ ActiveAdmin.register User, :as => "Student" do
       respond_to do |format|
         format.json { render :json => @tags.collect{|t| {:id => t.name, :name => t.name }}}
       end
+    end
+    def update
+      model = :user
+      if params[model][:password].blank?
+        %w(password password_confirmation).each { |p| params[model].delete(p) }
+      end
+      super
     end
   end
 end
