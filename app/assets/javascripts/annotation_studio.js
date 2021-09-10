@@ -63,7 +63,7 @@ var annotation_studio = {
     });
     if(user_select){
     var settings = {
-      'limit': 1000,
+      'limit': admin_filter_user ? null : 1000,
       "groups": groups,
       "subgroups": subgroups,
       'user': user_select,
@@ -76,7 +76,7 @@ var annotation_studio = {
     };
     }else {
     var settings = {
-      'limit': 1000,
+      'limit': admin_filter_user ? null : 1000,
       "groups": groups,
       "subgroups": subgroups,
       'user': filter_user,
