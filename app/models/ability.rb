@@ -30,7 +30,7 @@ class Ability
     elsif user.has_role? :student
       cannot :manage, Document
       can [:read, :create], Document
-      can [:read, :update, :anthology_add], Document, { :user_id => user.id }
+      can [:read, :update, :anthology_add, :preview, :snapshot, :export], Document, { :user_id => user.id }
       cannot :manage, Anthology
       can :manage, Anthology, { :user_id => user.id }
       can [:read], Anthology
