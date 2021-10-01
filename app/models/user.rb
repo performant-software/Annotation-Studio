@@ -79,7 +79,7 @@ class User < ActiveRecord::Base
   private
 
   def self.find_for_external_authentication(auth)
-    user = User.where(email: auth.info.email).first_or_initialize do |u|
+    user = User.where(email: auth.info.email.downcase).first_or_initialize do |u|
       yield u, auth if block_given?
       u.agreement = true
       u.password = Devise.friendly_token[0,20]
