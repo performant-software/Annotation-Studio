@@ -221,7 +221,7 @@ colum.covecollective.org:
     firstname: 'urn:oid:2.5.4.42'
     lastname: 'urn:oid:2.5.4.4'
 unl-staging.covecollective.org:
-  site_name: University of Nebraska - Lincoln Staging
+  site_name: U of Nebraska-Lincoln Staging
   welcome_message: 'Welcome to COVE Studio for the University of Nebraska - Lincoln'
   welcome_blurb: 'Welcome to COVE Studio for the University of Nebraska - Lincoln'
   site_color: '#d00000'
@@ -234,7 +234,7 @@ unl-staging.covecollective.org:
     firstname: 'urn:oid:2.5.4.42'
     lastname: 'urn:oid:2.5.4.4'
 unl.covecollective.org:
-  site_name: University of Nebraska - Lincoln
+  site_name: U of Nebraska-Lincoln
   welcome_message: 'Welcome to COVE Studio for the University of Nebraska - Lincoln'
   welcome_blurb: 'Welcome to COVE Studio for the University of Nebraska - Lincoln'
   site_color: '#d00000'
