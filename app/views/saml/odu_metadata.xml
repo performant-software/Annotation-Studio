@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" entityID="https://odu.covecollective.org/sp/metadata" ID="COVE Studio">
+  <SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+    <KeyDescriptor use="signing">
+      <ds:KeyInfo>
+        <ds:X509Data>
+          <ds:X509Certificate>
+            MIIGRjCCBS6gAwIBAgIRAKXjfzBQH1pzkXS/Ol18z1YwDQYJKoZIhvcNAQELBQAw
+            gY8xCzAJBgNVBAYTAkdCMRswGQYDVQQIExJHcmVhdGVyIE1hbmNoZXN0ZXIxEDAO
+            BgNVBAcTB1NhbGZvcmQxGDAWBgNVBAoTD1NlY3RpZ28gTGltaXRlZDE3MDUGA1UE
+            AxMuU2VjdGlnbyBSU0EgRG9tYWluIFZhbGlkYXRpb24gU2VjdXJlIFNlcnZlciBD
+            QTAeFw0yMTA2MjMwMDAwMDBaFw0yMjA3MjQyMzU5NTlaMB8xHTAbBgNVBAMMFCou
+            Y292ZWNvbGxlY3RpdmUub3JnMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC
+            AQEA9av/rml/PyrdO5mpEtI0TBSI0/BIdQr36rsQ8iMb8X/YEFkoP1OynkY6e0Lm
+            W3+C/Nf0VkIUMXzCfuj9sYWm/1MhuDnbhEktk6ME7rggf5wInDFKNnSl9wbh9diA
+            FMvnHT65HVU/CxcET8Uasv01S4JN2u/7lACYx8F25i1SFRA/oBNlFx+Yz7tPZJC8
+            fjPARczDDEgsumGtsVxl0N+kqagyI1eAa17w3QU6Glx3B7z7Bae9swAMp2+yyJOA
+            ex8wjhCNbXK+4rnCSMmAuEfrPQXK8up/vw1SF3ILB5M6IdNUwvX5GirmI1A4WSFn
+            Vtts9+L2ThCIzYWN0Nf2FT7rPQIDAQABo4IDCjCCAwYwHwYDVR0jBBgwFoAUjYxe
+            xFStiuF36Zv5mwXhuAGNYeEwHQYDVR0OBBYEFLjPV6oIfGsctelrYHzKFa7SEkXA
+            MA4GA1UdDwEB/wQEAwIFoDAMBgNVHRMBAf8EAjAAMB0GA1UdJQQWMBQGCCsGAQUF
+            BwMBBggrBgEFBQcDAjBJBgNVHSAEQjBAMDQGCysGAQQBsjEBAgIHMCUwIwYIKwYB
+            BQUHAgEWF2h0dHBzOi8vc2VjdGlnby5jb20vQ1BTMAgGBmeBDAECATCBhAYIKwYB
+            BQUHAQEEeDB2ME8GCCsGAQUFBzAChkNodHRwOi8vY3J0LnNlY3RpZ28uY29tL1Nl
+            Y3RpZ29SU0FEb21haW5WYWxpZGF0aW9uU2VjdXJlU2VydmVyQ0EuY3J0MCMGCCsG
+            AQUFBzABhhdodHRwOi8vb2NzcC5zZWN0aWdvLmNvbTAzBgNVHREELDAqghQqLmNv
+            dmVjb2xsZWN0aXZlLm9yZ4ISY292ZWNvbGxlY3RpdmUub3JnMIIBfgYKKwYBBAHW
+            eQIEAgSCAW4EggFqAWgAdwBGpVXrdfqRIDC1oolp9PN9ESxBdL79SbiFq/L8cP5t
+            RwAAAXo49Is5AAAEAwBIMEYCIQD0aUD8c/7Zd6gdxPbfWWYX5vx1HOzyipf/4UMW
+            j1JVWQIhAMSnGm61pmHGbfZHseHswzvJDUZhSXvcdJuMLppSfNw2AHYAQcjKsd8i
+            RkoQxqE6CUKHXk4xixsD6+tLx2jwkGKWBvYAAAF6OPSLAgAABAMARzBFAiBzVQVo
+            YvDJmZGBOYgzg8BiOyEuzNQ3ip5yW/f1xkOlnAIhAL5jLtfq/ZSdUfVLoTzZiGd6
+            6uvHjSl753GRR+yQrQonAHUAKXm+8J45OSHwVnOfY6V35b5XfZxgCvj5TV0mXCVd
+            x4QAAAF6OPSK1QAABAMARjBEAiBEGfRc5bdAAQN0/DsNtrDvkttIqkeDU3NvFq51
+            zq6Y+QIgG84w572fbP5vcl5WQ8262oXKYuTuEQYNZGB98auNxfAwDQYJKoZIhvcN
+            AQELBQADggEBANHqk2IWwEkJGdxcsCnE5Mpij+VGcbF5Q9nNm9gLTS5IW3UCGXyL
+            39Ns5W9bwLC1KujSEXK5IPQ7K9OND30SZgyJ1YmuNH/GR0NX0LPKyE8eO69C4lfO
+            qTIsYAJrIXdMhBhrwpB9gjVf8zr4MCPi3brWswimDHCr6w4IL8U5ae76RNfWqa2O
+            I7l185Ealy2YSG5f9bMUY7lFlIZQUQx6OcqStIY3iAymjthLzMXUcLDZMWQ7FtQW
+            QEtsGYeDsHfNY1QY03EU9XhSCb1h6uPdNGM0ZF07khH3HTghVrQrhh/hdzX5lEfH
+            5rKhrwIUOsYFV+EEVgpQzSWlME6o7MNHg1o=
+          </ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </KeyDescriptor>
+    <KeyDescriptor use="encryption">
+      <ds:KeyInfo>
+        <ds:X509Data>
+          <ds:X509Certificate>
+            MIIGRjCCBS6gAwIBAgIRAKXjfzBQH1pzkXS/Ol18z1YwDQYJKoZIhvcNAQELBQAw
+            gY8xCzAJBgNVBAYTAkdCMRswGQYDVQQIExJHcmVhdGVyIE1hbmNoZXN0ZXIxEDAO
+            BgNVBAcTB1NhbGZvcmQxGDAWBgNVBAoTD1NlY3RpZ28gTGltaXRlZDE3MDUGA1UE
+            AxMuU2VjdGlnbyBSU0EgRG9tYWluIFZhbGlkYXRpb24gU2VjdXJlIFNlcnZlciBD
+            QTAeFw0yMTA2MjMwMDAwMDBaFw0yMjA3MjQyMzU5NTlaMB8xHTAbBgNVBAMMFCou
+            Y292ZWNvbGxlY3RpdmUub3JnMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC
+            AQEA9av/rml/PyrdO5mpEtI0TBSI0/BIdQr36rsQ8iMb8X/YEFkoP1OynkY6e0Lm
+            W3+C/Nf0VkIUMXzCfuj9sYWm/1MhuDnbhEktk6ME7rggf5wInDFKNnSl9wbh9diA
+            FMvnHT65HVU/CxcET8Uasv01S4JN2u/7lACYx8F25i1SFRA/oBNlFx+Yz7tPZJC8
+            fjPARczDDEgsumGtsVxl0N+kqagyI1eAa17w3QU6Glx3B7z7Bae9swAMp2+yyJOA
+            ex8wjhCNbXK+4rnCSMmAuEfrPQXK8up/vw1SF3ILB5M6IdNUwvX5GirmI1A4WSFn
+            Vtts9+L2ThCIzYWN0Nf2FT7rPQIDAQABo4IDCjCCAwYwHwYDVR0jBBgwFoAUjYxe
+            xFStiuF36Zv5mwXhuAGNYeEwHQYDVR0OBBYEFLjPV6oIfGsctelrYHzKFa7SEkXA
+            MA4GA1UdDwEB/wQEAwIFoDAMBgNVHRMBAf8EAjAAMB0GA1UdJQQWMBQGCCsGAQUF
+            BwMBBggrBgEFBQcDAjBJBgNVHSAEQjBAMDQGCysGAQQBsjEBAgIHMCUwIwYIKwYB
+            BQUHAgEWF2h0dHBzOi8vc2VjdGlnby5jb20vQ1BTMAgGBmeBDAECATCBhAYIKwYB
+            BQUHAQEEeDB2ME8GCCsGAQUFBzAChkNodHRwOi8vY3J0LnNlY3RpZ28uY29tL1Nl
+            Y3RpZ29SU0FEb21haW5WYWxpZGF0aW9uU2VjdXJlU2VydmVyQ0EuY3J0MCMGCCsG
+            AQUFBzABhhdodHRwOi8vb2NzcC5zZWN0aWdvLmNvbTAzBgNVHREELDAqghQqLmNv
+            dmVjb2xsZWN0aXZlLm9yZ4ISY292ZWNvbGxlY3RpdmUub3JnMIIBfgYKKwYBBAHW
+            eQIEAgSCAW4EggFqAWgAdwBGpVXrdfqRIDC1oolp9PN9ESxBdL79SbiFq/L8cP5t
+            RwAAAXo49Is5AAAEAwBIMEYCIQD0aUD8c/7Zd6gdxPbfWWYX5vx1HOzyipf/4UMW
+            j1JVWQIhAMSnGm61pmHGbfZHseHswzvJDUZhSXvcdJuMLppSfNw2AHYAQcjKsd8i
+            RkoQxqE6CUKHXk4xixsD6+tLx2jwkGKWBvYAAAF6OPSLAgAABAMARzBFAiBzVQVo
+            YvDJmZGBOYgzg8BiOyEuzNQ3ip5yW/f1xkOlnAIhAL5jLtfq/ZSdUfVLoTzZiGd6
+            6uvHjSl753GRR+yQrQonAHUAKXm+8J45OSHwVnOfY6V35b5XfZxgCvj5TV0mXCVd
+            x4QAAAF6OPSK1QAABAMARjBEAiBEGfRc5bdAAQN0/DsNtrDvkttIqkeDU3NvFq51
+            zq6Y+QIgG84w572fbP5vcl5WQ8262oXKYuTuEQYNZGB98auNxfAwDQYJKoZIhvcN
+            AQELBQADggEBANHqk2IWwEkJGdxcsCnE5Mpij+VGcbF5Q9nNm9gLTS5IW3UCGXyL
+            39Ns5W9bwLC1KujSEXK5IPQ7K9OND30SZgyJ1YmuNH/GR0NX0LPKyE8eO69C4lfO
+            qTIsYAJrIXdMhBhrwpB9gjVf8zr4MCPi3brWswimDHCr6w4IL8U5ae76RNfWqa2O
+            I7l185Ealy2YSG5f9bMUY7lFlIZQUQx6OcqStIY3iAymjthLzMXUcLDZMWQ7FtQW
+            QEtsGYeDsHfNY1QY03EU9XhSCb1h6uPdNGM0ZF07khH3HTghVrQrhh/hdzX5lEfH
+            5rKhrwIUOsYFV+EEVgpQzSWlME6o7MNHg1o=
+          </ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+      <EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#aes256-cbc"/>
+      <EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#aes128-cbc"/>
+      <EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc"/>
+    </KeyDescriptor>
+    <AssertionConsumerService index="1" isDefault="true" Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://unl.covecollective.org/users/auth/saml/callback"/>
+  </SPSSODescriptor>
+</EntityDescriptor>
