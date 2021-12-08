@@ -1,4 +1,6 @@
-<% google_analytics_code = Tenant.find_by(database_name: Apartment::Tenant.current_tenant)&.google_analytics_code || ENV["GOOGLE_ANALYTICS_CODE"] %>
+<% tenant = Tenant.find_by(database_name: Apartment::Tenant.current_tenant) %>
+<% google_analytics_code = tenant&.google_analytics_code || ENV["GOOGLE_ANALYTICS_CODE"] %>
+<% banner_color = tenant&.banner_color || '#000' %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +42,7 @@
 </head>
 <body id="<%= yield(:body_id) %>" class="<%= yield(:body_class) %>">
 
-    <nav class="navbar navbar-inverse navbar-fixed-top" id="navbar">
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="navbar" style="background-color: <%= banner_color %>;">
       <div class="container">
         <%= render "#{ $DOMAIN_CONFIG['brand'] }" %>
       </div>
