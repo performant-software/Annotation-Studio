@@ -88,6 +88,6 @@
       <EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#aes128-cbc"/>
       <EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc"/>
     </KeyDescriptor>
-    <AssertionConsumerService index="1" isDefault="true" Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://unl.covecollective.org/users/auth/saml/callback"/>
+    <AssertionConsumerService index="1" isDefault="true" Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://odu.covecollective.org/users/auth/saml/callback"/>
   </SPSSODescriptor>
 </EntityDescriptor>
