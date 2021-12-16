@@ -247,7 +247,7 @@ unl.covecollective.org:
     firstname: 'urn:oid:2.5.4.42'
     lastname: 'urn:oid:2.5.4.4'
 odu-staging.covecollective.org:
-  site_name: Old Dominion University - Staging
+  site_name: Old Dominion U - Staging
   welcome_message: 'Welcome to COVE Studio for Old Dominion University'
   welcome_blurb: 'Welcome to COVE Studio for Old Dominion University'
   site_color: '#ACAAB4'
@@ -260,7 +260,7 @@ odu-staging.covecollective.org:
     firstname: 'urn:oid:2.5.4.42'
     lastname: 'urn:oid:2.5.4.4'
 odu.covecollective.org:
-  site_name: Old Dominion University
+  site_name: Old Dominion U
   welcome_message: 'Welcome to COVE Studio for Old Dominion University'
   welcome_blurb: 'Welcome to COVE Studio for Old Dominion University'
   site_color: '#ACAAB4'
