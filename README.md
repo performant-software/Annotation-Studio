@@ -61,10 +61,42 @@ This app uses the [apartment gem](http://github.com/influitive/apartment) to all
 
 To create a new tenant:
 
-1. Log in via an AdminUser account to http://www.your-app-url.com/admin/
-1. Add a Tenant record, with the full hostname at which you want users to access the application, and the name of the database to be used to store the tenant's data
-1. Configure DNS for that domain (or subdomain), pointing it to the URL of the application
-1. Add the domain in question to the web server configuration for the application
+#### Requirements
+* Tenant banner image
+* Tenant accent color (hex code)
+
+#### Rails config
+* Upload banner image to  `app/assets/images/`
+* Create tenant metadata file in `app/views/saml/` (use an existing tenant  metadata file as a guide)
+* Create tenant brand file in `app/views/shared/` (use an existing tenant brand file as a guide)
+* Add entry for new tenant to `config/domain_specific/config.yml` (use an existing tenant entry as a guide)
+* Precompile assets:  `RAILS_ENV=production bundle exec rake assets:precompile && git add public/assets/ && git commit -m "Add precompiled assets"`
+
+#### Add Google Analytics code
+* Create property for new tenant at  **Admin > Create Property**, then create data stream for newly created tenant property
+	* Data stream platform: Web
+	* Note the created Measurement ID (“G-XXXXXXXX”) — this will be used when creating a tenant record in the admin dashboard
+
+#### Admin dashboard config
+* Add new tenant record to Tenants menu in admin dashboard at [ Annotation Studio Dashboard - Tenants](https://cove-studio.herokuapp.com/admin/tenants) (use existing tenant record as a guide)
+	* If setting up a staging site, admin dashboard is at [Annotation Studio Dashboard - Tenants (Staging)](https://cove-staging.herokuapp.com/admin/tenants)
+
+#### Add DNS listing to Heroku
+* **@jamiefolsom** typically creates a CNAME record for the new tenant; once this is done, add the new domain to the `cove-studio` app in Heroku under **Settings > Domains**
+
+
+
+#### Copy over vetted documents
+  * Run the `copy_vetted_documents` rake task through the Heroku CLI:
+	* `heroku run rake copy_vetted_documents[source-db,destination-db] -a cove-studio`
+  * `source-db` value is usually `cove-studio`
+
+#### Add initial user
+* Using rails console, create a new User for Dino Felluga (felluga@purdue.edu)
+* Be sure to switch over to new tenant database first (`Apartment::Tenant.switch(‘name-of-tenant-db`)
+* Add admin role to user (`User.find(1).set_roles = [“admin”]`)
+
+#### Deploy to production
 
 #### Caveats
 1. If a domain does not have a matching Tenant, the default "public" tenant will be used.
