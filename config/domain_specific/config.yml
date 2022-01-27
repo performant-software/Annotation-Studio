@@ -273,14 +273,14 @@ odu.covecollective.org:
     firstname: 'urn:oid:2.5.4.42'
     lastname: 'urn:oid:2.5.4.4'
 macerata-staging.covecollective.org:
-  site_name: Università di Macerata - Staging
+  site_name: U di Macerata - Staging
   welcome_message: 'Welcome to COVE Studio for Università di Macerata'
   welcome_blurb: 'Welcome to COVE Studio for Università di Macerata'
   site_color: '#957375'
   home_banner: 'macerata_banner.png'
   brand: 'shared/macerata_brand.html.erb'
 macerata.covecollective.org:
-  site_name: Università di Macerata
+  site_name: U di Macerata
   welcome_message: 'Welcome to COVE Studio for Università di Macerata'
   welcome_blurb: 'Welcome to COVE Studio for Università di Macerata'
   site_color: '#957375'
