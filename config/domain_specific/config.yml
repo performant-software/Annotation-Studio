@@ -313,13 +313,13 @@ psu-staging.covecollective.org:
   site_name: Penn State University - Staging
   welcome_message: 'Welcome to COVE Studio for Penn State'
   welcome_blurb: 'Welcome to COVE Studio for Penn State'
-  site_color: '#1e407c'
+  site_color: '#ffffff'
   home_banner: 'psu_banner.png'
   brand: 'shared/psu_brand'
 psu.covecollective.org:
   site_name: Penn State University
   welcome_message: 'Welcome to COVE Studio for Penn State'
   welcome_blurb: 'Welcome to COVE Studio for Penn State'
-  site_color: '#1e407c'
+  site_color: '#ffffff'
   home_banner: 'psu_banner.png'
   brand: 'shared/psu_brand'
