@@ -28,7 +28,7 @@ staging.covecollective.org:
   home_banner: 'cove_home_banner.jpg'
   brand: 'shared/cove_brand'
 navsaconference-staging.covecollective.org:
-  site_name: COVE Conferences - Staging
+  site_name: Event 2024 - Staging
   welcome_message: 'Welcome to COVE Conferences'
   welcome_blurb: 'COVE Studio is a web application that supports close reading and collaborative interpretation of online documents.'
   site_color: '#ffe77a'
@@ -36,7 +36,7 @@ navsaconference-staging.covecollective.org:
   home_banner: 'cove_conferences_banner.jpg'
   brand: 'shared/navsa_conference_brand'
 navsaconference.covecollective.org:
-  site_name: COVE Conferences
+  site_name: Event 2024
   welcome_message: 'Welcome to COVE Conferences'
   welcome_blurb: 'COVE Studio is a web application that supports close reading and collaborative interpretation of online documents.'
   site_color: '#ffe77a'
