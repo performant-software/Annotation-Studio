@@ -32,6 +32,7 @@ navsaconference-staging.covecollective.org:
   welcome_message: 'Welcome to COVE Conferences'
   welcome_blurb: 'COVE Studio is a web application that supports close reading and collaborative interpretation of online documents.'
   site_color: '#ffe77a'
+  banner_color: '#2C5F2D'
   home_banner: 'cove_conferences_banner.jpg'
   brand: 'shared/navsa_conference_brand'
 navsaconference.covecollective.org:
@@ -39,6 +40,7 @@ navsaconference.covecollective.org:
   welcome_message: 'Welcome to COVE Conferences'
   welcome_blurb: 'COVE Studio is a web application that supports close reading and collaborative interpretation of online documents.'
   site_color: '#ffe77a'
+  banner_color: '#2C5F2D'
   home_banner: 'cove_conferences_banner.jpg'
   brand: 'shared/navsa_conference_brand'
 bavs-staging.covecollective.org:
