@@ -27,11 +27,20 @@ staging.covecollective.org:
   site_color: '#279eb2'
   home_banner: 'cove_home_banner.jpg'
   brand: 'shared/cove_brand'
-navsaconference.covecollective.org:
-  site_name: COVE Conferences
+navsaconference-staging.covecollective.org:
+  site_name: Event 2024 - Staging
   welcome_message: 'Welcome to COVE Conferences'
   welcome_blurb: 'COVE Studio is a web application that supports close reading and collaborative interpretation of online documents.'
   site_color: '#ffe77a'
+  banner_color: '#2C5F2D'
+  home_banner: 'cove_conferences_banner.jpg'
+  brand: 'shared/navsa_conference_brand'
+navsaconference.covecollective.org:
+  site_name: Event 2024
+  welcome_message: 'Welcome to COVE Conferences'
+  welcome_blurb: 'COVE Studio is a web application that supports close reading and collaborative interpretation of online documents.'
+  site_color: '#ffe77a'
+  banner_color: '#2C5F2D'
   home_banner: 'cove_conferences_banner.jpg'
   brand: 'shared/navsa_conference_brand'
 bavs-staging.covecollective.org:
@@ -286,3 +295,31 @@ macerata.covecollective.org:
   site_color: '#957375'
   home_banner: 'macerata_banner.png'
   brand: 'shared/macerata_brand.html.erb'
+coastal-staging.covecollective.org:
+  site_name: Coastal Carolina University - Staging
+  welcome_message: 'Welcome to COVE Studio for Coastal Carolina University'
+  welcome_blurb: 'Welcome to COVE Studio for Coastal Carolina University'
+  site_color: '#006F71'
+  home_banner: 'coastal_banner.jpg'
+  brand: 'shared/coastal_brand'
+coastal.covecollective.org:
+  site_name: Coastal Carolina University
+  welcome_message: 'Welcome to COVE Studio for Coastal Carolina University'
+  welcome_blurb: 'Welcome to COVE Studio for Coastal Carolina University'
+  site_color: '#006F71'
+  home_banner: 'coastal_banner.jpg'
+  brand: 'shared/coastal_brand'
+psu-staging.covecollective.org:
+  site_name: Penn State University - Staging
+  welcome_message: 'Welcome to COVE Studio for Penn State'
+  welcome_blurb: 'Welcome to COVE Studio for Penn State'
+  site_color: '#ffffff'
+  home_banner: 'psu_banner.png'
+  brand: 'shared/psu_brand'
+psu.covecollective.org:
+  site_name: Penn State University
+  welcome_message: 'Welcome to COVE Studio for Penn State'
+  welcome_blurb: 'Welcome to COVE Studio for Penn State'
+  site_color: '#ffffff'
+  home_banner: 'psu_banner.png'
+  brand: 'shared/psu_brand'
