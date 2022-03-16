@@ -288,6 +288,11 @@ macerata-staging.covecollective.org:
   site_color: '#957375'
   home_banner: 'macerata_banner.png'
   brand: 'shared/macerata_brand.html.erb'
+  saml_metadata: '/saml/macerata_metadata.xml'
+  saml_attributes:
+    email: 'urn:oid:0.9.2342.19200300.100.1.3'
+    firstname: 'urn:oid:2.5.4.42'
+    lastname: 'urn:oid:2.5.4.4'
 macerata.covecollective.org:
   site_name: U di Macerata
   welcome_message: 'Welcome to COVE Studio for Università di Macerata'
@@ -295,6 +300,11 @@ macerata.covecollective.org:
   site_color: '#957375'
   home_banner: 'macerata_banner.png'
   brand: 'shared/macerata_brand.html.erb'
+  saml_metadata: '/saml/macerata_metadata.xml'
+  saml_attributes:
+    email: 'urn:oid:0.9.2342.19200300.100.1.3'
+    firstname: 'urn:oid:2.5.4.42'
+    lastname: 'urn:oid:2.5.4.4'
 coastal-staging.covecollective.org:
   site_name: Coastal Carolina University - Staging
   welcome_message: 'Welcome to COVE Studio for Coastal Carolina University'
@@ -302,6 +312,11 @@ coastal-staging.covecollective.org:
   site_color: '#006F71'
   home_banner: 'coastal_banner.jpg'
   brand: 'shared/coastal_brand'
+  saml_metadata: '/saml/coastal_metadata.xml'
+  saml_attributes:
+    email: 'urn:oid:0.9.2342.19200300.100.1.3'
+    firstname: 'urn:oid:2.5.4.42'
+    lastname: 'urn:oid:2.5.4.4'
 coastal.covecollective.org:
   site_name: Coastal Carolina University
   welcome_message: 'Welcome to COVE Studio for Coastal Carolina University'
@@ -309,6 +324,11 @@ coastal.covecollective.org:
   site_color: '#006F71'
   home_banner: 'coastal_banner.jpg'
   brand: 'shared/coastal_brand'
+  saml_metadata: '/saml/coastal_metadata.xml'
+  saml_attributes:
+    email: 'urn:oid:0.9.2342.19200300.100.1.3'
+    firstname: 'urn:oid:2.5.4.42'
+    lastname: 'urn:oid:2.5.4.4'
 psu-staging.covecollective.org:
   site_name: Penn State University - Staging
   welcome_message: 'Welcome to COVE Studio for Penn State'
@@ -316,6 +336,11 @@ psu-staging.covecollective.org:
   site_color: '#ffffff'
   home_banner: 'psu_banner.png'
   brand: 'shared/psu_brand'
+  saml_metadata: '/saml/psu_metadata.xml'
+  saml_attributes:
+    email: 'urn:oid:0.9.2342.19200300.100.1.3'
+    firstname: 'urn:oid:2.5.4.42'
+    lastname: 'urn:oid:2.5.4.4'
 psu.covecollective.org:
   site_name: Penn State University
   welcome_message: 'Welcome to COVE Studio for Penn State'
@@ -323,3 +348,8 @@ psu.covecollective.org:
   site_color: '#ffffff'
   home_banner: 'psu_banner.png'
   brand: 'shared/psu_brand'
+  saml_metadata: '/saml/psu_metadata.xml'
+  saml_attributes:
+    email: 'urn:oid:0.9.2342.19200300.100.1.3'
+    firstname: 'urn:oid:2.5.4.42'
+    lastname: 'urn:oid:2.5.4.4'
