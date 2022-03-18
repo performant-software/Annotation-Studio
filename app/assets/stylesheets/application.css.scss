@@ -151,7 +151,17 @@ img#neh-logo {
   }
 }
 
+#mobile-nav-toggle {
+  display: none !important;
+}
+
+#navbar-brand {
+  font-size: 1.5rem;
+}
+
 #globalnav {
+  float: right;
+
   img {
     margin-top: -8px;
     color: #ccc;
@@ -170,5 +180,53 @@ img#neh-logo {
   li.divider {
     margin-top: 12px;
     color: #fff;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  #globalnav .logo-list {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  #mobile-nav-toggle {
+    display: initial !important;
+  }
+
+  #globalnav .logo-list {
+    display: initial;
+  }
+
+  #globalnav .logo-list ul {
+    padding: 10px 0;
+  }
+
+  .dropdown-menu {
+    margin: 0 auto !important;
+    min-width: 50% !important;
+    text-align: center !important;
+    max-width: 100%;
+  }
+
+  .dropdown-menu li ul {
+    margin: 0 auto;
+  }
+
+  .dropdown-menu a {
+    text-align: center;
+  }
+
+  .dropdown-menu .well {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .dropdown-menu li a {
+    padding-left: 15px !important;
+  }
+
+  #globalnav {
+    float: none;
   }
 }
