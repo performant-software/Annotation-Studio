@@ -306,7 +306,7 @@ macerata.covecollective.org:
     firstname: 'urn:oid:2.5.4.42'
     lastname: 'urn:oid:2.5.4.4'
 coastal-staging.covecollective.org:
-  site_name: Coastal Carolina University - Staging
+  site_name: Coastal Carolina - Staging
   welcome_message: 'Welcome to COVE Studio for Coastal Carolina University'
   welcome_blurb: 'Welcome to COVE Studio for Coastal Carolina University'
   site_color: '#006F71'
@@ -318,7 +318,7 @@ coastal-staging.covecollective.org:
     firstname: 'urn:oid:2.5.4.42'
     lastname: 'urn:oid:2.5.4.4'
 coastal.covecollective.org:
-  site_name: Coastal Carolina University
+  site_name: Coastal Carolina
   welcome_message: 'Welcome to COVE Studio for Coastal Carolina University'
   welcome_blurb: 'Welcome to COVE Studio for Coastal Carolina University'
   site_color: '#006F71'
@@ -330,7 +330,7 @@ coastal.covecollective.org:
     firstname: 'urn:oid:2.5.4.42'
     lastname: 'urn:oid:2.5.4.4'
 psu-staging.covecollective.org:
-  site_name: Penn State University - Staging
+  site_name: Penn State - Staging
   welcome_message: 'Welcome to COVE Studio for Penn State'
   welcome_blurb: 'Welcome to COVE Studio for Penn State'
   site_color: '#ffffff'
@@ -342,7 +342,7 @@ psu-staging.covecollective.org:
     firstname: 'urn:oid:2.5.4.42'
     lastname: 'urn:oid:2.5.4.4'
 psu.covecollective.org:
-  site_name: Penn State University
+  site_name: Penn State
   welcome_message: 'Welcome to COVE Studio for Penn State'
   welcome_blurb: 'Welcome to COVE Studio for Penn State'
   site_color: '#ffffff'
