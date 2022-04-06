@@ -98,6 +98,33 @@ To create a new tenant:
 
 #### Deploy to production
 
+#### SAML integration
+
+You will need to integrate COVE with the new tenant's SAML system. There are certain requirements for the settings:
+
+* encryptAssertions should be set to false
+* X509 fingerprint (usually the client provides a full certificate - you can Google for a website that converts it to a fingerprint)
+* Attributes that need to be released by the client:
+  * email: 'urn:oid:0.9.2342.19200300.100.1.3'
+  * firstname: 'urn:oid:2.5.4.42'
+  * lastname: 'urn:oid:2.5.4.4'
+
+There will still be issues, because every school's system is just a little bit different.
+
+A common issue is that the school forgets to disable encryptAssertions - when there are login issues, always double-check for this first. A typical sign of encryptAssertions being set incorrectly is when the user seems to sign in successfully, but is kicked back to the homepage. If you watch the server logs, you'll see `Authentication failure! invalid_ticket: OneLogin::RubySaml::ValidationError, An EncryptedAssertion found and no SP private key found on the settings to decrypt it.`, confirming that the setting is incorrect on the tenant's end.
+
+If the school uses Microsoft Azure, releasing the correct attributes in a way that COVE understands is a bit counterintuitive. For each attribute, the `name` field should be the "urn:oid" identifier from above.
+
+The setup that Azure requires is:
+
+| Name                              | Source Attribute |
+| ---------                         | ---------------- |
+| urn:oid:2.5.4.42                  | user.givenname   |
+| urn:oid:2.5.4.4                   | user.surname     |
+| urn:oid:0.9.2342.19200300.100.1.3 | user.mail        |
+
+The "namespace" field on the names should be kept empty (there may be something there by default).
+
 #### Caveats
 1. If a domain does not have a matching Tenant, the default "public" tenant will be used.
 2. Admin users are shared across all tenants, and therefore shouldn't be created and granted to single-tenant users
