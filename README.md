@@ -113,6 +113,8 @@ There will still be issues, because every school's system is just a little bit d
 
 A common issue is that the school forgets to disable encryptAssertions - when there are login issues, always double-check for this first. A typical sign of encryptAssertions being set incorrectly is when the user seems to sign in successfully, but is kicked back to the homepage. If you watch the server logs, you'll see `Authentication failure! invalid_ticket: OneLogin::RubySaml::ValidationError, An EncryptedAssertion found and no SP private key found on the settings to decrypt it.`, confirming that the setting is incorrect on the tenant's end.
 
+#### Microsoft Azure
+
 If the school uses Microsoft Azure, releasing the correct attributes in a way that COVE understands is a bit counterintuitive. For each attribute, the `name` field should be the "urn:oid" identifier from above.
 
 The setup that Azure requires is:
@@ -124,6 +126,16 @@ The setup that Azure requires is:
 | urn:oid:0.9.2342.19200300.100.1.3 | user.mail        |
 
 The "namespace" field on the names should be kept empty (there may be something there by default).
+
+#### OpenAthens
+
+As of this writing, two COVE tenants use OpenAthens.
+
+OpenAthens requires a slightly different metadata file. In each of the two cases, the tenant had to do some special setup on their side.
+
+Take a look at `doc/openathens_example_metadata.xml` for an example - this tenant reached out to OpenAthens support after lots of back-and-forth with us, and they provided the tenant with this working metadata file.
+
+Especially note the `wantsAssertionsSigned="false"`. Turning off encrypted assertions tends to be a pain point for new tenants, and OpenAthens makes it especially challenging.
 
 #### Caveats
 1. If a domain does not have a matching Tenant, the default "public" tenant will be used.
