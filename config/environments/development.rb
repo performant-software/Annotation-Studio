@@ -50,11 +50,11 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default :charset => "utf-8"  
   config.action_mailer.smtp_settings =  {
-    :address  => "smtp.gmail.com",
-    :domain  => "mit.edu",
+    :address  => "smtp.postmarkapp.com",
+    :domain  => "covecollective.org",
     :port  => 587,
-    :user_name  => ENV['GMAIL_USER'],
-    :password  => ENV['GMAIL_PASS'],
+    :user_name  => ENV['POSTMARK_TOKEN'],
+    :password  => ENV['POSTMARK_TOKEN'],
     :authentication  => :plain,
     :enable_starttls_auto => true
   }

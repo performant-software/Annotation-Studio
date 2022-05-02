@@ -183,6 +183,12 @@ img#neh-logo {
   }
 }
 
+// Don't display the regular login/register stuff
+// on the page for accepting invites.
+.invitations-edit-navbar #globalnav {
+  display: none;
+}
+
 @media screen and (max-width: 1200px) {
   #globalnav .logo-list {
     display: none;

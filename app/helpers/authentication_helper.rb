@@ -65,7 +65,12 @@ module AuthenticationHelper
   end
 
   def build_omniauth_link(provider)
-    provider_label = $DOMAIN_CONFIG['oauth_provider'] || $DOMAIN_CONFIG['saml_provider'] || I18n.t(provider, scope: [:devise, :omniauth])
+    provider_label = case provider
+      when :wordpress_hosted then $DOMAIN_CONFIG['oauth_provider']
+      when :saml then $DOMAIN_CONFIG['saml_provider']
+      else I18n.t(provider, scope: [:devise, :omniauth])
+    end
+
     login_label = I18n.t 'authentication.login_in'
 
     protocol = Rails.env.production? ? 'https' : 'http'

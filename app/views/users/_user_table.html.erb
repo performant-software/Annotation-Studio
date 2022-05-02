@@ -4,6 +4,7 @@
     <th>First Name</th>
     <th>Last Name</th>
     <th>Email</th>
+    <th>Accepted Invite</th>
     <th>Actions</th>
   </tr>
   <% users.each do |user| %>
@@ -14,11 +15,17 @@
         <td><div class="<%= "user_of_#{user.id}"%>" ><%= check_box_tag 'user_ids[]',  user.id %></div></td>
       <% end %>
       <td>
-        <%= link_to user.firstname, user_path(user.id) %></td>
+        <%= user.firstname %></td>
       <td>
         <%= user.lastname %></td>
       <td>
         <%= user.email %></td>
+      <td>
+        <% if user.invitation_accepted_at %>
+          <span class="text-success">Yes</span>
+        <% elsif user.invitation_created_at %>
+          <span class="text-danger">No</span>
+        <% end %></td>
       <td class="button-column">
         <% if @anthology.present? &&  user.anthologies.include?(@anthology) && @anthologies.include?(@anthology) %>
           <%= link_to 'Remove from anthology',

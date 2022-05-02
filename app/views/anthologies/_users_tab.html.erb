@@ -15,9 +15,32 @@
         <%= search_field_tag :name, params[:name], placeholder: "Full Name", class: "form-control" %>
         <%= hidden_field_tag :tab , "users" %>
         <div class="input-group-btn">
-        <%= button_tag "Search", :class => 'btn btn-info',:name => nil %>
+          <%= button_tag "Search", :class => 'btn btn-info',:name => nil %>
         </div>
+        
     </div>
+    <% end %>
+
+    <% if can? :create, User %>
+
+        <div class="dropdown" id="csv-dropdown">
+          <button class="btn btn-primary dropdown-toggle" id="csv-upload-btn" data-toggle="dropdown">
+            Invite from CSV
+            <span class="caret"></span>
+          </button>
+          <div class="dropdown-menu list-inline" aria-labelled-by="csv-upload-btn">
+            <%= form_tag({:action => :csv_import, :controller => :users}, :multipart => true) do %>
+              <%= hidden_field_tag :anthology_id , anthology.id %>
+              <%= file_field_tag 'csv', class: 'btn btn-warning' %>
+              <span class="right-button">
+                <button class="btn btn-success csv-submit">
+                  <span class="glyphicon glyphicon-upload"></span>
+                  Submit
+                </button>
+              </span>
+            <% end %>
+          </div>
+        </div>
     <% end %>
   </div>
 </div>

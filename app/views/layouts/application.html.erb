@@ -43,7 +43,7 @@
 <body id="<%= yield(:body_id) %>" class="<%= yield(:body_class) %>">
 
     <nav class="navbar navbar-inverse navbar-fixed-top" id="navbar" style="background-color: <%= banner_color %>;">
-      <div class="container">
+      <div class="container <%= controller_name %>-<%= action_name %>-navbar">
         <%= render "#{ $DOMAIN_CONFIG['brand'] }" %>
       </div>
     </nav>

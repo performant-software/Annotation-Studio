@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable, :rememberable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :trackable, :validatable, :confirmable,
          :timeoutable, :omniauthable, :omniauth_providers => [:wordpress_hosted, :saml]
 
@@ -79,16 +79,21 @@ class User < ActiveRecord::Base
   private
 
   def self.find_for_external_authentication(auth)
-    user = User.where(email: auth.info.email.downcase).first_or_initialize do |u|
-      yield u, auth if block_given?
-      u.agreement = true
-      u.password = Devise.friendly_token[0,20]
-    end
+    user = User.where(email: auth.info.email.downcase).first_or_initialize
+
+    yield user, auth if block_given?
+    user.agreement = true
+    user.password = Devise.friendly_token[0,20]
 
     user.provider = auth.provider
     user.uid = auth.uid
 
     user.skip_confirmation! if user.new_record?
+
+    # Accept the invitation if this is a newly invited user
+    if user.invitation_token && !user.invitation_accepted_at
+      user.accept_invitation!
+    end
 
     if user.save
       user

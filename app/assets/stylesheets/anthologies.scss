@@ -25,3 +25,36 @@
   display: block;
   text-align: center;
 }
+
+#csv-dropdown {
+  display: inline-block;
+  margin-top: 8px;
+}
+
+#csv-dropdown .dropdown-menu {
+  padding: 5px;
+}
+
+#csv-dropdown .dropdown-menu .btn {
+  margin: 2px;
+}
+
+#csv-dropdown .right-button {
+  display: flex;
+  justify-content: right;
+}
+
+@media (max-width: 768px) {
+  #csv-dropdown {
+    width: 100%;
+    text-align: center;
+  }
+
+  #csv-dropdown div {
+    width: 100%;
+  }
+
+  #csv-dropdown input {
+    width: 100%;
+  }
+}
