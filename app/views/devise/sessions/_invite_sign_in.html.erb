@@ -1,0 +1,41 @@
+<ul class="list-group" id="omniauth-links">
+
+    <% tenant = Tenant.current_tenant %>
+
+    <% if allow_wordpress_oauth_authentication?(tenant) %>
+      <li class="list-group-item">
+        <%= build_omniauth_link(:wordpress_hosted) %>
+      </li>
+    <% end %>
+
+    <% if allow_saml_authentication?(tenant) %>
+      <li class="list-group-item">
+        <%= build_omniauth_link(:saml) %>
+      </li>
+    <% end %>
+
+    <% if allow_devise_authentication?(tenant) %>
+          <p><%= f.label 'First name' %><br />
+          <%= f.text_field :firstname, required: true %></p>
+
+          <p><%= f.label 'Last name' %><br />
+          <%= f.text_field :lastname, required: true %></p>
+
+          <p><%= f.label :password %><br />
+          <%= f.password_field :password %></p>
+
+          <p><%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation %></p>
+
+          <div class="checkbox">
+			      <label class='checkbox agreement'> <%= f.check_box :agreement %> I have read and accept the <%= link_to 'terms of service', page_path('terms') %></label>
+		      </div>
+
+          <p><%= f.submit t("devise.invitations.edit.submit_button") %></p>
+    <% end %>
+
+    <% if local_assigns[:footer].present? %>
+      <%= render footer %>
+    <% end %>
+
+	</ul>

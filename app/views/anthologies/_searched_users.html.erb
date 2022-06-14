@@ -23,6 +23,7 @@
                             <th>Full Name</th>
                             <th>Email</th>
                             <th>Actions</th>
+                            <th>Invitation</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,6 +36,13 @@
                                         <%= link_to 'Remove From Anthology', { action: :remove_user, controller: 'anthologies', anthology_id: anthology.id, user_id: user.id, name: @searched_name, email: @searched_email}, method: :post , :class => 'btn btn-danger btn-md' %>
                                     <% else  %>
                                         <%= link_to 'Assign To Anthology', { action: :add_user, controller: 'anthologies', anthology_id: anthology.id, user_id: user.id, name: @searched_name, email: @searched_email}, method: :post, :class => 'btn btn-primary btn-md' %>
+                                    <% end %>
+                                </td>
+                                <td>
+                                    <% if user.invitation_accepted_at || !user.invitation_created_at %>
+                                        <span class="text-success">Accepted</span>
+                                    <% else %>
+                                        <span class="text-warning">Pending</span>
                                     <% end %>
                                 </td>
                             </tr>

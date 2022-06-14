@@ -10,7 +10,7 @@ AnnotationStudio::Application.routes.draw do
   get 'public/:id' => 'public_documents#show'
   get 'review/:id' => 'public_documents#show'
 
-  devise_for :users, controllers: {registrations: 'registrations', omniauth_callbacks: 'omniauth_callbacks'}
+  devise_for :users, controllers: {registrations: 'registrations', omniauth_callbacks: 'omniauth_callbacks', invitations: 'users/invitations'}
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
@@ -56,6 +56,7 @@ AnnotationStudio::Application.routes.draw do
     get 'anthologies/:anthology_id/documents/:document_id/annotations', to: 'annotations#index'
     get 'groups', to: 'groups#index'
     get 'groups/:id', to: 'groups#show'
+    post 'users/csv_import', to: 'users#csv_import'
   end
 
   unauthenticated :user do

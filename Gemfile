@@ -10,6 +10,7 @@ gem "newrelic_rpm"#, "~> 3.5.7.59"
 
 gem 'aws-sdk-s3'
 gem 'devise', '~> 3.2'
+gem 'devise_invitable', '~> 1.6', '>= 1.6.1'
 gem "switch_user"
 gem 'cancancan', '~> 1.10'
 gem 'repertoire-groups', '0.0.1', :path => 'vendor/repertoire-groups-0.0.1' #, :require => 'repertoire-groups'
@@ -39,11 +40,10 @@ group :development do
 end
 
 group :assets do
-  gem "therubyracer", require: false
   gem 'coffee-rails' #, '~> 3.2.1'
   gem 'uglifier' #, '>= 1.0.3'
   gem 'underscore-rails'
-  gem 'backbone-on-rails'
+  # gem 'backbone-on-rails'   # This gem has been yanked.
   gem 'mustache'
 end
 
@@ -60,6 +60,7 @@ group :test, :development do
 end
 
 group :production do
+  # gem "therubyracer", require: false
   gem 'rails_12factor'
 end
 

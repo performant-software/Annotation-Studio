@@ -32,6 +32,72 @@ class UsersController < ApplicationController
     end
   end
 
+  def csv_import
+    successful = true
+    invited_users = []
+    anthology_id = params[:anthology_id]
+    message = "The new users have been added."
+
+    begin
+      Rails.logger.info "***"
+      Rails.logger.info "Ingesting CSV file"
+
+      # Standardize line endings so the parser doesn't complain
+      csv_string = File.read(params[:csv].path)
+      csv_normalized = csv_string.encode(csv_string.encoding, universal_newline: true).strip
+      users = CSV.parse(csv_normalized, :headers => true)
+
+      users.each do |user|
+        # Don't reinvite if there are duplicates in the CSV
+        unless invited_users.map{ |u| u.email}.include? user['email']
+          existing = User.find_by(email: user['email'])
+          
+          # Only reinvite existing users if they haven't accepted yet
+          unless existing && existing.invitation_accepted_at
+
+            new_user = User.invite!(
+              email: user['email'],
+              firstname: user['firstname'],
+              lastname: user['lastname'],
+              skip_invitation: true
+            )
+
+            invited_users.push(new_user)
+
+            Rails.logger.info "Queuing email invite to #{new_user.email}..."
+            Delayed::Job.enqueue SendInvitesJob.new(new_user.id, Apartment::Tenant.current_tenant)
+          end
+        end
+      end
+
+      if anthology_id.present?
+        anthology = Anthology.find(anthology_id)
+        for user in invited_users do
+          unless anthology.users.include? user
+            anthology.users << user
+            anthology.save
+          end
+        end
+      end
+    rescue CSV::MalformedCSVError, ArgumentError => e
+      successful = false
+      message = "CSV parsing error: #{e.message}"
+      Rails.logger.info "CSV parsing error: #{e.message}"
+    rescue => e
+      successful = false
+      message = "Missing or invalid CSV file."
+      Rails.logger.info "Encountered #{e.class} while ingesting CSV:\n#{e.message}"
+    end
+
+    path = anthology_id ? anthology_path(params[:anthology_id], :tab => 'users') : users_path
+
+    if successful
+      redirect_to path, notice: message
+    else
+      redirect_to path, flash: { error: message }
+    end
+  end
+
   def anthology_add
     successful = true
     users = []
