@@ -25,7 +25,7 @@
           <div class="tab-pane no-padding active" id="all">
             <% unless documents.blank? %>
               <%= form_tag(anthology_add_path(anthology: anthology.id), :method => "post") do %>
-                <%= render partial: 'documents/document_table', locals: { documents: documents } %>
+                <%= render partial: 'documents/document_table', locals: { documents: documents, tab_state: tab_state } %>
               <% end %>
             <% else %>
               <div class="container">
