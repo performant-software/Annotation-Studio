@@ -28,7 +28,7 @@ gem 'apartment', '1.2.0'
 gem 'net-ssh'
 gem 'select2-rails', '< 4.0'
 gem 'omniauth-oauth2', '1.3.1'
-gem 'omniauth-wordpress_hosted', github: 'jwickard/omniauth-wordpress-oauth2-plugin'
+gem 'omniauth-wordpress_hosted', git: 'https://github.com/jwickard/omniauth-wordpress-oauth2-plugin'
 gem 'omniauth-saml'
 
 group :development do
