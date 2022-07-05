@@ -130,7 +130,11 @@ class AnthologiesController < ApplicationController
       if @anthology.present? && @document.present? && @anthology.documents.delete(@document)
         @document.rep_group_list.remove(@anthology.slug)
         @document.save
-        format.html {redirect_to @anthology, notice: "The document #{@document.title} was successfully removed from this anthology"}
+        if params[:tab_state]['search_results']
+          format.html { redirect_to anthology_path(@anthology, title: params[:title], author: params[:author], page: params[:page], docs: 'search_results'), notice: "The document #{@document.title } was successfully removed from this anthology"}
+        else
+          format.html { redirect_to anthology_path(@anthology, title: params[:title], author: params[:author], docs: 'all'), notice: "The document #{@document.title } was successfully removed from this anthology"}
+        end
       else
         format.html { redirect_to anthologies_path, error: "There was a problem removing the document from this anthology" }
       end
