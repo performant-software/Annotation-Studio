@@ -14,11 +14,12 @@ class DocumentsController < ApplicationController
   def anthology_add
     successful = true
     documents = []
+    document_ids = params[:document_ids] || []
     begin
       anthology = Anthology.find(params[:anthology])
       Rails.logger.info "****"
       Rails.logger.info "anthology is #{anthology.inspect}"
-      params[:document_ids].each do |doc_id|
+      document_ids.each do |doc_id|
         doc = Document.find(doc_id)
         doc.rep_group_list.add(anthology.slug)
         doc.save
@@ -34,7 +35,9 @@ class DocumentsController < ApplicationController
     end
     respond_to do |format|
       if successful
-        if documents.count == 1
+        if documents.count == 0
+          format.html { redirect_to anthology_path(Anthology.find(params[:anthology]), title: params[:title], author: params[:author]), notice: "No documents selected for addition" }
+        elsif documents.count == 1
           docs_string = " #{documents.first}"
         elsif documents.count == 2
           docs_string = "s #{documents.first} and #{documents.last}"

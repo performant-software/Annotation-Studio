@@ -1,5 +1,13 @@
 <table class="table table-striped table-bordered">
+  <% if controller_name == 'anthologies' %>
+    <% if current_user.admin? || @anthology.user == current_user %>
+      <div class="doc-table-flex-row">
+        <%= submit_tag "Add selected", :class => 'btn btn-primary btn-sm add-selected-documents-btn' %>
+      </div>
+    <% end %>
+  <% end %>
   <tr>
+    <th>Select</th>
     <th>
       <% if %w[documents].include?(controller_name) %>
         <%= link_to "Title", documents_path( order: "title", docs: params[:docs], title: params[:title],author: params[:author], edition: params[:edition], anthology_id: params[:anthology_id] ) %>
@@ -34,6 +42,9 @@
   </tr>
   <% documents.each do |document| %>
     <tr>
+      <td class="button-column">
+        <%= check_box_tag 'document_ids[]', document.id, false, :class => 'document-checkbox' %>
+      </td>
       <td>
         <% if controller_name == 'anthologies' %>
           <%= link_to document.title, anthology_document_path(@anthology.friendly_id, document.friendly_id) %></td>
