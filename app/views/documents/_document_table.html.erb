@@ -2,12 +2,20 @@
   <% if controller_name == 'anthologies' %>
     <% if current_user.admin? || @anthology.user == current_user %>
       <div class="doc-table-flex-row">
-        <%= submit_tag "Add selected", :class => 'btn btn-primary btn-sm add-selected-documents-btn' %>
+        <% if tab_state['search_results'] %>
+          <%= hidden_field_tag 'page', params[:page] %>
+          <%= hidden_field_tag 'title', params[:title] %>
+          <%= hidden_field_tag 'author', params[:author] %>
+          <%= hidden_field_tag 'docs', params[:docs] %>
+          <%= submit_tag "Add selected", :class => 'btn btn-primary btn-sm add-selected-documents-btn' %>
+        <% end %>
       </div>
     <% end %>
   <% end %>
   <tr>
-    <th>Select</th>
+    <% if tab_state['search_results'] %>
+      <th>Select</th>
+    <% end %>
     <th>
       <% if %w[documents].include?(controller_name) %>
         <%= link_to "Title", documents_path( order: "title", docs: params[:docs], title: params[:title],author: params[:author], edition: params[:edition], anthology_id: params[:anthology_id] ) %>
@@ -42,9 +50,11 @@
   </tr>
   <% documents.each do |document| %>
     <tr>
-      <td class="button-column">
-        <%= check_box_tag 'document_ids[]', document.id, false, :class => 'document-checkbox' %>
-      </td>
+      <% if tab_state['search_results'] %>
+        <td class="button-column">
+          <%= check_box_tag 'document_ids[]', document.id, false, :class => 'document-checkbox' %>
+        </td>
+      <% end %>
       <td>
         <% if controller_name == 'anthologies' %>
           <%= link_to document.title, anthology_document_path(@anthology.friendly_id, document.friendly_id) %></td>
@@ -136,10 +146,10 @@
             <% if current_user.admin? || @anthology.user == current_user %>
               <% if document.anthologies.include?(@anthology)  %>
                 <%= link_to 'Remove from anthology',
-                            { action: :remove_doc, controller: 'anthologies', anthology_id: @anthology.id, document_id: document.id, title: params[:title], author: params[:author], page: params[:page], tab_state: tab_state }, method: :post, :class => 'btn btn-danger btn-sm' %>
+                  { action: :anthology_remove, controller: 'documents', anthology: @anthology.id, document_ids: [document.id], title: params[:title], author: params[:author], page: params[:page], tab_state: tab_state}, method: :post, :class => 'btn btn-danger btn-sm' %>
               <% else %>
                 <%= link_to 'Assign to Anthology',
-                            { action: :anthology_add, controller: 'documents', anthology: @anthology.id, document_ids: [document.id], title: params[:title], author: params[:author], page: params[:page]}, method: :post, :class => 'btn btn-primary btn-sm' %>
+                  { action: :anthology_add, controller: 'documents', anthology: @anthology.id, document_ids: [document.id], title: params[:title], author: params[:author], page: params[:page], tab_state: tab_state}, method: :post, :class => 'btn btn-primary btn-sm' %>
               <% end %>
             <% end %>
           <% end %>
