@@ -47,9 +47,13 @@
 .doc-table-flex-row {
   width: 100%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: 10px;
   padding: 10px;
+}
+
+#document-form-select-all {
+  justify-self: flex-start;
 }
 
 .document-checkbox {

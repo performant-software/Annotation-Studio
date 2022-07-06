@@ -24,8 +24,14 @@
         <div class="tab-content">
           <div class="tab-pane no-padding active" id="all">
             <% unless documents.blank? %>
-              <%= form_tag(anthology_add_path(anthology: anthology.id), :method => "post") do %>
-                <%= render partial: 'documents/document_table', locals: { documents: documents, tab_state: tab_state } %>
+              <% if tab_state['search_results'] %>
+                <%= form_tag(anthology_add_path(anthology: anthology.id), :method => "post") do %>
+                  <%= render partial: 'documents/document_table', locals: { documents: documents, tab_state: tab_state } %>
+                <% end %>
+              <% elsif tab_state['all'] %>
+                <%= form_tag(anthology_remove_path(anthology: anthology.id), :method => "post") do %>
+                  <%= render partial: 'documents/document_table', locals: { documents: documents, tab_state: tab_state } %>
+                <% end %>
               <% end %>
             <% else %>
               <div class="container">

@@ -2,18 +2,25 @@
   <% if controller_name == 'anthologies' %>
     <% if current_user.admin? || @anthology.user == current_user %>
       <div class="doc-table-flex-row">
+        <%= hidden_field_tag 'page', params[:page] %>
+        <%= hidden_field_tag 'title', params[:title] %>
+        <%= hidden_field_tag 'author', params[:author] %>
+        <%= hidden_field_tag 'docs', params[:docs] %>
+        <%= hidden_field_tag 'tab_state', params[:tab_state] %>
+        <div>
+          <button id='document-form-select-all' class='btn btn-primary btn-sm' type='button' onClick='selectAll()'>Select All</button>
+          <button id='document-form-select-all' class='btn btn-warning btn-sm' type='button' onClick='deselectAll()'>Deselect All</button>
+        </div>
         <% if tab_state['search_results'] %>
-          <%= hidden_field_tag 'page', params[:page] %>
-          <%= hidden_field_tag 'title', params[:title] %>
-          <%= hidden_field_tag 'author', params[:author] %>
-          <%= hidden_field_tag 'docs', params[:docs] %>
           <%= submit_tag "Add selected", :class => 'btn btn-primary btn-sm add-selected-documents-btn' %>
+        <% elsif tab_state['all'] %>
+          <%= submit_tag "Remove selected", :class => 'btn btn-danger btn-sm add-selected-documents-btn' %>
         <% end %>
       </div>
     <% end %>
   <% end %>
   <tr>
-    <% if tab_state['search_results'] %>
+    <% if current_user.admin? || @anthology.user == current_user %>
       <th>Select</th>
     <% end %>
     <th>
@@ -50,7 +57,7 @@
   </tr>
   <% documents.each do |document| %>
     <tr>
-      <% if tab_state['search_results'] %>
+      <% if current_user.admin? || @anthology.user == current_user %>
         <td class="button-column">
           <%= check_box_tag 'document_ids[]', document.id, false, :class => 'document-checkbox' %>
         </td>
@@ -166,4 +173,18 @@
       $(function () {
         $('[data-toggle="tooltip"]').tooltip();
       });
+
+      const selectAll = () => {
+        const boxes = document.getElementsByClassName('document-checkbox')
+        for (let x = 0; x < boxes.length; x++) {
+          boxes[x].checked = true
+        }
+      }
+
+      const deselectAll = () => {
+        const boxes = document.getElementsByClassName('document-checkbox')
+        for (let x = 0; x < boxes.length; x++) {
+          boxes[x].checked = false
+        }
+      }
     </script>
