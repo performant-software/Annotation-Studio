@@ -42,10 +42,23 @@ class UsersController < ApplicationController
       Rails.logger.info "***"
       Rails.logger.info "Ingesting CSV file"
 
+      if params[:csv].original_filename.split('.').last.to_s.downcase != 'csv'
+        raise Exceptions::CsvImportError.new('The uploaded file does not appear to be in CSV format. If you are using Excel or Numbers, make sure to export as a .csv file.')
+      end
+
       # Standardize line endings so the parser doesn't complain
       csv_string = File.read(params[:csv].path)
+
       csv_normalized = csv_string.encode(csv_string.encoding, universal_newline: true).strip
+
       users = CSV.parse(csv_normalized, :headers => true)
+
+      # Make sure all required fields are filled before sending any invites
+      users.each do |user|
+        unless user['email'] && user['firstname'] && user['lastname']
+          raise Exceptions::CsvImportError.new('Missing one or more required columns. Please make sure your CSV file contains columns named "email", "firstname", and "lastname," and that every user has a value in each column.')
+        end
+      end
 
       users.each do |user|
         # Don't reinvite if there are duplicates in the CSV
@@ -79,7 +92,7 @@ class UsersController < ApplicationController
           end
         end
       end
-    rescue CSV::MalformedCSVError, ArgumentError => e
+    rescue CSV::MalformedCSVError, ArgumentError, Exceptions::CsvImportError => e
       successful = false
       message = "CSV parsing error: #{e.message}"
       Rails.logger.info "CSV parsing error: #{e.message}"
