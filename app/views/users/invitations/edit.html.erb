@@ -5,7 +5,7 @@
 
   <%= f.hidden_field :invitation_token %>
 
-  <h3>Please set up your account below:</h3>
+  <h3>You have been invited to a COVE Studio anthology. Log in to accept.</h3>
 
   <%= render :partial => "/devise/sessions/invite_sign_in", :locals => {:f => f, :resource => resource} %>
 <% end %>
