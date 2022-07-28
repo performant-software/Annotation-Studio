@@ -36,7 +36,7 @@ class AnnotationsController < ApplicationController
             loadOptions[:field] = params[:field]
         end
         if params[:document_id]
-            loadOptions[:uri] = request.base_url + '/documents/' + params[:document_id]
+            loadOptions[:uri] = request.url.sub(/\/annotations\/field\/.*.json$/, '')
         end
         @token = session['jwt']
         @loadOptions = loadOptions.to_json
