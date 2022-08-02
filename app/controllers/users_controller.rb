@@ -66,8 +66,10 @@ class UsersController < ApplicationController
           existing = User.find_by(email: user['email'])
           
           # Only reinvite existing users if they haven't accepted yet
-          unless existing && existing.invitation_accepted_at
-
+          # Also don't invite users who made accounts before invitations existed
+          if existing && (existing.invitation_accepted_at || existing.sign_in_count > 0)
+            invited_users.push(existing)
+          else
             new_user = User.invite!(
               email: user['email'],
               firstname: user['firstname'],
