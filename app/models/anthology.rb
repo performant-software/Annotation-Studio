@@ -12,6 +12,7 @@ class Anthology < ActiveRecord::Base
   belongs_to :user
   friendly_id :name, use: :slugged
   belongs_to :user
+  acts_as_tagger
   attr_accessor :error_messages
 
   def check_content_type

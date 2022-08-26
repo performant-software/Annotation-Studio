@@ -11,12 +11,26 @@
           <button id='document-form-select-all' class='btn btn-primary btn-sm' type='button' onClick='selectAll()'>Select All</button>
           <button id='document-form-select-all' class='btn btn-warning btn-sm' type='button' onClick='deselectAll()'>Deselect All</button>
         </div>
-        <% if tab_state['search_results'] %>
-          <%= submit_tag "Add selected", :class => 'btn btn-primary btn-sm add-selected-documents-btn' %>
-        <% elsif tab_state['all'] %>
-          <%= submit_tag "Remove selected", :class => 'btn btn-danger btn-sm add-selected-documents-btn' %>
+        <% if @tab_state['search_results'] %>
+          <%= submit_tag "Add selected to anthology", :class => 'btn btn-primary btn-sm add-selected-documents-btn' %>
+        <% elsif @tab_state['all'] %>
+          <%= submit_tag "Remove selected from anthology", :class => 'btn btn-danger btn-sm add-selected-documents-btn' %>
+        <% elsif @tab_state['folders'] %>
+          <div class="input-group create-new-tag">
+            <%= text_field_tag :tag_name_new, "", :class => 'form-control', :placeholder => 'Add to new folder' %>
+            <%= submit_tag "Create and add", :class => 'btn btn-primary btn-sm add-selected-documents-btn' %>
+          </div>
+          <div class="input-group add-selected-tags">
+            <%= select_tag :tag_name_dropdown, options_for_select(@anthology.owned_tags.map { |tag| tag.name }), include_blank: true, :class => 'form-control' %>
+            <%= submit_tag "Add to folder", :class => 'btn btn-primary btn-sm add-selected-documents-btn' %>
+          </div>
         <% end %>
       </div>
+      <% if params[:folder] %>
+        <div class="doc-table-flex-row">
+          <p class='text-center'><%= "Showing \"#{params[:folder]}\" documents." %></p>
+        </div>
+      <% end %>
     <% end %>
   <% end %>
   <tr>
@@ -46,6 +60,9 @@
     </th>
     <% if %w[anthologies].exclude?(controller_name) and current_user.admin?%>
     <th><%= ENV["CLASS_TERM_PLURAL"] %></th>
+    <% end %>
+    <% if controller_name == 'anthologies' and @anthology.owned_tags.count > 0 %>
+      <th>Folders</th>
     <% end %>
     <% if %w[anthologies documents].include?(controller_name) %>
       <th>Vetted</th>
@@ -79,6 +96,20 @@
             <span class="label label-info">
           <%= group %></span>
             <% end %></td>
+        <% end %>
+        <% if controller_name == 'anthologies' and @anthology.owned_tags.count > 0 %>
+          <td>
+            <div class="doc-folder-cell-content">
+              <% document.owner_tags_on(@anthology, :rep_folder).each do |tag| %>
+                <span class="label label-info">
+                  <%= link_to tag, anthology_path(anthology: @anthology.id, folder: tag.name, docs: 'folders'), :class => 'white-color' %>
+                  <% if current_user.admin? || @anthology.user == current_user %>
+                    <%= link_to "X", anthology_tag_documents_path(anthology: @anthology.id, document_id: document.id, tag_to_remove: tag.name), method: :post %>
+                  <% end %>
+                </span>
+              <% end %>
+            </div>
+          </td>
         <% end %>
         <% if %w[anthologies documents].include?(controller_name) %>
           <td>

@@ -40,7 +40,7 @@ application/pdf
   friendly_id :title, use: [:slugged, :history, :finders]
 
   # acts_as_taggable_on :rep_group, :courses, :semesters, :genres, :categories
-  acts_as_taggable_on :rep_privacy, :rep_group
+  acts_as_taggable_on :rep_privacy, :rep_group, :rep_folder
 
   has_attached_file :upload
   validates_attachment_content_type :upload, content_type: ALLOWED_CONTENT_TYPES

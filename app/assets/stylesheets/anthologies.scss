@@ -74,6 +74,18 @@
   margin-bottom: 4px;
 }
 
+.doc-table-flex-row .input-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+  gap: 10px;
+}
+
+.doc-table-flex-row .input-group .form-control {
+  max-width: 200px;
+}
+
 @media (max-width: 768px) {
   #csv-dropdown {
     width: 100%;

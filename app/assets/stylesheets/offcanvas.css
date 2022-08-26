@@ -37,8 +37,20 @@
 }
 
 .label {
-  padding-left: 3px;
-  padding-right: 3px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.doc-folder-cell-content {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+	height: 100%;
+	width: 100%;
+}
+
+.white-color {
+	color: white;
 }
 
 /* Extra small */
