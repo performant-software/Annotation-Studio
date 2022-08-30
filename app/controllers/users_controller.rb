@@ -88,7 +88,15 @@ class UsersController < ApplicationController
       if anthology_id.present?
         anthology = Anthology.find(anthology_id)
         for user in invited_users do
-          unless anthology.users.include? user
+          unless user.rep_group_list.include?(anthology.slug)
+            user.rep_group_list.add(anthology.slug)
+
+            # fix validation error by checking agreement box
+            user.agreement = true
+
+            user.save
+          end
+          unless anthology.users.include?(user)
             anthology.users << user
             anthology.save
           end
