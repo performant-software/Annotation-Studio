@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  include ApplicationHelper
+
   before_filter :authenticate_user!
 
   def show
@@ -88,10 +90,7 @@ class UsersController < ApplicationController
       if anthology_id.present?
         anthology = Anthology.find(anthology_id)
         for user in invited_users do
-          unless anthology.users.include? user
-            anthology.users << user
-            anthology.save
-          end
+          add_user_to_anthology(user, anthology)
         end
       end
     rescue CSV::MalformedCSVError, ArgumentError, Exceptions::CsvImportError => e

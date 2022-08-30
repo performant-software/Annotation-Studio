@@ -1,4 +1,6 @@
 class AnthologiesController < ApplicationController
+  include ApplicationHelper
+
   before_filter :find_anthology, :only => [:show, :edit, :destroy]
   before_filter :authenticate_user!
 
@@ -149,9 +151,7 @@ class AnthologiesController < ApplicationController
       @searched_email = (params[:email] || [])
 
       if @anthology.present? && @user.present?
-        @anthology.users << @user
-        @user.rep_group_list.add(@anthology.slug)
-        @user.save
+        add_user_to_anthology(@user, @anthology)
         format.html {redirect_to anthology_path(@anthology, tab: "users", name: @searched_name, email: @searched_email), notice: "The user #{@user.email} was successfully added to this anthology"}
       else
         format.html { redirect_to anthologies_path(@anthology, tab: "users", name: @searched_name, email: @searched_email), error: "There was a problem adding the user to this anthology" }
