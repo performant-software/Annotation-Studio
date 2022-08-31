@@ -4,7 +4,9 @@ task :copy_vetted_documents, [:source_tenant, :destination_tenant, :user_email] 
   args.with_defaults(:destination_tenant => nil)
   args.with_defaults(:user_email => nil)
 
-  puts "Started at #{Time.now.strftime("%I:%M:%S")}"
+  log_string = ''
+
+  log_action(log_string, "Started at #{Time.now.strftime("%I:%M:%S")}")
 
   # declare arg variables
   starting_tenant = Apartment::Tenant.current
@@ -14,19 +16,28 @@ task :copy_vetted_documents, [:source_tenant, :destination_tenant, :user_email] 
   if !args[:destination_tenant]
     tenants = Apartment.tenant_names.select { |name| name != 'public-temp' }
     tenants.each do |tenant|
-      copy_to_tenant(args[:source_tenant], tenant, user_email)
+      copy_to_tenant(args[:source_tenant], tenant, user_email, log_string)
     end
   else
-    copy_to_tenant(args[:source_tenant], args[:destination_tenant], user_email)
+    copy_to_tenant(args[:source_tenant], args[:destination_tenant], user_email, log_string)
   end
 
   # switch back to starting tenant
   Apartment::Tenant.switch(starting_tenant)
   
-  puts "Done at #{Time.now.strftime("%I:%M:%S")}"
+  log_action(log_string, "Done at #{Time.now.strftime("%I:%M:%S")}")
+  
+  Delayed::Job.enqueue VettedDocumentsNotifierJob.new(log_string)
 end
 
-def copy_to_tenant(source, destination, user_email)
+# Messages will be logged to console and also put into a string for email alerts
+def log_action(log_string, message)
+  puts message
+  log_string << "\n"
+  log_string << message
+end
+
+def copy_to_tenant(source, destination, user_email, log_string)
   # switch to source tenant
   Apartment::Tenant.switch(source)
 
@@ -58,10 +69,10 @@ def copy_to_tenant(source, destination, user_email)
     end
   end
 
-  puts "Copied #{copied_docs_count} vetted documents from #{source} to #{destination}"
+  log_action(log_string, "Copied #{copied_docs_count} vetted documents from #{source} to #{destination}")
 
   if skipped_doc_slugs.present?
-    puts "Skipped the following #{skipped_doc_slugs.count} documents:"
-    skipped_doc_slugs.each { |slug| puts "   #{slug}" }
+    log_action(log_string, "Skipped the following #{skipped_doc_slugs.count} documents:")
+    skipped_doc_slugs.each { |slug| log_action(log_string, "   #{slug}") }
   end
 end
