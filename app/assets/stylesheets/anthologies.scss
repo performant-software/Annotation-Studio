@@ -102,6 +102,7 @@
   align-items: center;
   width: 200px;
   flex-direction: column;
+  line-height: 0.5rem;
 }
 
 .anthology-folder-list-container img {
@@ -113,6 +114,10 @@
 .selected-folder-link {
   background: rgba(0, 0, 0, 0.1);
   border-radius: 10px;
+}
+
+.folder-document-count {
+  font-size: 1.2rem;
 }
 
 @media (max-width: 768px) {
