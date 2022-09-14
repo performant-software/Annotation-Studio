@@ -17,8 +17,8 @@
           <%= submit_tag "Remove selected from anthology", :class => 'btn btn-danger btn-sm add-selected-documents-btn' %>
         <% elsif @tab_state['folders'] %>
           <div class="input-group create-new-tag">
-            <%= submit_tag "Create and add:", :class => 'btn btn-primary btn-sm add-selected-documents-btn' %>
-            <%= text_field_tag :tag_name_new, "", :class => 'form-control', :placeholder => 'Add to new folder' %>
+            <%= submit_tag "Create folder and add:", :class => 'btn btn-primary btn-sm add-selected-documents-btn' %>
+            <%= text_field_tag :tag_name_new, "", :class => 'form-control' %>
           </div>
           <div class="input-group add-selected-tags">
             <%= submit_tag "Add to existing folder:", :class => 'btn btn-primary btn-sm add-selected-documents-btn' %>
