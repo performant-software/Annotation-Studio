@@ -1,0 +1,8 @@
+<div class="anthology-folder-list-container">
+  <% @anthology.owned_tags.sort { |a, b| a.name <=> b.name }.each do |tag| %>
+    <%= link_to anthology_path(anthology: @anthology.id, folder: tag.name, docs: 'folders'), :class => "#{'selected-folder-link' if params[:folder] == tag.name}" do %>
+      <%= image_tag('folder-fill.svg') %>
+      <span><%= tag.name %></span>
+    <% end %>
+  <% end %>
+</div>
