@@ -179,7 +179,7 @@ class AnthologiesController < ApplicationController
 
       if params[:commit] == 'Add to existing folder:'
         tag_name = params[:tag_name_dropdown]
-      elsif params[:commit] == 'Create and add:'
+      elsif params[:commit] == 'Create folder and add:'
         tag_name = params[:tag_name_new]
       end
 
