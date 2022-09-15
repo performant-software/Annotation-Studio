@@ -52,6 +52,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 10px;
   padding: 10px;
 }
@@ -84,6 +85,41 @@
 
 .doc-table-flex-row .input-group .form-control {
   max-width: 200px;
+}
+
+.anthology-folder-list-container {
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  font-size: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.anthology-folder-list-container a {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  width: 200px;
+  flex-direction: column;
+  line-height: 0.5rem;
+}
+
+.anthology-folder-list-container img {
+  width: 64px !important;
+  height: 64px;
+  filter: invert(86%) sepia(8%) saturate(2518%) hue-rotate(162deg) brightness(92%) contrast(85%);
+}
+
+.selected-folder-link {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.folder-document-count {
+  font-size: 1.2rem;
+  color: black;
 }
 
 @media (max-width: 768px) {

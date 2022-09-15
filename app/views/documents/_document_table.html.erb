@@ -17,12 +17,12 @@
           <%= submit_tag "Remove selected from anthology", :class => 'btn btn-danger btn-sm add-selected-documents-btn' %>
         <% elsif @tab_state['folders'] %>
           <div class="input-group create-new-tag">
-            <%= text_field_tag :tag_name_new, "", :class => 'form-control', :placeholder => 'Add to new folder' %>
-            <%= submit_tag "Create and add", :class => 'btn btn-primary btn-sm add-selected-documents-btn' %>
+            <%= submit_tag "Create folder and add:", :class => 'btn btn-primary btn-sm add-selected-documents-btn' %>
+            <%= text_field_tag :tag_name_new, "", :class => 'form-control' %>
           </div>
           <div class="input-group add-selected-tags">
+            <%= submit_tag "Add to existing folder:", :class => 'btn btn-primary btn-sm add-selected-documents-btn' %>
             <%= select_tag :tag_name_dropdown, options_for_select(@anthology.owned_tags.map { |tag| tag.name }), include_blank: true, :class => 'form-control' %>
-            <%= submit_tag "Add to folder", :class => 'btn btn-primary btn-sm add-selected-documents-btn' %>
           </div>
         <% end %>
       </div>
@@ -61,7 +61,7 @@
     <% if %w[anthologies].exclude?(controller_name) and current_user.admin?%>
     <th><%= ENV["CLASS_TERM_PLURAL"] %></th>
     <% end %>
-    <% if controller_name == 'anthologies' and @anthology.owned_tags.count > 0 %>
+    <% if controller_name == 'anthologies' and @anthology.owned_tags.count > 0 and (!params[:folder] || current_user.admin? || @anthology.user == current_user) %>
       <th>Folders</th>
     <% end %>
     <% if %w[anthologies documents].include?(controller_name) %>
@@ -97,7 +97,7 @@
           <%= group %></span>
             <% end %></td>
         <% end %>
-        <% if controller_name == 'anthologies' and @anthology.owned_tags.count > 0 %>
+        <% if controller_name == 'anthologies' and @anthology.owned_tags.count > 0 and (!params[:folder] || current_user.admin? || @anthology.user == current_user) %>
           <td>
             <div class="doc-folder-cell-content">
               <% document.owner_tags_on(@anthology, :rep_folder).each do |tag| %>

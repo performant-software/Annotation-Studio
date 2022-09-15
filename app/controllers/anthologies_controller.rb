@@ -172,15 +172,14 @@ class AnthologiesController < ApplicationController
   end
 
   def tag_documents
-    puts params.inspect
     respond_to do |format|
       @anthology = Anthology.find(params[:anthology])
       tag_name = nil
       document_ids = params[:document_ids] || [params[:document_id]] || []
 
-      if params[:commit] == 'Add to folder'
+      if params[:commit] == 'Add to existing folder:'
         tag_name = params[:tag_name_dropdown]
-      elsif params[:commit] == 'Create and add'
+      elsif params[:commit] == 'Create and add:'
         tag_name = params[:tag_name_new]
       end
 

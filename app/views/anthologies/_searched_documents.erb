@@ -23,11 +23,13 @@
                 <span class='badge'><%= all_documents_count %></span> All
               <% end %>
             </li>
-            <li class="<%= tab_state['folders'] %>">
-              <%= link_to anthology_path( docs: 'folders', title: params[:title],author: params[:author], edition: params[:edition], id: anthology.friendly_id, tab: params[:tab] ), params do %>
-                <span class='badge'><%= @tag_count %></span> Folders
-              <% end %>
-            </li>
+            <% if @anthology.owned_tags.count > 0 || current_user.admin? %>
+              <li class="<%= tab_state['folders'] %>">
+                <%= link_to anthology_path( docs: 'folders', title: params[:title],author: params[:author], edition: params[:edition], id: anthology.friendly_id, tab: params[:tab] ), params do %>
+                  <span class='badge'><%= @tag_count %></span> Folders
+                <% end %>
+              </li>
+            <% end %>
           </ul>
         </div>
         <div class="tab-content">
@@ -42,8 +44,13 @@
                   <%= render partial: 'documents/document_table', locals: { documents: documents, tab_state: tab_state } %>
                 <% end %>
               <% elsif tab_state['folders'] %>
-                <%= form_tag(anthology_tag_documents_path(anthology: anthology.id), :method => "post") do %>
-                  <%= render partial: 'documents/document_table', locals: { documents: documents, tab_state: tab_state } %>
+                <% if @tag_count > 0 && @tab_state['folders'] %>
+                  <%= render partial: 'anthologies/folder_list', locals: { documents: documents, tab_state: tab_state } %>
+                <% end %>
+                <% if current_user.admin? || @anthology.user == current_user || params[:folder] %>
+                  <%= form_tag(anthology_tag_documents_path(anthology: anthology.id), :method => "post") do %>
+                    <%= render partial: 'documents/document_table', locals: { documents: documents, tab_state: tab_state } %>
+                  <% end %>
                 <% end %>
               <% end %>
             <% else %>
