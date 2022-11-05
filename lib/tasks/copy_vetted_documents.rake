@@ -35,7 +35,7 @@ task :copy_vetted_documents, [:source_tenant, :destination_tenant, :user_email, 
 
   log_action(log_string, "Done at #{Time.now.strftime("%I:%M:%S")}")
 
-  Delayed::Job.enqueue VettedDocumentsNotifierJob.new(log_string, dry_run)
+  send_email(log_string, dry_run)
 
 end
 
@@ -94,5 +94,19 @@ def copy_to_tenant(source, destination, user_email, log_string, dry_run)
       log_action(log_string, "Skipped the following #{skipped_doc_slugs.count} documents:")
     end
     skipped_doc_slugs.each { |slug| log_action(log_string, "   #{slug}") }
+  end
+end
+
+def send_email(log_string, dry_run)
+  emails = ENV['ADMINS_TO_NOTIFY'].split(',')
+  admins = AdminUser.where('email IN (?)', emails)
+
+  admins.each do |admin|
+    Rails.logger.info "emailing vetted documents logs to #{admin.email}..."
+    if dry_run === "true"
+      VettedDocumentsMailer.dry_run_notification(log_string, admin).deliver_now
+    else
+      VettedDocumentsMailer.import_notification(log_string, admin).deliver_now
+    end
   end
 end
