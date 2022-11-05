@@ -81,10 +81,18 @@ def copy_to_tenant(source, destination, user_email, log_string, dry_run)
     end
   end
 
-  log_action(log_string, "Copied #{copied_docs_count} vetted documents from #{source} to #{destination}")
+  if dry_run === "true"
+    log_action(log_string, "DRY RUN: #{copied_docs_count} vetted documents would have been copied from #{source} to #{destination}")
+  else
+    log_action(log_string, "Copied #{copied_docs_count} vetted documents from #{source} to #{destination}")
+  end
 
   if skipped_doc_slugs.present?
-    log_action(log_string, "Skipped the following #{skipped_doc_slugs.count} documents:")
+    if dry_run === "true"
+      log_action(log_string, "DRY RUN: The following #{skipped_doc_slugs.count} documents would have been skipped:")
+    else
+      log_action(log_string, "Skipped the following #{skipped_doc_slugs.count} documents:")
+    end
     skipped_doc_slugs.each { |slug| log_action(log_string, "   #{slug}") }
   end
 end
