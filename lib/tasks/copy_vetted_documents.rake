@@ -11,8 +11,8 @@ task :copy_vetted_documents, [:source_tenant, :destination_tenant, :user_email, 
   starting_tenant = Apartment::Tenant.current
   user_email = args[:user_email]
   dry_run = args[:dry_run] || ENV['VETTED_DOC_DRY_RUN'] || "false"
-  run_day = ENV['VETTED_DOC_RUN_DAY'].downcase || "sunday"
-  run_frequency = ENV['VETTED_DOC_RUN_FREQUENCY'].downcase || "weekly"
+  run_day = ENV['VETTED_DOC_RUN_DAY']&.downcase || "sunday"
+  run_frequency = ENV['VETTED_DOC_RUN_FREQUENCY']&.downcase || "weekly"
 
   if run_frequency === "weekly" && Time.now.utc.strftime("%A").downcase != run_day
     raise Exception.new "The selected run day is #{run_day.capitalize}, but it is currently #{Time.now.utc.strftime("%A")} (UTC). Task will exit."
