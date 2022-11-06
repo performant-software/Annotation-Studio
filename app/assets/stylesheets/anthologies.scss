@@ -101,7 +101,7 @@
   display: flex;
   gap: 6px;
   align-items: center;
-  width: 200px;
+  min-width: 75px;
   flex-direction: column;
   line-height: 0.5rem;
 }
