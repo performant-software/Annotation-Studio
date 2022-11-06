@@ -93,8 +93,8 @@
   display: flex;
   gap: 10px;
   font-size: 1.5rem;
-  flex-wrap: wrap;
-  justify-content: center;
+  height: 170px;
+  overflow-x: scroll;
 }
 
 .anthology-folder-list-container a {
@@ -120,6 +120,8 @@
 .folder-document-count {
   font-size: 1.2rem;
   color: black;
+  line-height: 1;
+  text-align: center;
 }
 
 @media (max-width: 768px) {
