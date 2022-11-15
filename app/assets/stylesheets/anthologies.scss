@@ -103,7 +103,13 @@
   align-items: center;
   min-width: 75px;
   flex-direction: column;
-  line-height: 0.5rem;
+  line-height: 1;
+  margin: 0 5px;
+}
+
+.anthology-folder-list-container a p {
+  text-align: center;
+  margin: 0;
 }
 
 .anthology-folder-list-container img {
