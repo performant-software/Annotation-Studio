@@ -460,7 +460,7 @@ wm.covecollective.org:
   site_name: William & Mary
   welcome_message: 'Welcome to COVE Studio for William & Mary'
   welcome_blurb: 'Welcome to COVE Studio for William & Mary'
-  site_color: '#115740'
+  site_color: '#ffffff'
   home_banner: 'wm_banner.jpg'
   brand: 'shared/wm_brand'
   saml_provider: 'wm.edu'
@@ -473,7 +473,7 @@ wm-staging.covecollective.org:
   site_name: William & Mary
   welcome_message: 'Welcome to COVE Studio for William & Mary'
   welcome_blurb: 'Welcome to COVE Studio for William & Mary'
-  site_color: '#115740'
+  site_color: '#ffffff'
   home_banner: 'wm_banner.jpg'
   brand: 'shared/wm_brand'
   saml_provider: 'okta.com'
@@ -486,7 +486,7 @@ baylor.covecollective.org:
   site_name: Baylor
   welcome_message: 'Welcome to COVE Studio for Baylor'
   welcome_blurb: 'Welcome to COVE Studio for Baylor'
-  site_color: '#154734'
+  site_color: '#FFB81C'
   home_banner: 'baylor_banner.png'
   brand: 'shared/baylor_brand'
   saml_provider: 'baylor.edu'
@@ -499,7 +499,7 @@ baylor-staging.covecollective.org:
   site_name: Baylor
   welcome_message: 'Welcome to COVE Studio for Baylor'
   welcome_blurb: 'Welcome to COVE Studio for Baylor'
-  site_color: '#154734'
+  site_color: '#FFB81C'
   home_banner: 'baylor_banner.png'
   brand: 'shared/baylor_brand'
   saml_provider: 'okta.com'
