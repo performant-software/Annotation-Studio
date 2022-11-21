@@ -62,14 +62,14 @@ def copy_to_tenant(source, destination, user_email, log_string, dry_run)
   # with the same slug,
   # preserve document slug, and
   # assign specified user OR default to User with id == 1
-  copied_docs_count = 0
-  skipped_doc_slugs = []
+  skipped_docs_count = 0
+  copied_doc_slugs = []
 
   existing_slugs = Document.all.pluck(:slug)
 
   vetted_docs.each do |doc|
     if existing_slugs.include?(doc.slug)
-      skipped_doc_slugs << doc.slug
+      skipped_docs_count += 1
     else
       if dry_run != "true"
         new_doc = doc.deep_dup
@@ -77,23 +77,23 @@ def copy_to_tenant(source, destination, user_email, log_string, dry_run)
         new_doc.user_id = user_email && User.find_by(email: user_email)&.id || 1
         new_doc.save
       end
-      copied_docs_count += 1
+      copied_doc_slugs << doc.slug
     end
   end
 
   if dry_run === "true"
-    log_action(log_string, "DRY RUN: #{copied_docs_count} vetted documents would have been copied from #{source} to #{destination}")
+    log_action(log_string, "DRY RUN: #{skipped_docs_count} vetted documents would have skipped being copied from #{source} to #{destination}")
   else
-    log_action(log_string, "Copied #{copied_docs_count} vetted documents from #{source} to #{destination}")
+    log_action(log_string, "Skipped copying #{skipped_docs_count} vetted documents from #{source} to #{destination}")
   end
 
-  if skipped_doc_slugs.present?
+  if copied_doc_slugs.present?
     if dry_run === "true"
-      log_action(log_string, "DRY RUN: The following #{skipped_doc_slugs.count} vetted documents would have skipped being copied from #{source} to #{destination}:")
+      log_action(log_string, "DRY RUN: The following #{copied_doc_slugs.count} vetted documents would have been copied from #{source} to #{destination}:")
     else
-      log_action(log_string, "Skipped copying the following #{skipped_doc_slugs.count} vetted documents from #{source} to #{destination}:")
+      log_action(log_string, "Copied the following #{copied_doc_slugs.count} vetted documents from #{source} to #{destination}:")
     end
-    skipped_doc_slugs.each { |slug| log_action(log_string, "   #{slug}") }
+    copied_doc_slugs.each { |slug| log_action(log_string, "   #{slug}") }
   end
 end
 
