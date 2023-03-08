@@ -29,6 +29,12 @@
             <span class="caret"></span>
           </button>
           <div class="dropdown-menu list-inline" aria-labelled-by="csv-upload-btn">
+            <div class="csv-invite-how-to">
+              <h5>How to use CSV imports:</h5>
+              <p>Programs like Canvas and Blackboard usually offer the ability to export your list of students to a CSV file.</p>
+              <p>In order to set up student accounts with the proper attributes, COVE Studio needs the following columns: <em>email</em>, <em>firstname</em>, and <em>lastname</em>. Column headers must conform exactly to these titles (all lower case) so your column headings may need to be edited if your CSV file was downloaded.</p>
+              <p>Use our <%= link_to("example file", asset_path("example.csv"), :target => "_new")%> as a guide.</p>
+            </div>
             <%= form_tag({:action => :csv_import, :controller => :users}, :multipart => true) do %>
               <%= hidden_field_tag :anthology_id , anthology.id %>
               <%= file_field_tag 'csv', class: 'btn btn-warning' %>

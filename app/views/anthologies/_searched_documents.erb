@@ -3,7 +3,11 @@
     <div class="col-md-12">
       <div class="panel panel-default" id="dashboard-documents">
         <div class="panel-heading">
-          <span class="panel-title">Documents</span>
+          <% if params[:folder] %>
+            <span class="panel-title">Folder: <%= params[:folder] %></span>
+          <% else %>
+            <span class="panel-title">Documents</span>
+          <% end %>
           <br/>
           <span class="panel-title" style="font-style: italic; font-size: 15px ">Click on Title, Author, Created to sort</span>
           <ul class="nav nav-tabs nav-tabs-xs pull-right" id="document-tabs" role="tablist">
@@ -19,13 +23,35 @@
                 <span class='badge'><%= all_documents_count %></span> All
               <% end %>
             </li>
+            <% if @anthology.user == current_user || @anthology.owned_tags.count > 0 || current_user.admin? %>
+              <li class="<%= tab_state['folders'] %>">
+                <%= link_to anthology_path( docs: 'folders', title: params[:title],author: params[:author], edition: params[:edition], id: anthology.friendly_id, tab: params[:tab] ), params do %>
+                  <span class='badge'><%= @tag_count %></span> Folders
+                <% end %>
+              </li>
+            <% end %>
           </ul>
         </div>
         <div class="tab-content">
           <div class="tab-pane no-padding active" id="all">
             <% unless documents.blank? %>
-              <%= form_tag(anthology_add_path(anthology: anthology.id), :method => "post") do %>
-                <%= render partial: 'documents/document_table', locals: { documents: documents } %>
+              <% if tab_state['search_results'] %>
+                <%= form_tag(anthology_add_path(anthology: anthology.id), :method => "post") do %>
+                  <%= render partial: 'documents/document_table', locals: { documents: documents, tab_state: tab_state } %>
+                <% end %>
+              <% elsif tab_state['all'] %>
+                <%= form_tag(anthology_remove_path(anthology: anthology.id), :method => "post") do %>
+                  <%= render partial: 'documents/document_table', locals: { documents: documents, tab_state: tab_state } %>
+                <% end %>
+              <% elsif tab_state['folders'] %>
+                <% if @tag_count > 0 && @tab_state['folders'] %>
+                  <%= render partial: 'anthologies/folder_list', locals: { documents: documents, tab_state: tab_state } %>
+                <% end %>
+                <% if current_user.admin? || @anthology.user == current_user || params[:folder] %>
+                  <%= form_tag(anthology_tag_documents_path(anthology: anthology.id), :method => "post") do %>
+                    <%= render partial: 'documents/document_table', locals: { documents: documents, tab_state: tab_state } %>
+                  <% end %>
+                <% end %>
               <% end %>
             <% else %>
               <div class="container">

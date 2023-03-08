@@ -1,4 +1,6 @@
 class AnthologiesController < ApplicationController
+  include ApplicationHelper
+
   before_filter :find_anthology, :only => [:show, :edit, :destroy]
   before_filter :authenticate_user!
 
@@ -15,6 +17,8 @@ class AnthologiesController < ApplicationController
     document_set = 'all'
     @tab_state = { document_set => 'active' }
     @current_tab = params[:tab]
+    @tag_count = @anthology.owned_tags.count
+    @folder = params[:folder]
     if @current_tab == 'users' && (can? :update, Anthology)
       Rails.logger.info "******** We are in users tab"
       if !params[:docs].present? && !params[:email] && !params[:name] || params[:docs] == "all"
@@ -50,10 +54,12 @@ class AnthologiesController < ApplicationController
       end
     else
       Rails.logger.info "******** We are in documents tab"
-      if !params[:docs].present? && !params[:author] && !params[:edition] && !params[:title] || ( params[:docs] == "all" )
-        @tab_state = { 'all' => 'active' }
+      if !params[:docs].present? && !params[:author] && !params[:edition] && !params[:title] || ( params[:docs] == "all" || params[:docs] == "folders" )
+        @tab_state = { params[:docs] || 'all' => 'active' }
         @docs = "all"
-        if params[:order].present? && ["title", "author", "created_at"].include?(params[:order])
+        if params[:docs] == "folders" && @folder
+          @documents = Document.tagged_with(@folder, :on => :rep_folder, :owned_by => @anthology).order(created_at: :desc).paginate(:page => @page, :per_page =>10 )
+        elsif params[:order].present? && ["title", "author", "created_at"].include?(params[:order])
           if params[:order] == "created_at"
             @documents = @anthology.documents.order(created_at: :desc).paginate(:page => @page, :per_page =>10 )
           else
@@ -120,23 +126,6 @@ class AnthologiesController < ApplicationController
 
   end
 
-  def remove_doc
-    respond_to do |format|
-      @anthology = Anthology.find(params[:anthology_id])
-      Rails.logger.info "**** entering remove doc"
-      @document = Document.find(params[:document_id])
-      Rails.logger.info "The doc is #{@document.inspect}"
-
-      if @anthology.present? && @document.present? && @anthology.documents.delete(@document)
-        @document.rep_group_list.remove(@anthology.slug)
-        @document.save
-        format.html {redirect_to @anthology, notice: "The document #{@document.title} was successfully removed from this anthology"}
-      else
-        format.html { redirect_to anthologies_path, error: "There was a problem removing the document from this anthology" }
-      end
-    end
-  end
-
   def remove_user
     respond_to do |format|
       @anthology = Anthology.find(params[:anthology_id])
@@ -166,9 +155,7 @@ class AnthologiesController < ApplicationController
       @searched_email = (params[:email] || [])
 
       if @anthology.present? && @user.present?
-        @anthology.users << @user
-        @user.rep_group_list.add(@anthology.slug)
-        @user.save
+        add_user_to_anthology(@user, @anthology)
         format.html {redirect_to anthology_path(@anthology, tab: "users", name: @searched_name, email: @searched_email), notice: "The user #{@user.email} was successfully added to this anthology"}
       else
         format.html { redirect_to anthologies_path(@anthology, tab: "users", name: @searched_name, email: @searched_email), error: "There was a problem adding the user to this anthology" }
@@ -182,6 +169,51 @@ class AnthologiesController < ApplicationController
 
   def edit
 
+  end
+
+  def tag_documents
+    respond_to do |format|
+      @anthology = Anthology.find(params[:anthology])
+      tag_name = nil
+      document_ids = params[:document_ids] || [params[:document_id]] || []
+
+      if params[:commit] == 'Add to existing folder:'
+        tag_name = params[:tag_name_dropdown]
+      elsif params[:commit] == 'Create folder and add:'
+        tag_name = params[:tag_name_new]
+      end
+
+      if params[:tag_to_remove]
+        # Remove tag from document
+        document = Document.find(document_ids[0])
+        existing_tags = document.owner_tags_on(@anthology, :rep_folder).to_a
+        new_tags = existing_tags.select { |tag| tag.name != params[:tag_to_remove] }
+        @anthology.tag(document, :with => new_tags.join(','), parse: true, :on => :rep_folder)
+        document.save
+
+        format.html { redirect_to anthology_path(@anthology, tab: "documents", docs: "folders"), notice: "You removed \"#{document.title}\" from the \"#{params[:tag_to_remove]}\" folder" }
+      else
+        # Add tag to document(s)
+        if !tag_name || tag_name.length == 0 || document_ids.count == 0
+          format.html { redirect_to anthology_path(@anthology, tab: "documents", docs: "folders"), alert: "There was a problem categorizing the documents." }
+        end
+  
+        document_titles = []
+  
+        document_ids.each do |doc_id|
+          document = Document.find(doc_id)
+          existing_tags = document.owner_tags_on(@anthology, :rep_folder)
+          new_tags = existing_tags + [tag_name]
+  
+          @anthology.tag(document, :with => new_tags.join(','), parse: true, :on => :rep_folder)
+          document.save
+  
+          document_titles << document.title
+        end
+  
+        format.html { redirect_to anthology_path(@anthology, tab: "documents", docs: "folders"), notice: "You added the following document(s) to the \"#{tag_name}\" folder: #{document_titles.join(' ')}" }
+      end
+    end
   end
 
   def destroy

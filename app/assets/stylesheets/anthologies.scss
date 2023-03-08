@@ -20,6 +20,10 @@
   margin-top: 20px;
 }
 
+.csv-invite-how-to {
+  margin: 0 6px;
+}
+
 #documents td .glyphicon {
   font-size: 18px;
   display: block;
@@ -42,6 +46,89 @@
 #csv-dropdown .right-button {
   display: flex;
   justify-content: right;
+}
+
+.doc-table-flex-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+}
+
+#document-form-select-all {
+  justify-self: flex-start;
+}
+
+.document-checkbox {
+  height: 26px;
+  width: 26px;
+}
+
+.document-checkbox:hover {
+  cursor: pointer;
+}
+
+.add-selected-documents-btn {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.doc-table-flex-row .input-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+  gap: 10px;
+}
+
+.doc-table-flex-row .input-group .form-control {
+  max-width: 200px;
+}
+
+.anthology-folder-list-container {
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  font-size: 1.5rem;
+  height: 170px;
+  overflow-x: scroll;
+}
+
+.anthology-folder-list-container a {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  min-width: 75px;
+  max-width: 100px;
+  flex-direction: column;
+  line-height: 1;
+  margin: 0 5px;
+}
+
+.anthology-folder-list-container a p {
+  text-align: center;
+  margin: 0;
+}
+
+.anthology-folder-list-container img {
+  width: 64px !important;
+  height: 64px;
+  filter: invert(86%) sepia(8%) saturate(2518%) hue-rotate(162deg) brightness(92%) contrast(85%);
+}
+
+.selected-folder-link {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.folder-document-count {
+  font-size: 1.2rem;
+  color: black;
+  line-height: 1;
+  text-align: center;
 }
 
 @media (max-width: 768px) {

@@ -58,4 +58,19 @@ module ApplicationHelper
     end
     false
   end
+
+  def add_user_to_anthology(user, anth)
+    unless user.rep_group_list.include?(anth.slug)
+      user.rep_group_list.add(anth.slug)
+
+      # fix validation error by checking agreement box
+      user.agreement = true
+
+      user.save
+    end
+    unless anth.users.include?(user)
+      anth.users << user
+      anth.save
+    end
+  end
 end

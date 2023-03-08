@@ -7,18 +7,19 @@ class DocumentsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :set_relevant_users
 
-  load_and_authorize_resource :except => [:create, :anthology_add]
+  load_and_authorize_resource :except => [:create, :anthology_add, :anthology_remove]
 
   # GET /documents
   # GET /documents.json
   def anthology_add
     successful = true
     documents = []
+    document_ids = params[:document_ids] || []
     begin
       anthology = Anthology.find(params[:anthology])
       Rails.logger.info "****"
       Rails.logger.info "anthology is #{anthology.inspect}"
-      params[:document_ids].each do |doc_id|
+      document_ids.each do |doc_id|
         doc = Document.find(doc_id)
         doc.rep_group_list.add(anthology.slug)
         doc.save
@@ -34,20 +35,69 @@ class DocumentsController < ApplicationController
     end
     respond_to do |format|
       if successful
-        if documents.count == 1
+        if documents.count == 0
+          format.html { redirect_to anthology_path(Anthology.find(params[:anthology]), title: params[:title], author: params[:author]), notice: "No documents selected for addition" }
+          return
+        elsif documents.count == 1
           docs_string = " #{documents.first}"
         elsif documents.count == 2
           docs_string = "s #{documents.first} and #{documents.last}"
         elsif documents.count > 2
           docs_string = "s #{documents[ 0..-2 ].join(", ")} and #{documents.last}"
         end
-        format.html { redirect_to anthology_path(Anthology.find(params[:anthology]), title: params[:title], author: params[:author]), notice: "You added the document#{docs_string} to this anthology" }
+        format.html { redirect_to anthology_path(Anthology.find(params[:anthology]), title: params[:title], author: params[:author], page: params[:page]), notice: "You added the document#{docs_string} to this anthology" }
       else
         format.html { redirect_to documents_path, alert: "There was a problem adding documents to the anthology selected"}
       end
     end
-    # redirect_to anthology_path(Anthology.first)
   end
+
+  def anthology_remove
+    successful = true
+    documents = []
+    document_ids = params[:document_ids] || []
+    begin
+      anthology = Anthology.find(params[:anthology])
+      Rails.logger.info "****"
+      Rails.logger.info "anthology is #{anthology.inspect}"
+      document_ids.each do |doc_id|
+        doc = Document.find(doc_id)
+        doc.rep_group_list.remove(anthology.slug)
+        doc.save
+        unless !anthology.documents.include?(doc)
+          anthology.documents.delete(doc)
+          documents << doc.title
+        end
+      end
+      anthology.save
+      Rails.logger.info "*** past save"
+    rescue
+      successful = false
+    end
+    respond_to do |format|
+      if successful
+        if documents.count == 0
+          format.html { redirect_to anthology_path(Anthology.find(params[:anthology]), title: params[:title], author: params[:author]), notice: "No documents selected for removal" }
+          return
+        elsif documents.count == 1
+          docs_string = " #{documents.first}"
+        elsif documents.count == 2
+          docs_string = "s #{documents.first} and #{documents.last}"
+        elsif documents.count > 2
+          docs_string = "s #{documents[ 0..-2 ].join(", ")} and #{documents.last}"
+        end
+
+        if (params[:tab_state]['search_results'])
+          format.html { redirect_to anthology_path(Anthology.find(params[:anthology]), title: params[:title], author: params[:author], page: params[:page], docs: 'search_results'), notice: "You removed the document#{docs_string} from this anthology" }
+        else
+          format.html { redirect_to anthology_path(Anthology.find(params[:anthology]), title: params[:title], author: params[:author], page: params[:page], docs: 'all'), notice: "You removed the document#{docs_string} from this anthology" }
+        end
+      else
+        format.html { redirect_to documents_path, alert: "There was a problem removing documents from the anthology selected"}
+      end
+    end
+  end
+
   def index
     @anthologies = current_user.anthologies.map {|ant| ant.id}.uniq
     @anthologies = [@anthologies, Anthology.where(user_id: current_user.id).pluck(:id) ]
