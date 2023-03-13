@@ -189,12 +189,12 @@ uchicago.covecollective.org:
     firstname: 'urn:oid:2.5.4.42'
     lastname: 'urn:oid:2.5.4.4'
 ryerson-staging.covecollective.org:
-  site_name: Ryerson University Staging
-  welcome_message: 'Welcome to COVE Studio for Ryerson University'
-  welcome_blurb: 'Welcome to COVE Studio for Ryerson University'
+  site_name: Toronto Metropolitan University Staging
+  welcome_message: 'Welcome to COVE Studio for Toronto Metropolitan University'
+  welcome_blurb: 'Welcome to COVE Studio for Toronto Metropolitan University'
   site_color: '#00a9ef'
   home_banner: 'torontomu_banner.jpg'
-  brand: 'shared/ryerson_brand'
+  brand: 'shared/torontomu_brand'
   saml_provider: 'ryerson.ca'
   saml_metadata: '/saml/ryerson_staging_metadata.xml'
   saml_attributes:
@@ -202,12 +202,12 @@ ryerson-staging.covecollective.org:
     firstname: 'urn:oid:2.5.4.42'
     lastname: 'urn:oid:2.5.4.4'
 ryerson.covecollective.org:
-  site_name: Ryerson University
-  welcome_message: 'Welcome to COVE Studio for Ryerson University'
-  welcome_blurb: 'Welcome to COVE Studio for Ryerson University'
+  site_name: Toronto Metropolitan University
+  welcome_message: 'Welcome to COVE Studio for Toronto Metropolitan University'
+  welcome_blurb: 'Welcome to COVE Studio for Toronto Metropolitan University'
   site_color: '#00a9ef'
   home_banner: 'torontomu_banner.jpg'
-  brand: 'shared/ryerson_brand'
+  brand: 'shared/torontomu_brand'
   oauth_provider: NAVSA
   saml_provider: 'ryerson.ca'
   saml_metadata: '/saml/ryerson_metadata.xml'
