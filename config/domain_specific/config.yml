@@ -193,7 +193,7 @@ ryerson-staging.covecollective.org:
   welcome_message: 'Welcome to COVE Studio for Ryerson University'
   welcome_blurb: 'Welcome to COVE Studio for Ryerson University'
   site_color: '#00a9ef'
-  home_banner: 'ryerson_banner.jpg'
+  home_banner: 'torontomu_banner.jpg'
   brand: 'shared/ryerson_brand'
   saml_provider: 'ryerson.ca'
   saml_metadata: '/saml/ryerson_staging_metadata.xml'
@@ -206,7 +206,7 @@ ryerson.covecollective.org:
   welcome_message: 'Welcome to COVE Studio for Ryerson University'
   welcome_blurb: 'Welcome to COVE Studio for Ryerson University'
   site_color: '#00a9ef'
-  home_banner: 'ryerson_banner.jpg'
+  home_banner: 'torontomu_banner.jpg'
   brand: 'shared/ryerson_brand'
   oauth_provider: NAVSA
   saml_provider: 'ryerson.ca'
