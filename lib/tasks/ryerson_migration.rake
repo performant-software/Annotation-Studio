@@ -8,6 +8,7 @@ task :ryerson_migration => :environment do
 
         if !existing
           u.email = u.email.sub('@ryerson.ca', '@torontomu.ca')
+          u.skip_reconfirmation!
           u.save
         end
       end
