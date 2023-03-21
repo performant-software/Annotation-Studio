@@ -1,15 +1,17 @@
 source 'https://rubygems.org'
 
-ruby '2.4.10'
+ruby '2.7.7'
 
 gem 'rails', '4.2.8'
 gem 'puma'
+
+gem 'bigdecimal', '~> 1.4'
 
 gem 'pg', '~> 0.18'
 gem "newrelic_rpm"#, "~> 3.5.7.59"
 
 gem 'aws-sdk-s3'
-gem 'devise', '~> 3.2'
+gem 'devise', '~> 4.0'
 gem 'devise_invitable', '~> 1.6', '>= 1.6.1'
 gem "switch_user"
 gem 'cancancan', '~> 1.10'
@@ -76,11 +78,11 @@ gem 'jbuilder'
 gem "jwt"
 gem "rabl"
 gem "gon"
-gem "nokogiri"
+gem "nokogiri", '1.11'
 
 gem 'tilt', '1.1'
 gem 'sass-rails', '5.0.3'
-gem 'activeadmin', '1.0.0.pre1'
+gem 'activeadmin', '1.0.0'
 
 gem 'will_paginate', '~> 3.0.5'
 gem 'will_paginate-bootstrap'
