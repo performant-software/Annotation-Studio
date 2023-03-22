@@ -77,7 +77,7 @@ module AuthenticationHelper
     url_prefix = root_url(protocol: protocol).gsub(/\/$/, "")
     url = omniauth_authorize_path(resource_name, provider)
 
-    link_to "#{login_label} #{provider_label}", "#{url_prefix}#{url}", :class => "btn btn-default"
+    link_to "#{login_label} #{provider_label}", "#{url_prefix}#{url}", :class => "btn btn-default", method: :post
   end
 
   def saml_attributes

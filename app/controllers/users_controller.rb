@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   include ApplicationHelper
 
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   def show
     if params[:id].nil? # if there is no user id in params, show current one
@@ -82,7 +82,7 @@ class UsersController < ApplicationController
             invited_users.push(new_user)
 
             Rails.logger.info "Queuing email invite to #{new_user.email}..."
-            Delayed::Job.enqueue SendInvitesJob.new(new_user.id, Apartment::Tenant.current_tenant)
+            Delayed::Job.enqueue SendInvitesJob.new(new_user.id, Apartment::Tenant.current)
           end
         end
       end

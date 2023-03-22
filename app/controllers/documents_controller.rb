@@ -3,9 +3,9 @@ require 'melcatalog'
 require 'json'
 
 class DocumentsController < ApplicationController
-  before_filter :find_document, :only => [:show, :set_default_state, :preview, :post_to_cove, :annotatable, :review, :publish, :export, :archive, :snapshot, :destroy, :edit, :update]
-  before_filter :authenticate_user!
-  before_filter :set_relevant_users
+  before_action :find_document, :only => [:show, :set_default_state, :preview, :post_to_cove, :annotatable, :review, :publish, :export, :archive, :snapshot, :destroy, :edit, :update]
+  before_action :authenticate_user!
+  before_action :set_relevant_users
 
   load_and_authorize_resource :except => [:create, :anthology_add, :anthology_remove]
 
@@ -245,7 +245,7 @@ class DocumentsController < ApplicationController
     respond_to do |format|
       if @document.save
         if params[:document][:upload].present?
-          Delayed::Job.enqueue DocumentProcessor.new(@document.id, @document.state, Apartment::Database.current_tenant)
+          Delayed::Job.enqueue DocumentProcessor.new(@document.id, @document.state, Apartment::Tenant.current)
           @document.pending!
         end
         format.html { redirect_to documents_url(docs: 'created'), notice: 'Document was successfully created.', anchor: 'created'}
@@ -391,7 +391,7 @@ class DocumentsController < ApplicationController
     end
   end
 
-  before_filter :prepare_for_mobile
+  before_action :prepare_for_mobile
 
   def prepare_for_mobile
     session[:mobile_param] = params[:mobile] if params[:mobile]

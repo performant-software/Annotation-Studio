@@ -5,7 +5,7 @@ class SendInvitesJob
   end
 
   def perform
-    original_tenant = Apartment::Tenant.current_tenant
+    original_tenant = Apartment::Tenant.current
     begin
       Apartment::Tenant.switch(@tenant)
       user = User.find(@user_id)

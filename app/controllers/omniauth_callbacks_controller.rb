@@ -1,6 +1,6 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   include AuthenticationHelper
-  skip_before_filter :verify_authenticity_token, only: :saml
+  skip_before_action :verify_authenticity_token, only: :saml
 
   def wordpress_hosted
     @user = User.find_for_wordpress_oauth2(request.env["omniauth.auth"], current_user)
@@ -38,7 +38,8 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     request.env['omniauth.strategy'].options[:client_id] = wp_auth_key(@tenant)
     request.env['omniauth.strategy'].options[:client_secret] = wp_auth_secret(@tenant)
     request.env['omniauth.strategy'].options[:client_options].site = wp_url(@tenant)
-    render :text => "Setup complete.", :status => 404
+
+    render :plain => "Setup complete.", :status => 404
   end
 
   def setup_saml
@@ -57,7 +58,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     request.env['omniauth.strategy'].options[:issuer] = url_for(action: 'metadata', controller: 'saml')
     request.env['omniauth.strategy'].options[:attribute_statements] = saml_attributes
 
-    render :text => "Setup complete.", :status => 404
+    render :plain => "Setup complete.", :status => 404
   end
 
 end
