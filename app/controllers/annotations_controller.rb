@@ -91,7 +91,7 @@ class AnnotationsController < ApplicationController
       if data
         send_data data
       else
-        redirect_to :back, alert: "There are no annotations to be downloaded."
+        redirect_back(fallback_location: root_path, alert: "There are no annotations to be downloaded.")
       end
     end
 end
