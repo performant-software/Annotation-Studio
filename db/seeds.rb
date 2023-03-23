@@ -11,7 +11,7 @@ default_tenants = ['public', 'www']
 default_tenants.each do |tenant|
   if tenant != 'public'
     Tenant.where(database_name: tenant, domain: "#{tenant}.localhost").first_or_create
-    Apartment::Tenant.switch(tenant)
+    Apartment::Tenant.switch!(tenant)
   else
     # Use the default 'public' schema
     Apartment::Tenant.reset

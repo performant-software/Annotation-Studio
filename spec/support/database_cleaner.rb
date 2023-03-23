@@ -14,7 +14,7 @@ RSpec.configure do |config|
     # Start transaction for this test
     DatabaseCleaner.start
     # Switch into the default tenant
-    Apartment::Tenant.switch 'www'
+    Apartment::Tenant.switch!('www')
   end
 
   config.after(:each) do

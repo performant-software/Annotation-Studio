@@ -23,7 +23,7 @@ describe DocumentProcessor do
 
   context 'apartment multitenancy' do
     it 'switches tenants when running a job' do
-      Apartment::Tenant.switch('public')
+      Apartment::Tenant.switch!('public')
       current_tenant = Apartment::Tenant.current
       document = build(:document, id: 100)
       Document.should_receive(:find).with(document.id).and_return(document)

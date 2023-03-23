@@ -7,7 +7,7 @@ class SendInvitesJob
   def perform
     original_tenant = Apartment::Tenant.current
     begin
-      Apartment::Tenant.switch(@tenant)
+      Apartment::Tenant.switch!(@tenant)
       user = User.find(@user_id)
       Rails.logger.info "Sending email invite to #{user.email}..."
       tenant_domain = Tenant.find_by(database_name: @tenant).domain
@@ -18,7 +18,7 @@ class SendInvitesJob
       user.deliver_invitation
     ensure
       # Reset both of the global settings we changed
-      Apartment::Tenant.switch(original_tenant)
+      Apartment::Tenant.switch!(original_tenant)
       ActionMailer::Base.default_url_options[:host] = { :host => ENV['EMAIL_DOMAIN'] }
     end
   end

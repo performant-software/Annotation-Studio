@@ -93,7 +93,7 @@ To create a new tenant:
 
 #### Add initial user
 * Using rails console, create a new User for Dino Felluga (felluga@purdue.edu)
-* Be sure to switch over to new tenant database first (`Apartment::Tenant.switch(‘name-of-tenant-db`)
+* Be sure to switch over to new tenant database first (`Apartment::Tenant.switch!(‘name-of-tenant-db`)
 * Add admin role to user (`User.find(1).set_roles = [“admin”]`)
 
 #### Deploy to production
