@@ -1,13 +1,13 @@
 source 'https://rubygems.org'
 
-ruby '3.0.5'
+ruby '3.1.3'
 
-gem 'rails', '6.0.6'
+gem 'rails', '~> 6.1', '>= 6.1.7.3'
 gem 'puma'
 
 gem 'bigdecimal', '~> 2.0'
 
-gem 'pg', '~> 0.18'
+gem 'pg', '~> 1.1'
 gem "newrelic_rpm"#, "~> 3.5.7.59"
 
 gem 'aws-sdk-s3'
@@ -76,3 +76,5 @@ gem 'foreman'
 gem 'dotenv-rails'
 
 gem "terser", "~> 1.1"
+
+gem "matrix", "~> 0.4.2"
