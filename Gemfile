@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 ruby '3.0.5'
 
 gem 'rails', '6.0.6'
-gem 'railties', '6.0.6'
 gem 'puma'
 
 gem 'bigdecimal', '~> 2.0'
@@ -20,7 +19,7 @@ gem 'repertoire-groups', '0.0.1', :path => 'vendor/repertoire-groups-0.0.1' #, :
 gem 'acts-as-taggable-on', '~> 9.0'
 gem "friendly_id"
 gem "babosa"
-gem 'high_voltage', '~> 2.1.0'
+gem 'high_voltage', '~> 3.0.0'
 gem "paperclip", '6.1.0'
 gem "delayed_job_active_record"
 gem 'pdf-reader'
@@ -40,9 +39,13 @@ group :assets do
   gem 'mustache'
 end
 
+group :production do
+  gem 'rails_12factor'
+end
+
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'tinymce-rails'
+gem 'tinymce-rails', '5.1.4'
 
 gem "fog", '~> 1.42'
 gem "mini_magick"
@@ -71,3 +74,5 @@ gem "octokit", "~> 5.0"
 gem 'foreman'
 
 gem 'dotenv-rails'
+
+gem "terser", "~> 1.1"
