@@ -232,7 +232,7 @@ class AnthologiesController < ApplicationController
     @anthology = Anthology.friendly.find(params[:id])
 
     respond_to do |format|
-      if @anthology.update_attributes(anthology_params)
+      if @anthology.update(anthology_params)
         format.html { redirect_to @anthology, notice: 'Anthology was successfully updated.' }
         format.json { head :no_content }
       else

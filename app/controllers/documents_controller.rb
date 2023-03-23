@@ -263,7 +263,7 @@ class DocumentsController < ApplicationController
     @document = Document.friendly.find(params[:id])
 
     respond_to do |format|
-      if @document.update_attributes(documents_params)
+      if @document.update(documents_params)
         format.html { redirect_to :back, notice: 'Document was successfully updated.' }
         format.json { head :no_content }
       else
