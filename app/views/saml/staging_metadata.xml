@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" entityID="https://staging.covecollective.org/sp/metadata" ID="cove-studio-staging">
-  <SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol" wantAssertionsEncrypted="false">
+  <SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol" WantAssertionsSigned="false" wantAssertionsSigned="false">
     <KeyDescriptor use="signing">
       <ds:KeyInfo>
         <ds:X509Data>
@@ -27,36 +27,6 @@
           </ds:X509Certificate>
         </ds:X509Data>
       </ds:KeyInfo>
-    </KeyDescriptor>
-    <KeyDescriptor use="encryption">
-      <ds:KeyInfo>
-        <ds:X509Data>
-          <ds:X509Certificate>
-            MIIDcTCCAlmgAwIBAgIUUZFLdEhAfyXrzSru/OM7bBt4in4wDQYJKoZIhvcNAQEL
-            BQAwSDELMAkGA1UEBhMCVVMxHDAaBgNVBAoME1BlcmZvcm1hbnQgU29mdHdhcmUx
-            GzAZBgNVBAMMEmNvdmVjb2xsZWN0aXZlLm9yZzAeFw0yMDA3MjkyMDIyNDVaFw0y
-            MTA3MjkyMDIyNDVaMEgxCzAJBgNVBAYTAlVTMRwwGgYDVQQKDBNQZXJmb3JtYW50
-            IFNvZnR3YXJlMRswGQYDVQQDDBJjb3ZlY29sbGVjdGl2ZS5vcmcwggEiMA0GCSqG
-            SIb3DQEBAQUAA4IBDwAwggEKAoIBAQDja5hjA3WDggMi4Tw/Q8xPTnMPj2ADtxSa
-            KSJ4OS6awfJOYvq5qgNNja84gcb3mRQvZTWbSfyL+6Yf8H31XQfBAqa3bwO1rcqv
-            +oCVTlhsIiJFI0KmpacFR1uHgeXB42qFXwsAqE/wOpGDpnpynKOEzkXWGySMXhGV
-            VgEMDIAeAqewdWcBFpEkCEud9WDfII8nKUfY0n59HSzv+72Oxud1sVZnRHa3qNEz
-            h8kS+scWLY39ejVxrWCswe0SLBFyoBDK60k+p1eaW8LZOLxJgSc0CwlHFljA5Ara
-            YBP9wI81JAKRFmmBZ+/iO0ogdRdn4EcL1h1whoUcWfR2wuuf8ocFAgMBAAGjUzBR
-            MB0GA1UdDgQWBBSBEaGw63gghoqr4Y8NedVVJ67KwzAfBgNVHSMEGDAWgBSBEaGw
-            63gghoqr4Y8NedVVJ67KwzAPBgNVHRMBAf8EBTADAQH/MA0GCSqGSIb3DQEBCwUA
-            A4IBAQCZeflK8cVU9o2+Mz7R7yQt94h/zj2q3Hvj5y/9GfBgLwGoie2DGgUyB6zK
-            iptNRC6NInY1ZkUd2WmLhxFNepS8Ihxj9wu5i1A86mQ1S8fqQKRNZG3/V7R7YR85
-            03lQWw0FxDFx1mipveORhfUQfR3GNqDO1bVMtZOGkW8iiaDFBTLyxaHP2pgP2cT7
-            fpLhKvaQ0zF0Bj0mR2pyNeUBgLm5bZUjMNorNRCtzJp9PqiPIun2yMrt6OuUxxYf
-            k7z84lmRJxrg/NzHsXGXkJSvFeWqrfheonB1lYLDUhSu1xKlsrB2ZeWafHPVCp+L
-            94jUv+wOO0wX3gE8N4xQ/SXSG9U6
-          </ds:X509Certificate>
-        </ds:X509Data>
-      </ds:KeyInfo>
-      <EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#aes256-cbc"/>
-      <EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#aes128-cbc"/>
-      <EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc"/>
     </KeyDescriptor>
     <AssertionConsumerService index="1" isDefault="true" Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://staging.covecollective.org/users/auth/saml/callback"/>
   </SPSSODescriptor>
