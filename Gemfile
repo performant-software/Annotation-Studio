@@ -34,13 +34,8 @@ gem 'omniauth-saml'
 
 group :assets do
   gem 'coffee-rails'
-  gem 'uglifier'
   gem 'underscore-rails'
   gem 'mustache'
-end
-
-group :production do
-  gem 'rails_12factor'
 end
 
 gem 'jquery-rails'

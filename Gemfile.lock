@@ -499,11 +499,6 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.5.0)
       loofah (~> 2.19, >= 2.19.1)
-    rails_12factor (0.0.3)
-      rails_serve_static_assets
-      rails_stdout_logging
-    rails_serve_static_assets (0.0.5)
-    rails_stdout_logging (0.0.5)
     railties (6.1.7.3)
       actionpack (= 6.1.7.3)
       activesupport (= 6.1.7.3)
@@ -581,8 +576,6 @@ GEM
       railties (>= 3.1.1)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-    uglifier (4.2.0)
-      execjs (>= 0.3.0, < 3)
     underscore-rails (1.8.3)
     unf (0.1.4)
       unf_ext
@@ -648,7 +641,6 @@ DEPENDENCIES
   puma
   rabl
   rails (~> 6.1, >= 6.1.7.3)
-  rails_12factor
   repertoire-groups (= 0.0.1)!
   rest-client
   ros-apartment (= 2.10.0)
@@ -658,7 +650,6 @@ DEPENDENCIES
   terser (~> 1.1)
   tilt (= 1.1)
   tinymce-rails (= 5.1.4)
-  uglifier
   underscore-rails
   will_paginate (~> 3.3.1)
   will_paginate-bootstrap
