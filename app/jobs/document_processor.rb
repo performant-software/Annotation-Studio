@@ -8,9 +8,9 @@ class DocumentProcessor
   end
 
   def perform
-    original_tenant = Apartment::Tenant.current_tenant
+    original_tenant = Apartment::Tenant.current
     begin
-      Apartment::Tenant.switch(@tenant)
+      Apartment::Tenant.switch!(@tenant)
       document = Document.find(@document_id)
 
       processor_class = DocumentProcessorDispatcher.processor_for(document.upload.content_type)
@@ -18,7 +18,7 @@ class DocumentProcessor
 
       processor.work
     ensure
-      Apartment::Tenant.switch(original_tenant)
+      Apartment::Tenant.switch!(original_tenant)
     end
   end
 end

@@ -1,4 +1,4 @@
-<% tenant = Tenant.find_by(database_name: Apartment::Tenant.current_tenant) %>
+<% tenant = Tenant.find_by(database_name: Apartment::Tenant.current) %>
 <% google_analytics_code = tenant&.google_analytics_code || ENV["GOOGLE_ANALYTICS_CODE"] %>
 <% banner_color = tenant&.banner_color || '#000' %>
 

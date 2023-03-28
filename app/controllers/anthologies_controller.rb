@@ -1,8 +1,8 @@
 class AnthologiesController < ApplicationController
   include ApplicationHelper
 
-  before_filter :find_anthology, :only => [:show, :edit, :destroy]
-  before_filter :authenticate_user!
+  before_action :find_anthology, :only => [:show, :edit, :destroy]
+  before_action :authenticate_user!
 
   def show
     @page = 1
@@ -25,12 +25,12 @@ class AnthologiesController < ApplicationController
         @tab_state = { 'all' => 'active' }
         if params[:order].present? && ["full_name", "email"].include?(params[:order])
           if params[:order] == "full_name"
-            @users = @anthology.users.order(full_name: :desc).paginate(:page => @page, :per_page =>10 ).uniq
+            @users = @anthology.users.order(full_name: :desc).paginate(:page => @page, :per_page =>10 )
           else
-            @users = @anthology.users.order(params[:order].to_sym).paginate(:page => @page, :per_page =>10 ).uniq
+            @users = @anthology.users.order(params[:order].to_sym).paginate(:page => @page, :per_page =>10 )
           end
         else
-          @users = @anthology.users.paginate(:page => @page, :per_page =>10 ).uniq
+          @users = @anthology.users.paginate(:page => @page, :per_page =>10 )
         end
       else
         @tab_state = { 'search_results' => 'active' }
@@ -232,7 +232,7 @@ class AnthologiesController < ApplicationController
     @anthology = Anthology.friendly.find(params[:id])
 
     respond_to do |format|
-      if @anthology.update_attributes(anthology_params)
+      if @anthology.update(anthology_params)
         format.html { redirect_to @anthology, notice: 'Anthology was successfully updated.' }
         format.json { head :no_content }
       else

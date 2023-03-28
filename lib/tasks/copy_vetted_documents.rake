@@ -31,7 +31,7 @@ task :copy_vetted_documents, [:source_tenant, :destination_tenant, :user_email, 
   end
 
   # switch back to starting tenant
-  Apartment::Tenant.switch(starting_tenant)
+  Apartment::tenant.switch!(starting_tenant)
 
   log_action(log_string, "Done at #{Time.now.strftime("%I:%M:%S")}")
 
@@ -49,13 +49,13 @@ end
 def copy_to_tenant(source, destination, user_email, log_string, dry_run)
 
   # switch to source tenant
-  Apartment::Tenant.switch(source)
+  Apartment::Tenant.switch!(source)
 
   # gather all vetted documents from source tenant
   vetted_docs = Document.where(vetted: true).to_a
 
   # switch to destination tenant
-  Apartment::Tenant.switch(destination)
+  Apartment::Tenant.switch!(destination)
 
   # copy each vetted document from source tenant to destination
   # tenant IF destination tenant does not already have a document
