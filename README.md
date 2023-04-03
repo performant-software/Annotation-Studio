@@ -141,6 +141,10 @@ Especially note the `wantsAssertionsSigned="false"`. Turning off encrypted asser
 1. If a domain does not have a matching Tenant, the default "public" tenant will be used.
 2. Admin users are shared across all tenants, and therefore shouldn't be created and granted to single-tenant users
 
+## Tenant Name Changes
+
+For future reference, the Mongo query for updating annotations when a tenant changes their name/email is available at `doc/torontomu_annotations_mongo_query`.
+
 ## User Support and Developer forum
 http://support.annotationstudio.org
 
