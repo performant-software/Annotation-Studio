@@ -31,7 +31,7 @@ task :copy_vetted_documents, [:source_tenant, :destination_tenant, :user_email, 
   end
 
   # switch back to starting tenant
-  Apartment::tenant.switch!(starting_tenant)
+  Apartment::Tenant.switch!(starting_tenant)
 
   log_action(log_string, "Done at #{Time.now.strftime("%I:%M:%S")}")
 
