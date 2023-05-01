@@ -57,7 +57,7 @@ communicate them to Heroku
   -  `rake figaro:heroku[$APPNAME]`
 
 ### Multitenancy
-This app uses the [apartment gem](http://github.com/influitive/apartment) to allow multiple domains to be hosted in a single instance.  
+This app uses the [apartment gem](http://github.com/influitive/apartment) to allow multiple domains to be hosted in a single instance.
 
 To create a new tenant:
 
@@ -67,6 +67,7 @@ To create a new tenant:
 
 #### Rails config
 * Upload banner image to  `app/assets/images/`
+  * A lot of tenants provide large banner images (3MB+) - in these cases, it's a good idea to [resize the image](https://legacy.imagemagick.org/Usage/resize/#percent) by 50% or so.
 * Create tenant metadata file in `app/views/saml/` (use an existing tenant  metadata file as a guide)
 * Create tenant brand file in `app/views/shared/` (use an existing tenant brand file as a guide)
 * Add entry for new tenant to `config/domain_specific/config.yml` (use an existing tenant entry as a guide)
@@ -95,6 +96,11 @@ To create a new tenant:
 * Using rails console, create a new User for Dino Felluga (felluga@purdue.edu)
 * Be sure to switch over to new tenant database first (`Apartment::Tenant.switch!(‘name-of-tenant-db`)
 * Add admin role to user (`User.find(1).set_roles = [“admin”]`)
+
+#### Add roles
+* In the Rails console, check the list of roles with `Role.all`
+* There should be `student`, `teacher`, and `admin`
+* Create any that don't already exist
 
 #### Deploy to production
 
