@@ -1,11 +1,15 @@
 module AnthologiesHelper
+
+  # Generate a list that contains the name
+  # of each folder in the given anthology  
+  # and the number of documents within it.
   def get_folders(anthology)
     tags = ActsAsTaggableOn::Tagging.where(
       tagger_id: anthology.id,
       taggable_type: 'Document',
       tagger_type: 'Anthology',
       context: 'rep_folder'
-    ).joins(:tag).select('taggings.*, tags.*')
+    ).joins(:tag).select('taggings.*, tags.name')
 
     folders = []
 
