@@ -60,10 +60,8 @@
     </div><!-- end .tab-pane#ant-created -->
     </div><!-- end tab content -->
     <div class="panel-footer doc-set-footer">
-      <% if current_user.admin? || current_user.teacher? %>
-        <%= link_to anthology_path('new') do %>
-          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create New Anthology
-        <% end %>
+      <%= link_to anthology_path('new') do %>
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create New Anthology
       <% end %>
     </div>
   </div>
