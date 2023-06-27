@@ -9,7 +9,7 @@ module AnthologiesHelper
       taggable_type: 'Document',
       tagger_type: 'Anthology',
       context: 'rep_folder'
-    ).joins(:tag).select('taggings.*, tags.name')
+    ).joins(:tag).select('tags.name')
 
     folders = []
 
