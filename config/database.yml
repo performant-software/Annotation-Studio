@@ -5,7 +5,9 @@ development: &default
   host: localhost
   pool: 5
   timeout: 5000
-  gssencmode: disable
+  # If you have issues running the datbase
+  # locally, try uncommenting the line below.
+  # gssencmode: disable
 
 test:
   <<: *default
