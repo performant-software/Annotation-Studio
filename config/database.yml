@@ -5,6 +5,7 @@ development: &default
   host: localhost
   pool: 5
   timeout: 5000
+  gssencmode: disable
 
 test:
   <<: *default

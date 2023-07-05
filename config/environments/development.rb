@@ -45,19 +45,14 @@ Rails.application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+  config.action_mailer.delivery_method = :postmark
+  config.action_mailer.postmark_settings = { :api_token => ENV['POSTMARK_TOKEN'] }
+
+  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.delivery_method = :smtp
   config.action_mailer.default :charset => "utf-8"  
-  config.action_mailer.smtp_settings =  {
-    :address  => "smtp.postmarkapp.com",
-    :domain  => "covecollective.org",
-    :port  => 587,
-    :user_name  => ENV['POSTMARK_TOKEN'],
-    :password  => ENV['POSTMARK_TOKEN'],
-    :authentication  => :plain,
-    :enable_starttls_auto => true
-  }
 
   # Adds additional error checking when serving assets at runtime.
   # Checks for improperly declared sprockets dependencies.
