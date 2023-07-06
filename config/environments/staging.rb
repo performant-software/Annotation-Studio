@@ -44,6 +44,7 @@ AnnotationStudio::Application.configure do
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
 
+  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_url_options = { :host => ENV['EMAIL_DOMAIN'] }
   config.action_mailer.postmark_settings = { :api_token => ENV['POSTMARK_TOKEN'] }
   config.action_mailer.perform_deliveries = true
