@@ -470,6 +470,11 @@ GEM
       html_writer (~> 0.2.0)
       pdf-reader (~> 1.1.0)
     pg (1.4.6)
+    postmark (1.24.0)
+      json
+    postmark-rails (0.22.1)
+      actionmailer (>= 3.0.0)
+      postmark (>= 1.21.3, < 2.0)
     public_suffix (4.0.7)
     puma (6.1.1)
       nio4r (~> 2.0)
@@ -638,6 +643,7 @@ DEPENDENCIES
   pdf-reader
   pdf-reader-html
   pg (~> 1.1)
+  postmark-rails
   puma
   rabl
   rails (~> 6.1, >= 6.1.7.3)

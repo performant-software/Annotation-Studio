@@ -61,6 +61,8 @@ gem 'will_paginate-bootstrap'
 
 gem 'exception_notification'
 
+gem 'postmark-rails'
+
 gem "melcatalog", :path => "vendor"
 gem "rest-client"
 

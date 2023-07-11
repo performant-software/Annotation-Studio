@@ -34,8 +34,6 @@ development:
     AWS_SECRET_ACCESS_KEY:                 "xxxxxx"
     EMAIL_DOMAIN:                          "staging-annotationstudio.herokuapp.com"
     S3_BUCKET_NAME:                        "annotationstudio-public"
-    SENDGRID_PASSWORD:                     "xxxx"
-    SENDGRID_USERNAME:                     "xxxx"
 
 production:
     DEFAULT_NEW_USER_GROUP: public
@@ -73,5 +71,3 @@ production:
     AWS_SECRET_ACCESS_KEY:                 "xxxxxx"
     EMAIL_DOMAIN:                          "staging-annotationstudio.herokuapp.com"
     S3_BUCKET_NAME:                        "annotationstudio-public"
-    SENDGRID_PASSWORD:                     "xxxx"
-    SENDGRID_USERNAME:                     "xxxx"
