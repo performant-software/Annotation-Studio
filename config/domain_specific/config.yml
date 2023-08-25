@@ -571,7 +571,7 @@ umich.covecollective.org:
   site_name: University of Michigan
   welcome_message: 'Welcome to COVE Studio for the University of Michigan'
   welcome_blurb: 'Welcome to COVE Studio for the University of Michigan'
-  site_color: '#00274C'
+  site_color: '#FFCB05'
   home_banner: 'umich_banner.jpg'
   brand: 'shared/umich_brand'
   saml_provider: 'umich.edu'
@@ -584,7 +584,7 @@ umich-staging.covecollective.org:
   site_name: University of Michigan
   welcome_message: 'Welcome to COVE Studio for the University of Michigan'
   welcome_blurb: 'Welcome to COVE Studio for the University of Michigan'
-  site_color: '#00274C'
+  site_color: '#FFCB05'
   home_banner: 'umich_banner.jpg'
   brand: 'shared/umich_brand'
   saml_provider: 'okta.com'
